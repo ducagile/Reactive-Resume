@@ -21,7 +21,7 @@ export const HomePage = () => {
         <html lang={i18n.locale} />
 
         <title>
-          {t`Reactive Resume`} - {t`Talent Resume`}
+          {t`Talent Hub`} - {t`Talent Resume`}
         </title>
 
         <meta
