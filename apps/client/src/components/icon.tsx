@@ -12,12 +12,12 @@ export const Icon = ({ size = 32, className }: Props) => {
   let src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 
   switch (isDarkMode) {
-    case true: {
-      src = "/icon/dark.svg";
+    case false: {
+      src = "/icon/Icon_Dark.svg";
       break;
     }
-    case false: {
-      src = "/icon/light.svg";
+    case true: {
+      src = "/icon/Icon_Light.svg";
       break;
     }
   }
