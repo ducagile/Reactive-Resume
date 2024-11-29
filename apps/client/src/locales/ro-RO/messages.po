@@ -243,7 +243,7 @@ msgid "By the community, for the community."
 msgstr "Construit de comunitate, pentru comunitate."
 
 #: apps/client/src/pages/builder/sidebars/left/sections/shared/section-dialog.tsx:131
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:155
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:165
 #: apps/client/src/pages/dashboard/resumes/_dialogs/lock.tsx:49
 #: apps/client/src/pages/dashboard/resumes/_dialogs/resume.tsx:154
 #: apps/client/src/pages/dashboard/settings/_dialogs/two-factor.tsx:137
@@ -326,7 +326,7 @@ msgstr "Copiază link-ul pentru a relua"
 msgid "Copy to Clipboard"
 msgstr "Copiază în clipboard"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:139
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:149
 msgid "Cover Letter"
 msgstr ""
 
@@ -1001,6 +1001,10 @@ msgstr "nguyenvana@example.com"
 msgid "No results found"
 msgstr "Nu s-a găsit niciun rezultat"
 
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:134
+msgid "No resumes found"
+msgstr ""
+
 #: apps/client/src/pages/home/sections/features/index.tsx:49
 msgid "No user tracking or advertising"
 msgstr "Fără urmărire a utilizatorilor sau publicitate"
@@ -1020,7 +1024,7 @@ msgstr "Parolă unică"
 
 #: apps/client/src/components/ai-actions.tsx:56
 #: apps/client/src/libs/axios.ts:29
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:89
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:95
 #: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:348
 #: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:645
 #: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:667
@@ -1293,11 +1297,11 @@ msgstr "Securitate"
 msgid "Select"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:126
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:130
 msgid "Select resumes"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:114
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:120
 msgid "Select Resumes"
 msgstr ""
 
@@ -1443,7 +1447,7 @@ msgstr "Stocați codurile de rezervă în siguranță"
 msgid "Stored"
 msgstr "Stocat"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:161
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:171
 msgid "Submit"
 msgstr ""
 
@@ -1765,7 +1769,7 @@ msgstr ""
 msgid "Work Status"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:143
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:153
 msgid "Write your cover letter here..."
 msgstr ""
 

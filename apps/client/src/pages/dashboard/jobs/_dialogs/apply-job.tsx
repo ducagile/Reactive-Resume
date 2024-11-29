@@ -28,8 +28,14 @@ import { IJobApply, useInitJobApply, useLinkJobApply } from "@/client/services/j
 import { useResumes } from "@/client/services/resume";
 import { useDialog } from "@/client/stores/dialog";
 
+const optionSchema = z.object({
+  label: z.string(),
+  value: z.string(),
+  disable: z.boolean().optional(),
+});
+
 const formSchema = z.object({
-  resumeIds: z.array(z.string()).min(1),
+  resumeIds: z.array(optionSchema).min(1),
   coverLetter: z.string(),
 });
 
@@ -72,7 +78,7 @@ export const ApplyJobDialog = () => {
   const onSubmit = async (values: FormValues) => {
     try {
       const { Id: jobApplydId } = await initJobApply({
-        cv_ids: values.resumeIds,
+        cv_ids: values.resumeIds.map((id) => id.value),
         introduce: values.coverLetter,
         user_id: payload.item?.userId as string,
       });
@@ -115,12 +121,6 @@ export const ApplyJobDialog = () => {
                   <FormControl>
                     <MultipleSelector
                       {...field}
-                      value={
-                        field.value.map((id) => ({
-                          label: userResumes?.find((resume) => resume.id === id)?.title ?? id,
-                          value: id,
-                        })) ?? []
-                      }
                       defaultOptions={
                         userResumes?.map((resume) => ({
                           label: resume.title,
@@ -129,6 +129,11 @@ export const ApplyJobDialog = () => {
                       }
                       placeholder={t`Select resumes`}
                       className="z-10"
+                      emptyIndicator={
+                        <p className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400">
+                          {t`No resumes found`}
+                        </p>
+                      }
                     />
                   </FormControl>
                   <FormMessage />

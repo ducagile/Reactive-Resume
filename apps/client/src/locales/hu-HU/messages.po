@@ -243,7 +243,7 @@ msgid "By the community, for the community."
 msgstr "A közösség által, a közösségért."
 
 #: apps/client/src/pages/builder/sidebars/left/sections/shared/section-dialog.tsx:131
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:155
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:165
 #: apps/client/src/pages/dashboard/resumes/_dialogs/lock.tsx:49
 #: apps/client/src/pages/dashboard/resumes/_dialogs/resume.tsx:154
 #: apps/client/src/pages/dashboard/settings/_dialogs/two-factor.tsx:137
@@ -326,7 +326,7 @@ msgstr "Másolja a hivatkozást az önéletrajzhoz"
 msgid "Copy to Clipboard"
 msgstr "Másolás a vágólapra"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:139
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:149
 msgid "Cover Letter"
 msgstr ""
 
@@ -999,6 +999,10 @@ msgstr "gipsz.jakab@example.com"
 msgid "No results found"
 msgstr "Nincs találat"
 
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:134
+msgid "No resumes found"
+msgstr ""
+
 #: apps/client/src/pages/home/sections/features/index.tsx:49
 msgid "No user tracking or advertising"
 msgstr "Nincs felhasználói nyomkövetés vagy reklám"
@@ -1018,7 +1022,7 @@ msgstr "Egyszer használható jelszó"
 
 #: apps/client/src/components/ai-actions.tsx:56
 #: apps/client/src/libs/axios.ts:29
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:89
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:95
 #: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:348
 #: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:645
 #: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:667
@@ -1291,11 +1295,11 @@ msgstr "Biztonság"
 msgid "Select"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:126
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:130
 msgid "Select resumes"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:114
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:120
 msgid "Select Resumes"
 msgstr ""
 
@@ -1441,7 +1445,7 @@ msgstr "Tárolja biztonságosan a biztonsági kódokat"
 msgid "Stored"
 msgstr "Tárolt"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:161
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:171
 msgid "Submit"
 msgstr ""
 
@@ -1763,7 +1767,7 @@ msgstr ""
 msgid "Work Status"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:143
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:153
 msgid "Write your cover letter here..."
 msgstr ""
 
