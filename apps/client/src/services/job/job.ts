@@ -92,7 +92,7 @@ export const DEFAULT_JOB_APPLY: IJobApply = {
 
 export type InitJobDto = {
   introduce: string;
-  cv_ids: string[];
+  cv_ids: string;
   user_id: string;
 };
 
