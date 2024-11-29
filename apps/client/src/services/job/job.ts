@@ -139,7 +139,7 @@ export const linkJobApply = async (data: LinkJobApplyDto) => {
       Id: jobId,
     },
   );
-
+  console.log(response);
   return response.data;
 };
 
