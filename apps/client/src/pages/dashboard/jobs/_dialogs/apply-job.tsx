@@ -78,7 +78,7 @@ export const ApplyJobDialog = () => {
   const onSubmit = async (values: FormValues) => {
     try {
       const { Id: jobApplydId } = await initJobApply({
-        cv_ids: values.resumeIds.map((id) => id.value),
+        cv_ids: values.resumeIds.map((id) => id.value).toString(),
         introduce: values.coverLetter,
         user_id: payload.item?.userId as string,
       });
