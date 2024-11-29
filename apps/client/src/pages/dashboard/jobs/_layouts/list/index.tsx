@@ -2,6 +2,7 @@
 import { sortByDate } from "@reactive-resume/utils";
 import { AnimatePresence, motion } from "framer-motion";
 
+import { useTechStacks } from "@/client/services/job";
 import { useJobs } from "@/client/services/job/job";
 
 import { BaseListItem } from "./_components/item";
@@ -9,6 +10,7 @@ import { JobItem } from "./_components/job-item";
 
 export const ListView = () => {
   const { jobs, loading } = useJobs();
+  const { techStacks } = useTechStacks();
 
   return (
     <div className="grid gap-y-4">
@@ -46,9 +48,18 @@ export const ListView = () => {
                 initial={{ opacity: 0, y: -50 }}
                 animate={{ opacity: 1, y: 0, transition: { delay: (index + 2) * 0.1 } }}
                 exit={{ opacity: 0, filter: "blur(8px)", transition: { duration: 0.5 } }}
-              // className="shadow-md"
+                // className="shadow-md"
               >
-                <JobItem job={job} />
+                <JobItem
+                  job={job}
+                  jobTechStacks={
+                    techStacks?.filter((ts) =>
+                      job._nc_m2m_job_tech_stacks.some(
+                        (jts) => String(jts.tech_stack_id) === String(ts.Id),
+                      ),
+                    ) ?? []
+                  }
+                />
               </motion.div>
             ))}
         </AnimatePresence>

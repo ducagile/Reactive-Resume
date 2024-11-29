@@ -3,15 +3,13 @@ import { useTheme } from "@reactive-resume/hooks";
 import { Button } from "@reactive-resume/ui";
 import { cn } from "@reactive-resume/utils";
 
-import { useTechStacks } from "@/client/services/job/tech-stack";
-
-type AnyObject = Record<string, string>;
+import { ITechStack } from "@/client/services/job/tech-stack";
 
 type Props = {
   title?: React.ReactNode;
   time?: string;
   description?: string;
-  techStackArray?: AnyObject[];
+  techStackArray?: ITechStack[];
   className?: string;
   onClick?: () => void;
   onClickApply?: () => void;
@@ -26,11 +24,7 @@ export const BaseListItem = ({
   techStackArray,
   onClickApply,
 }: Props) => {
-  const { techStacks } = useTechStacks();
   const { isDarkMode } = useTheme();
-  const findTitle = (id: number) => {
-    return techStacks?.find((ts) => ts.Id === id)?.title;
-  };
 
   return (
     <article className="relative w-full">
@@ -62,13 +56,14 @@ export const BaseListItem = ({
             <div className="!m-0 flex gap-2">
               {techStackArray?.map((ts) => (
                 <div
+                  key={ts.Id}
                   className="rounded-full px-6 py-1 text-sm"
                   style={{
                     border: `1px solid ${isDarkMode ? "white" : "#0057FF"}`,
                     backgroundColor: isDarkMode ? "rgba(255, 255, 255, 0.1)" : "#e6efff",
                   }}
                 >
-                  {findTitle(ts.tech_stack_id as unknown as number)}
+                  {ts.title}
                 </div>
               ))}
             </div>

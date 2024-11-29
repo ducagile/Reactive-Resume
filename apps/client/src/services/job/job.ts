@@ -24,7 +24,10 @@ export const axios = _axios.create({
   },
 });
 
-type AnyObject = Record<string, string>;
+type IJobTechStackLink = {
+  job_id: string;
+  tech_stack_id: string;
+};
 
 export type IJob = {
   Id: number;
@@ -35,7 +38,7 @@ export type IJob = {
   CreatedAt: string;
   UpdatedAt: string;
   _nc_m2m_job_apply_jobs: unknown[];
-  _nc_m2m_job_tech_stacks: AnyObject[];
+  _nc_m2m_job_tech_stacks: IJobTechStackLink[];
   job_applies: number;
 };
 

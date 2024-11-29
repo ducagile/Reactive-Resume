@@ -2,13 +2,19 @@ import { t } from "@lingui/macro";
 import { ContextMenu, ContextMenuTrigger } from "@radix-ui/react-context-menu";
 import dayjs from "dayjs";
 
+import { ITechStack } from "@/client/services/job";
 import { IJob, IJobApply } from "@/client/services/job/job";
 import { useAuthStore } from "@/client/stores/auth";
 import { useDialog } from "@/client/stores/dialog";
 
 import { BaseListItem } from "./item";
 
-export const JobItem = ({ job }: { job: IJob }) => {
+type JobItemProps = {
+  job: IJob;
+  jobTechStacks: ITechStack[];
+}
+
+export const JobItem = ({ job, jobTechStacks }: JobItemProps) => {
   const { open } = useDialog<IJob>("job");
   const { open: openApply } = useDialog<IJobApply>("apply-job");
   const { user } = useAuthStore();
@@ -32,7 +38,7 @@ export const JobItem = ({ job }: { job: IJob }) => {
           className="group"
           title={job.title}
           time={t`Posted ${postedTime}`}
-          techStackArray={job._nc_m2m_job_tech_stacks}
+          techStackArray={jobTechStacks}
           description={job.description}
           onClick={onDescription}
           onClickApply={onClickApply}
