@@ -115,14 +115,18 @@ export const ApplyJobDialog = () => {
                   <FormControl>
                     <MultipleSelector
                       {...field}
-                      value={field.value.map((id) => ({
-                        label: userResumes?.find((resume) => resume.id === id)?.title ?? id,
-                        value: id,
-                      }))}
-                      defaultOptions={userResumes?.map((resume) => ({
-                        label: resume.title,
-                        value: resume.id,
-                      }))}
+                      value={
+                        field.value.map((id) => ({
+                          label: userResumes?.find((resume) => resume.id === id)?.title ?? id,
+                          value: id,
+                        })) ?? []
+                      }
+                      defaultOptions={
+                        userResumes?.map((resume) => ({
+                          label: resume.title,
+                          value: resume.id,
+                        })) ?? []
+                      }
                       placeholder={t`Select resumes`}
                     />
                   </FormControl>

@@ -148,10 +148,11 @@ msgid "API Key"
 msgstr "Kλειδί API"
 
 #: apps/client/src/pages/dashboard/jobs/_layouts/grid/_components/job-card.tsx:55
+#: apps/client/src/pages/dashboard/jobs/_layouts/list/_components/item.tsx:34
 msgid "Apply"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:71
+#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:59
 msgid "Apply Now"
 msgstr ""
 
@@ -231,6 +232,7 @@ msgstr "Περιγραμμα"
 msgid "Border Radius"
 msgstr "Ακτίνα Περιγράμματος"
 
+#: apps/client/src/pages/public/admin-page.tsx:96
 #: apps/client/src/pages/public/page.tsx:92
 msgid "Built with"
 msgstr "Δημιουργημένο με:"
@@ -241,6 +243,7 @@ msgid "By the community, for the community."
 msgstr "Από την κοινότητα, για την κοινότητα."
 
 #: apps/client/src/pages/builder/sidebars/left/sections/shared/section-dialog.tsx:131
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:155
 #: apps/client/src/pages/dashboard/resumes/_dialogs/lock.tsx:49
 #: apps/client/src/pages/dashboard/resumes/_dialogs/resume.tsx:154
 #: apps/client/src/pages/dashboard/settings/_dialogs/two-factor.tsx:137
@@ -322,6 +325,10 @@ msgstr "Αντιγραφή συνδέσμου στο βιογραφικό σημ
 #: apps/client/src/pages/builder/sidebars/right/sections/sharing.tsx:78
 msgid "Copy to Clipboard"
 msgstr "Αντιγραφή στο Πρόχειρο"
+
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:139
+msgid "Cover Letter"
+msgstr ""
 
 #: apps/client/src/pages/builder/sidebars/left/sections/shared/section-dialog.tsx:167
 #: apps/client/src/pages/dashboard/resumes/_dialogs/resume.tsx:242
@@ -408,6 +415,7 @@ msgstr "Διαγραφή Λογαριασμού"
 #: apps/client/src/pages/builder/sidebars/left/dialogs/projects.tsx:66
 #: apps/client/src/pages/builder/sidebars/left/dialogs/references.tsx:53
 #: apps/client/src/pages/builder/sidebars/left/dialogs/skills.tsx:63
+#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:65
 msgid "Description"
 msgstr "Περιγραφή"
 
@@ -460,6 +468,7 @@ msgid "Download a PDF of your resume. This file can be used to print your resume
 msgstr "Κατεβάστε ένα PDF του βιογραφικού σας σημειώματος. Αυτό το αρχείο μπορεί να χρησιμοποιηθεί για να εκτυπώσετε το βιογραφικό σας, να το στείλετε σε εργοδότες ή να το ανεβάσετε σε πύλες εργασίας."
 
 #: apps/client/src/pages/builder/_components/toolbar.tsx:158
+#: apps/client/src/pages/public/admin-page.tsx:108
 #: apps/client/src/pages/public/page.tsx:104
 msgid "Download PDF"
 msgstr "Λήψη PDF"
@@ -653,7 +662,6 @@ msgstr "Google"
 msgid "Grayscale"
 msgstr "Κλίμακα του Γκρι"
 
-#: apps/client/src/pages/dashboard/jobs/page.tsx:43
 #: apps/client/src/pages/dashboard/resumes/page.tsx:45
 msgid "Grid"
 msgstr "Πλέγμα"
@@ -786,10 +794,6 @@ msgstr "Φαίνεται ότι το διακριτικό επαλήθευσης
 msgid "It looks like your email address has already been verified."
 msgstr "Φαίνεται ότι η διεύθυνση ηλεκτρονικού ταχυδρομείου σας έχει ήδη επαληθευτεί."
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:46
-msgid "Job Description"
-msgstr ""
-
 #: apps/client/src/pages/builder/sidebars/left/sections/shared/work-status.tsx:64
 msgid "Job Type"
 msgstr ""
@@ -862,7 +866,6 @@ msgstr "Ύψος Γραμμής"
 msgid "LinkedIn, JSON Resume, etc."
 msgstr "LinkedIn, JSON Βιογραφικό, κλπ."
 
-#: apps/client/src/pages/dashboard/jobs/page.tsx:47
 #: apps/client/src/pages/dashboard/resumes/page.tsx:49
 msgid "List"
 msgstr "Λίστα"
@@ -1015,6 +1018,7 @@ msgstr "Κωδικός πρόσβασης μίας χρήσης"
 
 #: apps/client/src/components/ai-actions.tsx:56
 #: apps/client/src/libs/axios.ts:29
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:89
 #: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:348
 #: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:645
 #: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:667
@@ -1132,8 +1136,9 @@ msgstr "Θέση"
 msgid "Position"
 msgstr "Θέση"
 
+#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:56
 #: apps/client/src/pages/dashboard/jobs/_layouts/grid/_components/job-card.tsx:36
-#: apps/client/src/pages/dashboard/jobs/_layouts/list/_components/job-item.tsx:25
+#: apps/client/src/pages/dashboard/jobs/_layouts/list/_components/job-item.tsx:40
 msgid "Posted {postedTime}"
 msgstr ""
 
@@ -1286,6 +1291,14 @@ msgstr "Ασφάλεια"
 msgid "Select"
 msgstr ""
 
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:126
+msgid "Select resumes"
+msgstr ""
+
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:114
+msgid "Select Resumes"
+msgstr ""
+
 #: apps/client/src/pages/home/sections/features/index.tsx:50
 msgid "Self-host with Docker"
 msgstr "Self-host με Docker"
@@ -1428,6 +1441,10 @@ msgstr "Αποθηκεύστε τους κωδικούς αντιγράφων α
 msgid "Stored"
 msgstr "Αποθηκευμένες"
 
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:161
+msgid "Submit"
+msgstr ""
+
 #: apps/client/src/pages/builder/sidebars/left/dialogs/awards.tsx:101
 #: apps/client/src/pages/builder/sidebars/left/dialogs/certifications.tsx:95
 #: apps/client/src/pages/builder/sidebars/left/dialogs/custom-section.tsx:128
@@ -1471,6 +1488,7 @@ msgstr "Σύστημα"
 #: apps/client/src/pages/home/components/footer.tsx:21
 #: apps/client/src/pages/home/meta/privacy-policy/page.tsx:10
 #: apps/client/src/pages/home/page.tsx:24
+#: apps/client/src/pages/public/admin-page.tsx:77
 #: apps/client/src/pages/public/page.tsx:73
 msgid "Talent Hub"
 msgstr "Talent Hub"
@@ -1493,11 +1511,12 @@ msgstr "Το Talent Hub ευδοκιμεί χάρη στη ζωντανή του
 
 #: apps/client/src/pages/home/page.tsx:24
 #: apps/client/src/pages/home/sections/hero/index.tsx:36
+#: apps/client/src/pages/public/admin-page.tsx:98
 #: apps/client/src/pages/public/page.tsx:94
 msgid "Talent Resume"
 msgstr "Ένας δωρεάν και ανοικτού κώδικα κατασκευαστής βιογραφικών σημειωμάτων"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:59
+#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:74
 msgid "Tech Stack"
 msgstr ""
 
@@ -1742,6 +1761,10 @@ msgstr ""
 
 #: apps/client/src/pages/builder/sidebars/left/sections/shared/work-status.tsx:29
 msgid "Work Status"
+msgstr ""
+
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:143
+msgid "Write your cover letter here..."
 msgstr ""
 
 #: apps/client/src/pages/builder/sidebars/left/dialogs/custom-section.tsx:157
