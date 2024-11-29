@@ -10,7 +10,7 @@ import { defaultJob, IJob } from "@/client/services/job/job";
 import { useTechStacks } from "@/client/services/job/tech-stack";
 import { useDialog } from "@/client/stores/dialog";
 
-const DescriptionJobDialog = () => {
+export const DescriptionJobDialog = () => {
   const { isOpen, close, payload } = useDialog("job");
   const { techStacks } = useTechStacks();
   const { isDarkMode } = useTheme();
@@ -93,4 +93,3 @@ const DescriptionJobDialog = () => {
   );
 };
 
-export default DescriptionJobDialog;
