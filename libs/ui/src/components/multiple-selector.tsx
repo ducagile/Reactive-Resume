@@ -440,7 +440,7 @@ export const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSe
       >
         <div
           className={cn(
-            "min-h-9 rounded-md border border-input text-sm",
+            "min-h-9 rounded-md border border-input text-sm ring-offset-background",
             {
               "px-3 py-2": selected.length !== 0,
               "cursor-text": !disabled && selected.length !== 0,
@@ -541,7 +541,7 @@ export const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSe
         <div className="relative">
           {open && (
             <CommandList
-              className="absolute top-1 z-10 w-full rounded-md border bg-popover text-popover-foreground shadow-md outline-none animate-in"
+              className="absolute top-1 z-10 w-full rounded-md border bg-background text-foreground shadow-md outline-none animate-in"
               onMouseLeave={() => {
                 setOnScrollbar(false);
               }}

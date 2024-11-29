@@ -128,6 +128,7 @@ export const ApplyJobDialog = () => {
                         })) ?? []
                       }
                       placeholder={t`Select resumes`}
+                      className="z-10"
                     />
                   </FormControl>
                   <FormMessage />
