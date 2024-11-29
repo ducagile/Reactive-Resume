@@ -1,5 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import _axios, { AxiosResponse } from "axios";
 
 import { JOBS_KEY } from "@/client/constants/query-keys";

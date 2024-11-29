@@ -428,7 +428,7 @@ export const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSe
       <Command
         ref={dropdownRef}
         {...commandProps}
-        className={cn("h-auto overflow-visible bg-transparent", commandProps?.className)}
+        className={cn("h-auto overflow-visible bg-background", commandProps?.className)}
         filter={commandFilter()}
         shouldFilter={
           commandProps?.shouldFilter !== undefined ? commandProps.shouldFilter : !onSearch
