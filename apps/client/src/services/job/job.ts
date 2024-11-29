@@ -100,9 +100,11 @@ export type InitJobResponse = {
   Id: string;
 };
 
+const NOCO_JOB_APPLY_TABLE = process.env.NX_PUBLIC_JOB_APPLY_TABLE ?? "m0lhvss666g64he";
+
 export const initJopApply = async (data: InitJobDto) => {
   const response = await axios.post<InitJobResponse, AxiosResponse<InitJobResponse>, InitJobDto>(
-    `${process.env.NX_PUBLIC_JOB_APPLY_TABLE}/records`,
+    `${NOCO_JOB_APPLY_TABLE}/records`,
     data,
   );
 
@@ -129,11 +131,13 @@ export type LinkJobApplyDto = {
   jobApplyId: string;
 };
 
+const NOCO_JOB_APPLY_LINK = process.env.NX_PUBLIC_JOB_JOB_APPLY_LINK ?? "c76ljn1rfqekjmg";
+
 export const linkJobApply = async (data: LinkJobApplyDto) => {
   const { jobId, jobApplyId } = data;
 
   const response = await axios.post(
-    `${process.env.NX_PUBLIC_JOB_APPLY_TABLE}/links/${process.env.NX_PUBLIC_JOB_JOB_APPLY_LINK}/records/${jobApplyId}`,
+    `${NOCO_JOB_APPLY_TABLE}/links/${NOCO_JOB_APPLY_LINK}/records/${jobApplyId}`,
     {
       Id: jobId,
     },
