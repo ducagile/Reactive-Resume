@@ -44,9 +44,11 @@ export const DialogContent = forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        "fixed gap-4 border bg-background p-6 duration-200 focus:outline-none focus:ring-1 focus:ring-secondary focus:ring-offset-1 sm:rounded-sm md:w-full",
+        "fixed gap-4 border bg-background p-6 duration-200 focus:outline-none focus:ring-1 focus:ring-secondary focus:ring-offset-1 sm:rounded-sm",
         className,
-        sidePosition ? "" : "left-1/2 top-1/2 z-50 grid -translate-x-1/2 -translate-y-1/2",
+        sidePosition
+          ? ""
+          : "left-1/2 top-1/2 z-50 grid -translate-x-1/2 -translate-y-1/2 md:w-full",
       )}
       {...props}
     >
