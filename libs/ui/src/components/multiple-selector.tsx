@@ -522,7 +522,7 @@ export const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSe
             <button
               type="button"
               className={cn(
-                "absolute right-0 h-6 w-6 p-0",
+                "absolute right-1 top-1/2 flex size-6 -translate-y-1/2 items-center justify-center p-0",
                 (hideClearAllButton ||
                   disabled ||
                   selected.length < 1 ||
