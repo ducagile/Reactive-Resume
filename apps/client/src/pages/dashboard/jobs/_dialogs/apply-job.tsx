@@ -88,6 +88,11 @@ export const ApplyJobDialog = () => {
         jobApplyId: jobApplydId,
       });
 
+      toast({
+        variant: "success",
+        title: t`Application submitted successfully!`,
+      });
+
       close();
     } catch (error: unknown) {
       toast({
@@ -100,7 +105,7 @@ export const ApplyJobDialog = () => {
 
   return (
     <Dialog open={isOpen} onOpenChange={close}>
-      <DialogContent className="sm:max-w-[725px]">
+      <DialogContent className="sm:max-w-[725px] z-[60]">
         <DialogHeader>
           <DialogTitle>
             <div className="flex items-center space-x-2.5">

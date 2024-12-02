@@ -4,16 +4,20 @@ import { useTheme } from "@reactive-resume/hooks";
 import { Button, Dialog, DialogContent, DialogHeader, ScrollArea } from "@reactive-resume/ui";
 import dayjs from "dayjs";
 import { AnimatePresence } from "framer-motion";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
-import { defaultJob, IJob } from "@/client/services/job/job";
+import { defaultJob, IJob, IJobApply } from "@/client/services/job";
 import { useTechStacks } from "@/client/services/job/tech-stack";
+import { useAuthStore } from "@/client/stores/auth";
 import { useDialog } from "@/client/stores/dialog";
 
 export const DescriptionJobDialog = () => {
   const { isOpen, close, payload } = useDialog("job");
   const { techStacks } = useTechStacks();
   const { isDarkMode } = useTheme();
+
+  const { user } = useAuthStore();
+  const { open: openApply } = useDialog<IJobApply>("apply-job");
 
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   const job = useMemo<IJob>(() => (payload ? (payload.item as IJob) : defaultJob), [payload]);
@@ -27,6 +31,15 @@ export const DescriptionJobDialog = () => {
     () => (payload ? dayjs().to((payload.item as IJob).CreatedAt) : ""),
     [payload],
   );
+
+  const onClickApply = () => {
+    if (job && user) {
+      openApply("create", {
+        id: "apply-job",
+        item: { job, coverLetter: "", userId: user.id, resumes: [] },
+      });
+    }
+  };
 
   return (
     <Dialog
@@ -44,7 +57,7 @@ export const DescriptionJobDialog = () => {
           // data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]
         }}
         // data-[state=closed]:!translate-x-full data-[state=open]:!translate-x-0
-        className="w-[calc(100vw - 20px)] xl:w-[1024px] right-0 data-[state=open]:!slide-in-from-right-full !top-0 z-50 h-screen text-lg duration-10000 data-[state=close]:opacity-0 data-[state=open]:opacity-100"
+        className="w-[calc(100vw - 20px)] !top-0 right-0 z-50 h-screen text-lg duration-10000 data-[state=close]:opacity-0 data-[state=open]:opacity-100 data-[state=open]:!slide-in-from-right-full xl:w-[1024px]"
         sidePosition={true}
       >
         <DialogHeader>
@@ -56,7 +69,10 @@ export const DescriptionJobDialog = () => {
             <p className="text-base">{t`Posted ${postedTime}`}</p>
           </div>
           <AnimatePresence presenceAffectsLayout>
-            <Button className="rounded-md py-6 text-lg">{t`Apply Now`}</Button>
+            <Button
+              className="rounded-md py-6 text-lg"
+              onClick={onClickApply}
+            >{t`Apply Now`}</Button>
           </AnimatePresence>
         </div>
         <ScrollArea>
@@ -92,4 +108,3 @@ export const DescriptionJobDialog = () => {
     </Dialog>
   );
 };
-
