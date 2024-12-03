@@ -147,12 +147,16 @@ msgstr "Bất kỳ ai có liên kết này đều có thể xem và tải xuốn
 msgid "API Key"
 msgstr "API Key"
 
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:93
+msgid "Application submitted successfully!"
+msgstr ""
+
 #: apps/client/src/pages/dashboard/jobs/_layouts/grid/_components/job-card.tsx:55
 #: apps/client/src/pages/dashboard/jobs/_layouts/list/_components/item.tsx:34
 msgid "Apply"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:59
+#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:75
 msgid "Apply Now"
 msgstr ""
 
@@ -243,7 +247,7 @@ msgid "By the community, for the community."
 msgstr "Bởi cộng đồng, vì cộng đồng."
 
 #: apps/client/src/pages/builder/sidebars/left/sections/shared/section-dialog.tsx:131
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:165
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:170
 #: apps/client/src/pages/dashboard/resumes/_dialogs/lock.tsx:49
 #: apps/client/src/pages/dashboard/resumes/_dialogs/resume.tsx:154
 #: apps/client/src/pages/dashboard/settings/_dialogs/two-factor.tsx:137
@@ -326,7 +330,7 @@ msgstr "Sao chép Liên kết đến Sơ yếu lý lịch"
 msgid "Copy to Clipboard"
 msgstr "Sao chép vào bộ nhớ tạm"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:149
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:154
 msgid "Cover Letter"
 msgstr ""
 
@@ -415,7 +419,7 @@ msgstr "Xóa tài khoản"
 #: apps/client/src/pages/builder/sidebars/left/dialogs/projects.tsx:66
 #: apps/client/src/pages/builder/sidebars/left/dialogs/references.tsx:53
 #: apps/client/src/pages/builder/sidebars/left/dialogs/skills.tsx:63
-#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:65
+#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:81
 msgid "Description"
 msgstr "Mô tả"
 
@@ -999,7 +1003,7 @@ msgstr "nguyenvana@example.com"
 msgid "No results found"
 msgstr "Không tìm thấy kết quả"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:134
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:139
 msgid "No resumes found"
 msgstr ""
 
@@ -1022,7 +1026,7 @@ msgstr "Mật khẩu sử dụng một lần"
 
 #: apps/client/src/components/ai-actions.tsx:56
 #: apps/client/src/libs/axios.ts:29
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:95
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:100
 #: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:348
 #: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:645
 #: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:667
@@ -1140,7 +1144,7 @@ msgstr "Vị trí"
 msgid "Position"
 msgstr "Vị trí"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:56
+#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:69
 #: apps/client/src/pages/dashboard/jobs/_layouts/grid/_components/job-card.tsx:36
 #: apps/client/src/pages/dashboard/jobs/_layouts/list/_components/job-item.tsx:40
 msgid "Posted {postedTime}"
@@ -1295,11 +1299,11 @@ msgstr "Bảo mật"
 msgid "Select"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:130
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:135
 msgid "Select resumes"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:120
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:125
 msgid "Select Resumes"
 msgstr ""
 
@@ -1445,7 +1449,7 @@ msgstr "Lưu trữ mã dự phòng của bạn một cách an toàn"
 msgid "Stored"
 msgstr "Đã lưu trữ"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:171
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:176
 msgid "Submit"
 msgstr ""
 
@@ -1520,7 +1524,7 @@ msgstr "Talent Hub phát triển mạnh nhờ cộng đồng sôi động. Dự 
 msgid "Talent Resume"
 msgstr "Công cụ xây dựng sơ yếu lý lịch miễn phí và mã nguồn mở"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:74
+#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:90
 msgid "Tech Stack"
 msgstr ""
 
@@ -1767,7 +1771,7 @@ msgstr ""
 msgid "Work Status"
 msgstr "Trạng Thái"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:153
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:158
 msgid "Write your cover letter here..."
 msgstr ""
 

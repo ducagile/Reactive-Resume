@@ -112,7 +112,7 @@ export const ApplyJobDialog = () => {
               <h2 className="text-xl font-bold">{payload.item?.job?.title}</h2>
             </div>
           </DialogTitle>
-          <DialogDescription>{payload.item?.job?.job_code}</DialogDescription>
+          {/* <DialogDescription>{payload.item?.job?.job_code}</DialogDescription> */}
         </DialogHeader>
 
         <Form {...form}>
