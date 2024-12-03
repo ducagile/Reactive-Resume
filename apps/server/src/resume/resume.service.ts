@@ -1,3 +1,5 @@
+import * as fs from "node:fs";
+
 import {
   BadRequestException,
   Injectable,
@@ -175,6 +177,9 @@ export class ResumeService {
 
   async upload(str: string) {
     const data = await this.handleUpload(str);
+    fs.unlink(str, (err) => {
+      if (err) console.error(`Failed to delete file ${str}:`, err);
+    });
     return data;
   }
 

@@ -1,9 +1,6 @@
-import { ResumeDto } from "@reactive-resume/dto";
-import { useMutation } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
 
 import { axios } from "@/client/libs/axios";
-import { queryClient } from "@/client/libs/query-client";
 
 // export const getSchemaData = async (data: { data: string; title: string }) => {
 //   const response = await axios.post<string, AxiosResponse<ResumeDto>>("/resume/getValues", {
@@ -15,9 +12,11 @@ import { queryClient } from "@/client/libs/query-client";
 
 type AnyObject = Record<string, string>;
 
-export const importPdfResume = async (data: string) => {
-  const response = await axios.post<string, AxiosResponse<AnyObject>>("/resume/upload", {
-    data,
+export const importPdfResume = async (data: FormData) => {
+  const response = await axios.post<string, AxiosResponse<AnyObject>>("/resume/upload", data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
   });
 
   return response.data;
