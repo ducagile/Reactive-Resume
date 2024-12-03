@@ -495,7 +495,7 @@ export const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSe
               disabled={disabled}
               placeholder={hidePlaceholderWhenSelected && selected.length !== 0 ? "" : placeholder}
               className={cn(
-                "flex-1 bg-transparent rounded-md outline-none placeholder:text-muted-foreground",
+                "flex-1 bg-background rounded-md outline-none placeholder:text-muted-foreground",
                 {
                   "w-full": hidePlaceholderWhenSelected,
                   "px-3 py-2": selected.length === 0,
