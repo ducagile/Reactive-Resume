@@ -202,6 +202,8 @@ const PdfImport = ({
 
   const workerRef = useRef<Worker | null>(null);
 
+  console.log(workerRef.current);
+
   useEffect(() => {
     workerRef.current = new Worker(new URL("worker.ts", import.meta.url), { type: "module" });
 
@@ -248,7 +250,8 @@ const PdfImport = ({
       keysLeft.current.flat(Infinity).includes(code),
     );
     try {
-      const pdfData = typeof memoizedPdfJson === "string" ? JSON.parse(memoizedPdfJson) : memoizedPdfJson;
+      const pdfData =
+        typeof memoizedPdfJson === "string" ? JSON.parse(memoizedPdfJson) : memoizedPdfJson;
       // if (isValidCode) {
       //   const currentMappingValue = mappingValue(pdfData, memoizedMappingCode);
       //   setPrevMappingValue(currentMappingValue);
@@ -263,7 +266,9 @@ const PdfImport = ({
             mappingCode: memoizedMappingCode,
           } as IEvent);
         } else {
+          console.log('abc')
           const currentMappingValue = mappingValue(pdfData, memoizedMappingCode);
+          console.log(currentMappingValue);
           setPrevMappingValue(currentMappingValue);
           setMappedResult(currentMappingValue);
         }
@@ -303,6 +308,16 @@ const PdfImport = ({
   //     return false;
   //   }
   // }, [pdfJson]);
+
+  console.log(keysLeft, mappingCode, isValidToImport)
+
+  console.log(validationResult,
+    setValidationResult,
+    initialData,
+    title,
+    onReset,
+    onClose)
+  console.log(keysLeft, mappingCode)
 
   const onValidate = () => {
     try {
@@ -352,7 +367,7 @@ const PdfImport = ({
   };
 
   return (
-    <div className="flex flex-col overflow-hidden">
+    <div className="flex flex-col gap-6 overflow-hidden">
       <DialogHeader>
         <DialogTitle>
           <div className="flex items-center space-x-2.5">
@@ -377,14 +392,16 @@ const PdfImport = ({
       {validationResult?.isValid === false && (
         <div className="space-y-2">
           <Label className="text-error">{t`Errors`}</Label>
-          <ScrollArea orientation="vertical" className="h-[120px]">
-            <div className="whitespace-pre-wrap rounded bg-secondary-accent p-4 font-mono text-xs leading-relaxed">
-              {validationResult.errors}
-            </div>
-          </ScrollArea>
+          <div className="max-h-[120px] overflow-auto">
+            <ScrollArea orientation="vertical">
+              <div className="whitespace-pre-wrap rounded bg-secondary-accent p-4 font-mono text-xs leading-relaxed">
+                {validationResult.errors}
+              </div>
+            </ScrollArea>
+          </div>
         </div>
       )}
-      <div className="grid grow grid-cols-3 gap-16 overflow-hidden py-8">
+      <div className="grid grow grid-cols-3 gap-16 overflow-hidden">
         {/* <div className="overflow-hidden"> */}
         <div className="flex flex-col gap-4 space-y-2 overflow-auto">
           <Label className=" text-[inherit]">{t`Your CV Data`}</Label>
@@ -483,9 +500,8 @@ export const ImportDialog = () => {
   const { importResume, loading } = useImportResume();
   const textRef = useRef<string | null>(null);
   const initialDataRef = useRef<AnyObject>({});
-  const inputRef = useRef<HTMLTextAreaElement | null>(null);
   const titleRef = useRef<null | string>(null);
-  const okRef = useRef<boolean>(false);
+  // const okRef = useRef<boolean>(false);
 
   const [validationResult, setValidationResult] = useState<ValidationResult | null>(null);
 
@@ -506,45 +522,12 @@ export const ImportDialog = () => {
     setValidationResult(null);
   }, [filetype]);
 
-  useEffect(() => {
-    if (validationResult?.isValid) {
-      inputRef.current?.focus();
-    }
-  }, [validationResult]);
-
   const accept = useMemo(() => {
     if (filetype.includes("json")) return ".json";
     if (filetype.includes("zip")) return ".zip";
     if (filetype.includes("pdf")) return ".pdf";
     return "";
   }, [filetype]);
-
-  const onParse = async () => {
-    try {
-      const { file, type } = formSchema.parse(form.getValues());
-      setConvertLoading(true);
-      const text = await extractText(file);
-      // setValidationResult({
-      //   isValid: true,
-      //   type,
-      //   result: {
-      //     text,
-      //     title: file.name.split(".pdf")[0],
-      //   },
-      // });
-      titleRef.current = file.name.split(".pdf")[0];
-      textRef.current = text;
-      okRef.current = true;
-      setConvertLoading(false);
-    } catch (error) {
-      if (error instanceof ZodError) {
-        toast({
-          variant: "error",
-          title: t`An error occurred while validating the file.`,
-        });
-      }
-    }
-  };
 
   const onValidate = async () => {
     try {
@@ -648,11 +631,44 @@ export const ImportDialog = () => {
     }
   };
 
+  // const onParse = async () => {
+  //   try {
+  //     // console.log('WF')
+  //     // return;
+  //     const { file, type } = formSchema.parse(form.getValues());
+  //     setConvertLoading(true);
+  //     const text = await extractText(file);
+  //     // setValidationResult({
+  //     //   isValid: true,
+  //     //   type,
+  //     //   result: {
+  //     //     text,
+  //     //     title: file.name.split(".pdf")[0],
+  //     //   },
+  //     // });
+  //     titleRef.current = file.name.split(".pdf")[0];
+  //     textRef.current = text;
+  //     okRef.current = true;
+  //     setConvertLoading(false);
+  //   } catch (error) {
+  //     if (error instanceof ZodError) {
+  //       toast({
+  //         variant: "error",
+  //         title: t`An error occurred while validating the file.`,
+  //       });
+  //     }
+  //   }
+  // };
+
   const onTransform = async () => {
     try {
       setConvertLoading(true);
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const response = await importPdfResume(textRef.current!);
+      const { file } = formSchema.parse(form.getValues());
+      const formData = new FormData();
+      formData.append("file", file);
+      const response = await importPdfResume(formData);
+      // const text = await extractText(file);
+      titleRef.current = file.name.split(".pdf")[0];
       initialDataRef.current = response;
       setPdfState("data");
       setConvertLoading(false);
@@ -676,9 +692,7 @@ export const ImportDialog = () => {
     setPdfState("none");
     // setMappingCode({});
     textRef.current = null;
-    inputRef.current = null;
     titleRef.current = null;
-    okRef.current = false;
   };
 
   const previewState = (
@@ -802,30 +816,21 @@ export const ImportDialog = () => {
                 </div>
               )}
 
-              {textRef.current &&
-                titleRef.current &&
-                filetype === ImportType["pdf-resume-file"] && (
-                  <div className="mt-2 flex flex-col space-y-2">
-                    <Label className="text-primary">{t`Modify`}</Label>
-                    <textarea
-                      ref={inputRef}
-                      rows={5}
-                      className="text-black"
-                      defaultValue={textRef.current}
-                      disabled={loading || convertLoading}
-                      onChange={(e) => (textRef.current = e.target.value)}
-                    />
-                  </div>
-                )}
               <DialogFooter>
                 <AnimatePresence presenceAffectsLayout>
-                  {((filetype !== ImportType["pdf-resume-file"] && !validationResult) || (filetype === ImportType["pdf-resume-file"] && !okRef.current)) && (
+                  {filetype !== ImportType["pdf-resume-file"] && !validationResult && (
+                    <Button type="button" disabled={loading || convertLoading} onClick={onValidate}>
+                      {t`Validate`}
+                    </Button>
+                  )}
+
+                  {filetype === ImportType["pdf-resume-file"] && (
                     <Button
                       type="button"
                       disabled={loading || convertLoading}
-                      onClick={filetype === ImportType["pdf-resume-file"] ? onParse : onValidate}
+                      onClick={onTransform}
                     >
-                      {filetype === ImportType["pdf-resume-file"] ? t`Modify` : t`Validate`}
+                      {loading || convertLoading ? t`Loading...` : t`Transform`}
                     </Button>
                   )}
 
@@ -853,16 +858,6 @@ export const ImportDialog = () => {
                         </Button>
                       </>
                     )}
-
-                  {!!okRef.current && filetype === ImportType["pdf-resume-file"] && (
-                    <Button
-                      type="button"
-                      disabled={loading || convertLoading}
-                      onClick={onTransform}
-                    >
-                      {loading || convertLoading ? t`Loading...` : t`Transform`}
-                    </Button>
-                  )}
                 </AnimatePresence>
               </DialogFooter>
             </form>

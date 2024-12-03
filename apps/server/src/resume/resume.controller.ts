@@ -1,3 +1,6 @@
+// eslint-disable-next-line unicorn/import-style
+import * as path from "node:path";
+
 import {
   BadRequestException,
   Body,
@@ -9,8 +12,11 @@ import {
   Param,
   Patch,
   Post,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from "@nestjs/common";
+import { FileInterceptor } from "@nestjs/platform-express";
 import { ApiTags } from "@nestjs/swagger";
 import { User as UserEntity } from "@prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
@@ -22,6 +28,7 @@ import {
 } from "@reactive-resume/dto";
 import { defaultBasicMapping, defaultSectionsMapping } from "@reactive-resume/schema";
 import { ErrorMessage } from "@reactive-resume/utils";
+import { diskStorage } from "multer";
 
 import { User } from "@/server/user/decorators/user.decorator";
 
@@ -156,42 +163,42 @@ export class ResumeController {
     }
   }
 
-  // @UseInterceptors(
-  //   FileInterceptor("file", {
-  //     storage: diskStorage({
-  //       destination: "./uploads",
-  //       filename: (req, file, callback) => {
-  //         console.log("daw");
-  //         // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-  //         const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-  //         const ext = path.extname(file.originalname);
-  //         const filename = `${file.fieldname}-${uniqueSuffix}${ext}`;
-  //         callback(null, filename);
-  //       },
-  //     }),
-  //     limits: { fileSize: 1000 * 1000 * 5 },
-  //     fileFilter: (req, file, cb) => {
-  //       if (file.mimetype === "application/pdf") {
-  //         cb(null, true);
-  //       } else {
-  //         cb(new BadRequestException("Invalid file type, only images are allowed!"), false);
-  //       }
-  //     },
-  //   }),
-  // )
-  // @Post("upload")
-  // // @UseGuards(TwoFactorGuard)
-  // upload(@UploadedFile() file: Express.Multer.File) {
-  //   console.log(file);
-  //   console.log(path.join(process.cwd(), "uploads", file.filename).split("/").join("/"));
-  //   const filePath = path.join(process.cwd(), "uploads", file.filename).split("/").join("/");
-  //   return this.resumeService.upload1(filePath);
-  //   // return this.resumeService.upload(data);
-  // }
-
+  @UseInterceptors(
+    FileInterceptor("file", {
+      storage: diskStorage({
+        destination: "./uploads",
+        filename: (req, file, callback) => {
+          console.log("daw");
+          // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+          const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+          const ext = path.extname(file.originalname);
+          const filename = `${file.fieldname}-${uniqueSuffix}${ext}`;
+          callback(null, filename);
+        },
+      }),
+      limits: { fileSize: 1000 * 1000 * 5 },
+      fileFilter: (req, file, cb) => {
+        if (file.mimetype === "application/pdf") {
+          cb(null, true);
+        } else {
+          cb(new BadRequestException("Invalid file type, only images are allowed!"), false);
+        }
+      },
+    }),
+  )
   @Post("upload")
   // @UseGuards(TwoFactorGuard)
-  async upload(@Body() { data }: { data: string }) {
-    return this.resumeService.upload(data);
+  async upload1(@UploadedFile() file: Express.Multer.File) {
+    console.log(file);
+    // console.log(path.join(process.cwd(), "uploads", file.filename).split("/").join("/"));
+    const filePath = path.join(process.cwd(), "uploads", file.filename).split("/").join("/");
+    return this.resumeService.upload(filePath);
+    // return this.resumeService.upload(data);
   }
+
+  // @Post("upload")
+  // // @UseGuards(TwoFactorGuard)
+  // async upload(@Body() { data }: { data: string }) {
+  //   return this.resumeService.upload(data);
+  // }
 }

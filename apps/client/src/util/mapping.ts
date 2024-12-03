@@ -4,6 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-type-parameters */
 /* eslint-disable unicorn/no-nested-ternary */
 
+import { createId } from "@paralleldrive/cuid2";
 import {
   defaultBasicMapping,
   defaultResumeData,
@@ -389,11 +390,11 @@ export const mappingValue = (
     //         let defaultItem = cloneDeep(schemaItem);
     //         for (const [rjsPath, thPath] of Object.entries(value[1])) {
     //           const valueInPath = getValues(rjsPath, itemValue as AnyObject) as unknown as string;
-              // const defaultValue = getValues(
-              //   // eslint-disable-next-line unicorn/prefer-spread
-              //   (value[0] as string).concat(".", thPath as string),
-              //   defaultResumeMapping,
-              // );
+    // const defaultValue = getValues(
+    //   // eslint-disable-next-line unicorn/prefer-spread
+    //   (value[0] as string).concat(".", thPath as string),
+    //   defaultResumeMapping,
+    // );
     //           // console.log("???>>", rjsPath, thPath, valueInPath, defaultValue, (value[0] as string).concat(".", thPath as string))
     //           if (Array.isArray(valueInPath) && !Array.isArray(defaultValue))
     //             return defaultResumeMapping;
@@ -441,7 +442,8 @@ export const mappingValue = (
         const arrayValue = getValues(originalKey, data) as unknown[];
 
         const arrayItem = arrayValue.map((itemValue) => {
-          const defaultItem = cloneDeep(schemaItem);
+          let defaultItem = cloneDeep(schemaItem);
+          if ((defaultItem as AnyObject).id) (defaultItem as AnyObject).id = createId();
           for (const [rjsPath, thPath] of Object.entries(value[1])) {
             const valueInPath = getValues(rjsPath, itemValue as AnyObject);
             const defaultValue = getValues(
@@ -463,6 +465,7 @@ export const mappingValue = (
         setValues(value[0], arrayItem, resultData);
       }
     }
+    console.warn(resultData)
     return resultData;
   } catch {
     return defaultResumeData;

@@ -1,4 +1,5 @@
 import { GoogleGenerativeAI, Schema, SchemaType } from "@google/generative-ai";
+import { GoogleAIFileManager } from "@google/generative-ai/server";
 import { Injectable } from "@nestjs/common";
 
 // import { v4 as uuidv4 } from "uuid";
@@ -135,7 +136,7 @@ const schema: Schema = {
       items: {
         type: SchemaType.OBJECT,
         description: "Work experience of the candidate",
-        required: ["name", "position", "url", "startDate", "endDate", "summary", "highlights"],
+        required: ["name", "position", "url", "date", "remainingText"],
         properties: {
           name: {
             type: SchemaType.STRING,
@@ -149,24 +150,36 @@ const schema: Schema = {
             type: SchemaType.STRING,
             description: "The official website of the company (URL must start with https://)",
           },
-          startDate: {
+          // startDate: {
+          //   type: SchemaType.STRING,
+          //   description: "The date when the candidate started the position at the company",
+          // },
+          // endDate: {
+          //   type: SchemaType.STRING,
+          //   description: "The date when the candidate ended the position at the company",
+          // },
+          date: {
             type: SchemaType.STRING,
-            description: "The date when the candidate started the position at the company",
+            description: "The period of time the candidate worked at the company.",
           },
-          endDate: {
-            type: SchemaType.STRING,
-            description: "The date when the candidate ended the position at the company",
-          },
-          summary: {
-            type: SchemaType.STRING,
-            description: String.raw`A brief description of the candidate's overall responsibilities, tasks, and contributions in the role (New line using \n)`,
-          },
-          highlights: {
+          // summary: {
+          //   type: SchemaType.STRING,
+          //   description: String.raw`A brief description of the candidate's overall responsibilities, tasks, and contributions in the role (New line using \n)`,
+          // },
+          // highlights: {
+          //   type: SchemaType.ARRAY,
+          //   items: {
+          //     type: SchemaType.STRING,
+          //     description:
+          //       "Key achievements or notable milestones the candidate accomplished during their time at the company",
+          //   },
+          // },
+          remainingText: {
             type: SchemaType.ARRAY,
             items: {
               type: SchemaType.STRING,
               description:
-                "Key achievements or notable milestones the candidate accomplished during their time at the company",
+                "A list of additional details related to the work experience that are not covered by the primary fields like name, date, url, position. This key should include supplementary information such as summary, highlights, and any other relevant insights about the work experience.",
             },
           },
         },
@@ -177,15 +190,7 @@ const schema: Schema = {
       items: {
         type: SchemaType.OBJECT,
         description: "Volunteer information of the candidate",
-        required: [
-          "organization",
-          "position",
-          "url",
-          "startDate",
-          "endDate",
-          "summary",
-          "highlights",
-        ],
+        required: ["organization", "position", "url", "date", "remainingText"],
         properties: {
           organization: {
             type: SchemaType.STRING,
@@ -200,24 +205,16 @@ const schema: Schema = {
             description:
               "The official website link of the organization (URL must start with https://)",
           },
-          startDate: {
+          date: {
             type: SchemaType.STRING,
-            description: "The date when the candidate started volunteering at the organization",
+            description: "The period of time the candidate volunteered at the organization.",
           },
-          endDate: {
-            type: SchemaType.STRING,
-            description: "The date when the candidate ended volunteering at the organization",
-          },
-          summary: {
-            type: SchemaType.STRING,
-            description: String.raw`A brief description of the candidate's duties, responsibilities, and contributions during their volunteer role or any other information about volunteer of the candidate (New line using \n)`,
-          },
-          highlights: {
+          remainingText: {
             type: SchemaType.ARRAY,
             items: {
               type: SchemaType.STRING,
               description:
-                "Key achievements or notable recognitions the candidate received during their volunteer experience",
+                "A list of additional details related to the volunteered at the organization that are not covered by the primary fields like organization, date, url, position. This key should include supplementary information such as summary, highlights, and any other relevant insights about the volunteering.",
             },
           },
         },
@@ -233,8 +230,9 @@ const schema: Schema = {
           "url",
           "area",
           "studyType",
-          "startDate",
-          "endDate",
+          // "startDate",
+          // "endDate",
+          "date",
           "score",
           "courses",
         ],
@@ -258,13 +256,17 @@ const schema: Schema = {
             description: "The type of degree or qualification the candidate pursued",
             example: "Bachelor",
           },
-          startDate: {
+          // startDate: {
+          //   type: SchemaType.STRING,
+          //   description: "The date when the candidate started their studies at the institution",
+          // },
+          // endDate: {
+          //   type: SchemaType.STRING,
+          //   description: "The date when the candidate ended their studies at the institution",
+          // },
+          date: {
             type: SchemaType.STRING,
-            description: "The date when the candidate started their studies at the institution",
-          },
-          endDate: {
-            type: SchemaType.STRING,
-            description: "The date when the candidate ended their studies at the institution",
+            description: "The period of time the candidate studied at the institution.",
           },
           score: {
             type: SchemaType.STRING,
@@ -452,35 +454,47 @@ const schema: Schema = {
       items: {
         type: SchemaType.OBJECT,
         description: "Projects completed by the candidate",
-        required: ["name", "startDate", "endDate", "description", "highlights", "url"],
+        required: [
+          "name",
+          "date",
+          // "description",
+          // "all_remaining_attribute_information_suchas_teamSize_tool_responsibility",
+          "url",
+          "remainingText",
+        ],
+        // required: ["name", "date", "description", "highlights", "url"],
         properties: {
           name: {
             type: SchemaType.STRING,
             description: "The name or title of the project",
           },
-          startDate: {
+          date: {
             type: SchemaType.STRING,
-            description: "The date when the project started",
+            description: "The period of time the candidate worked on the project.",
           },
-          endDate: {
-            type: SchemaType.STRING,
-            description: "The date when the project ended",
-          },
-          description: {
-            type: SchemaType.STRING,
-            description: "Description of the project",
-          },
-          highlights: {
-            type: SchemaType.ARRAY,
-            items: {
-              type: SchemaType.STRING,
-              description: "Key achievements or highlights of the project",
-            },
-          },
+          // description: {
+          //   type: SchemaType.STRING,
+          //   description: "Description of the project",
+          // },
+          // highlights: {
+          //   type: SchemaType.ARRAY,
+          //   items: {
+          //     type: SchemaType.STRING,
+          //     description: "Key achievements or highlights of the project",
+          //   },
+          // },
           url: {
             type: SchemaType.STRING,
             description:
               "The link to the project or more information about it (URL must start with https://)",
+          },
+          remainingText: {
+            type: SchemaType.ARRAY,
+            items: {
+              type: SchemaType.STRING,
+              description:
+                "A list of additional details related to the project that are not covered by the primary fields like name, date, url. This key should include supplementary information such as responsibilities, tools, technologies used, platform, server, database, team size, and any other relevant insights about the project.",
+            },
           },
         },
       },
@@ -491,20 +505,20 @@ const schema: Schema = {
 @Injectable()
 export class GenaiService {
   private genAI: GoogleGenerativeAI;
-  // private fileManager: GoogleAIFileManager;
+  private fileManager: GoogleAIFileManager;
 
   constructor() {
     this.genAI = new GoogleGenerativeAI(process.env.GENAI_API_KEY ?? "");
-    // this.fileManager = new GoogleAIFileManager(process.env.GENAI_API_KEY ?? "");
+    this.fileManager = new GoogleAIFileManager(process.env.GENAI_API_KEY ?? "");
   }
 
   async convertResumeToJson(str: string): Promise<any> {
     const prompt = `
       Lọc Ra Các Trường Phù Hợp Tương Ứng Với Dữ Liệu Resume Sau Và Những Trường Được Required Mà Không Có Dữ Liệu Thì Trả Về Chuỗi Rỗng Hoặc Mảng Rỗng (Lưu Ý Là Lấy Tất Cả Các Dữ Liệu Có Thể Trong Resume):
-      Resume Text: ${str}
       Return the output in valid JSON format. Ensure the JSON is properly formatted with correct syntax so that JSON.parse can be used.
-    `;
+      `;
 
+    // Resume Text: ${str}
     const model = this.genAI.getGenerativeModel({
       model: "gemini-1.5-flash-exp-0827",
       generationConfig: {
@@ -513,22 +527,22 @@ export class GenaiService {
       },
     });
 
-    // const uploadResponse = await this.fileManager.uploadFile(str, {
-    //   mimeType: "application/pdf",
-    //   displayName: "Gemini 1.5 PDF",
-    // });
+    const uploadResponse = await this.fileManager.uploadFile(str, {
+      mimeType: "application/pdf",
+      displayName: "Gemini 1.5 PDF",
+    });
 
-    // const response = await model.generateContent([
-    //   { text: prompt },
-    //   {
-    //     fileData: {
-    //       mimeType: uploadResponse.file.mimeType,
-    //       fileUri: uploadResponse.file.uri,
-    //     },
-    //   },
-    // ]);
+    const response = await model.generateContent([
+      { text: prompt },
+      {
+        fileData: {
+          mimeType: uploadResponse.file.mimeType,
+          fileUri: uploadResponse.file.uri,
+        },
+      },
+    ]);
 
-    const response = await model.generateContent(prompt);
+    // const response = await model.generateContent(prompt);
 
     // return JSON.stringify(zodToJsonSchema(resumeDataSchema));
     return response.response.text();
