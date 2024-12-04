@@ -126,6 +126,7 @@ export const ApplyJobDialog = () => {
                   <FormControl>
                     <MultipleSelector
                       {...field}
+                      allowSelectAll
                       defaultOptions={
                         userResumes?.map((resume) => ({
                           label: resume.title,

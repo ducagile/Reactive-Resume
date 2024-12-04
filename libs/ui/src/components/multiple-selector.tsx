@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
+/* eslint-disable unicorn/prefer-at */
 "use client";
 
 import { X } from "@phosphor-icons/react";
@@ -77,6 +80,8 @@ type MultipleSelectorProps = {
   >;
   /** hide the clear all button. */
   hideClearAllButton?: boolean;
+  /** Select all the options */
+  allowSelectAll?: boolean;
 };
 
 export type MultipleSelectorRef = {
@@ -111,6 +116,7 @@ function transToGroupOption(options: Option[], groupBy?: string) {
   }
 
   const groupOption: GroupOption = {};
+  // eslint-disable-next-line unicorn/no-array-for-each
   options.forEach((option) => {
     const key = (option[groupBy] as string) || "";
     if (!groupOption[key]) {
@@ -192,6 +198,7 @@ export const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSe
       commandProps,
       inputProps,
       hideClearAllButton = false,
+      allowSelectAll = false,
     }: MultipleSelectorProps,
     ref: React.Ref<MultipleSelectorRef>,
   ) => {
@@ -245,6 +252,7 @@ export const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSe
         const input = inputRef.current;
         if (input) {
           if (e.key === "Delete" || e.key === "Backspace") {
+            // eslint-disable-next-line unicorn/no-lonely-if
             if (input.value === "" && selected.length > 0) {
               const lastSelectOption = selected[selected.length - 1];
               // If last item is fixed, we should not remove it.
@@ -424,6 +432,38 @@ export const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSe
       return undefined;
     }, [creatable, commandProps?.filter]);
 
+    const handleSelectAll = React.useCallback(() => {
+      const allOptions = Object.values(options).flat();
+      const selectableOptions = allOptions.filter((option) => !option.disable);
+      setSelected(selectableOptions);
+      onChange?.(selectableOptions);
+    }, [onChange, options]);
+
+    const SelectAllItem = React.useCallback(() => {
+      if (!allowSelectAll) return null;
+
+      const allOptions = Object.values(options).flat();
+      const selectableOptions = allOptions.filter((option) => !option.disable);
+
+      if (selectableOptions.length === 0 || selectableOptions.length === selected.length) {
+        return null;
+      }
+
+      return (
+        <CommandItem
+          value="__select_all__"
+          className="cursor-pointer"
+          onMouseDown={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
+          onSelect={handleSelectAll}
+        >
+          Select All
+        </CommandItem>
+      );
+    }, [allowSelectAll, handleSelectAll, options, selected.length]);
+
     return (
       <Command
         ref={dropdownRef}
@@ -525,7 +565,7 @@ export const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSe
                 "absolute right-1 top-1/2 flex size-6 -translate-y-1/2 items-center justify-center p-0",
                 (hideClearAllButton ||
                   disabled ||
-                  selected.length < 1 ||
+                  selected.length === 0 ||
                   selected.filter((s) => s.fixed).length === selected.length) &&
                   "hidden",
               )}
@@ -557,6 +597,7 @@ export const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSe
               ) : (
                 <>
                   {EmptyItem()}
+                  {SelectAllItem()}
                   {CreatableItem()}
                   {!selectFirstItem && <CommandItem value="-" className="hidden" />}
                   {Object.entries(selectables).map(([key, dropdowns]) => (
