@@ -82,6 +82,7 @@ type MultipleSelectorProps = {
   hideClearAllButton?: boolean;
   /** Select all the options */
   allowSelectAll?: boolean;
+  selectAllLabel?: string;
 };
 
 export type MultipleSelectorRef = {
@@ -199,6 +200,7 @@ export const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSe
       inputProps,
       hideClearAllButton = false,
       allowSelectAll = false,
+      selectAllLabel = "Select All",
     }: MultipleSelectorProps,
     ref: React.Ref<MultipleSelectorRef>,
   ) => {
@@ -459,7 +461,7 @@ export const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSe
           }}
           onSelect={handleSelectAll}
         >
-          Select All
+          {selectAllLabel}
         </CommandItem>
       );
     }, [allowSelectAll, handleSelectAll, options, selected.length]);
@@ -597,7 +599,7 @@ export const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSe
               ) : (
                 <>
                   {EmptyItem()}
-                  {SelectAllItem()}
+                  <CommandGroup heading="select-all">{SelectAllItem()}</CommandGroup>
                   {CreatableItem()}
                   {!selectFirstItem && <CommandItem value="-" className="hidden" />}
                   {Object.entries(selectables).map(([key, dropdowns]) => (
