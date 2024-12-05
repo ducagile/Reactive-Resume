@@ -64,7 +64,7 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       transitionDuration: {
-        10000: "10000ms",
+        1500: "1500ms",
       },
     },
   },

@@ -57,8 +57,10 @@ export const DescriptionJobDialog = () => {
           // data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]
         }}
         // data-[state=closed]:!translate-x-full data-[state=open]:!translate-x-0
-        className="w-[calc(100vw - 20px)] !top-0 right-0 z-50 h-screen text-lg duration-10000 data-[state=close]:opacity-0 data-[state=open]:opacity-100 data-[state=open]:!slide-in-from-right-full xl:w-[1024px]"
+        // data-[state=close]:opacity-0 data-[state=open]:opacity-100 data-[state=open]:!slide-in-from-right-full
+        className="w-[calc(100vw - 20px)] !top-0 right-0 z-50 h-screen text-lg duration-700 data-[state=closed]:opacity-0 data-[state=open]:opacity-100 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:!duration-500 data-[state=open]:!duration-700 data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right xl:w-[1024px]"
         sidePosition={true}
+        classNameOverlay="!duration-700"
       >
         <DialogHeader>
           <ArrowLeft size={32} className="cursor-pointer" onClick={close} />
