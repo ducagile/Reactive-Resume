@@ -136,7 +136,7 @@ const schema: Schema = {
       items: {
         type: SchemaType.OBJECT,
         description: "Work experience of the candidate",
-        required: ["name", "position", "url", "date", "remainingText"],
+        required: ["name", "position", "url", "date", "sectionsHtmlRemainingContent"],
         properties: {
           name: {
             type: SchemaType.STRING,
@@ -174,7 +174,7 @@ const schema: Schema = {
           //       "Key achievements or notable milestones the candidate accomplished during their time at the company",
           //   },
           // },
-          remainingText: {
+          sectionsHtmlRemainingContent: {
             type: SchemaType.ARRAY,
             items: {
               type: SchemaType.STRING,
@@ -190,7 +190,7 @@ const schema: Schema = {
       items: {
         type: SchemaType.OBJECT,
         description: "Volunteer information of the candidate",
-        required: ["organization", "position", "url", "date", "remainingText"],
+        required: ["organization", "position", "url", "date", "sectionsHtmlRemainingContent"],
         properties: {
           organization: {
             type: SchemaType.STRING,
@@ -209,7 +209,7 @@ const schema: Schema = {
             type: SchemaType.STRING,
             description: "The period of time the candidate volunteered at the organization.",
           },
-          remainingText: {
+          sectionsHtmlRemainingContent: {
             type: SchemaType.ARRAY,
             items: {
               type: SchemaType.STRING,
@@ -460,7 +460,7 @@ const schema: Schema = {
           // "description",
           // "all_remaining_attribute_information_suchas_teamSize_tool_responsibility",
           "url",
-          "remainingText",
+          "sectionsHtmlRemainingContent",
         ],
         // required: ["name", "date", "description", "highlights", "url"],
         properties: {
@@ -488,13 +488,21 @@ const schema: Schema = {
             description:
               "The link to the project or more information about it (URL must start with https://)",
           },
-          remainingText: {
-            type: SchemaType.ARRAY,
-            items: {
-              type: SchemaType.STRING,
-              description:
-                "A list of additional details related to the project that are not covered by the primary fields like name, date, url. This key should include supplementary information such as responsibilities, tools, technologies used, platform, server, database, team size, and any other relevant insights about the project.",
-            },
+          // sectionsHtmlRemainingContent: {
+          //   type: SchemaType.ARRAY,
+          //   items: {
+          //     type: SchemaType.STRING,
+          //     description:
+          //       "A list of additional details related to the project that are not covered by the primary fields like name, date, url. This key should include supplementary information such as responsibilities, tools, technologies used, platform, server, database, team size, and any other relevant insights about the project.",
+          //   },
+          // },
+          sectionsHtmlRemainingContent: {
+            type: SchemaType.STRING,
+            // items: {
+            //   type: SchemaType.STRING,
+            // },
+            description:
+              "This text contains the HTML content for the remaining sections of the resume. It includes valid HTML tags (e.g., <section>, <h1>, <p>) and the corresponding data for each section, formatted for direct rendering in a web environment.",
           },
         },
       },
