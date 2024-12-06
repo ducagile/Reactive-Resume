@@ -8,7 +8,7 @@ const baseInit: RequestInit = {
   headers: {
     "Content-Type": "application/json",
     accept: "application/json",
-    "xc-token": process.env.NX_PUBLIC_NOCODB_TOKEN ?? "",
+    "xc-token": process.env.VITE_PUBLIC_NOCODB_TOKEN ?? "",
     "Access-Control-Allow-Origin": "*",
   },
 };
@@ -18,7 +18,7 @@ export const axios = _axios.create({
   headers: {
     "Content-Type": "application/json",
     accept: "application/json",
-    "xc-token": process.env.NX_PUBLIC_NOCODB_TOKEN ?? "",
+    "xc-token": process.env.VITE_PUBLIC_NOCODB_TOKEN ?? "",
     "Access-Control-Allow-Origin": "*",
   },
 });
@@ -56,7 +56,7 @@ export const defaultJob: IJob = {
 
 export const fetchJobs = async (): Promise<IJob[]> => {
   const response = await fetch(
-    `https://app.nocodb.com/api/v2/tables/${process.env.NX_PUBLIC_JOB_TABLE}/records?viewId=${process.env.NX_PUBLIC_JOB_VIEW_1}&where=%28status%2Ceq%2Copen%29&limit=25&shuffle=0&offset=0`,
+    `https://app.nocodb.com/api/v2/tables/${process.env.VITE_PUBLIC_JOB_TABLE}/records?viewId=${process.env.VITE_PUBLIC_JOB_VIEW_1}&where=%28status%2Ceq%2Copen%29&limit=25&shuffle=0&offset=0`,
     baseInit,
   );
   const json = await response.json();
@@ -100,7 +100,7 @@ export type InitJobResponse = {
   Id: string;
 };
 
-const NOCO_JOB_APPLY_TABLE = process.env.NX_PUBLIC_JOB_APPLY_TABLE ?? "m0lhvss666g64he";
+const NOCO_JOB_APPLY_TABLE = process.env.VITE_PUBLIC_JOB_APPLY_TABLE ?? "m0lhvss666g64he";
 
 export const initJopApply = async (data: InitJobDto) => {
   const response = await axios.post<InitJobResponse, AxiosResponse<InitJobResponse>, InitJobDto>(
@@ -131,7 +131,7 @@ export type LinkJobApplyDto = {
   jobApplyId: string;
 };
 
-const NOCO_JOB_APPLY_LINK = process.env.NX_PUBLIC_JOB_JOB_APPLY_LINK ?? "c76ljn1rfqekjmg";
+const NOCO_JOB_APPLY_LINK = process.env.VITE_PUBLIC_JOB_JOB_APPLY_LINK ?? "c76ljn1rfqekjmg";
 
 export const linkJobApply = async (data: LinkJobApplyDto) => {
   const { jobId, jobApplyId } = data;
