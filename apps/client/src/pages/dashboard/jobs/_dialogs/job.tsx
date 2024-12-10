@@ -58,7 +58,7 @@ export const DescriptionJobDialog = () => {
         }}
         // data-[state=closed]:!translate-x-full data-[state=open]:!translate-x-0
         // data-[state=close]:opacity-0 data-[state=open]:opacity-100 data-[state=open]:!slide-in-from-right-full
-        className="w-[calc(100vw - 20px)] !top-0 right-0 z-50 h-screen text-lg !duration-500 data-[state=closed]:opacity-0 data-[state=open]:opacity-100 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right xl:w-[1024px]"
+        // className="w-[calc(100vw - 20px)] !top-0 right-0 z-50 h-screen text-lg !duration-500 data-[state=closed]:opacity-0 data-[state=open]:opacity-100 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right xl:w-[1024px]"
         sidePosition={true}
         classNameOverlay="!duration-500"
       >
