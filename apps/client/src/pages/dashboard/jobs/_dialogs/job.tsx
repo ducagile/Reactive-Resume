@@ -36,7 +36,7 @@ export const DescriptionJobDialog = () => {
     if (job && user) {
       openApply("create", {
         id: "apply-job",
-        item: { job, coverLetter: "", userId: user.id, resumes: [] },
+        item: { job, userId: user.id, userName: user.name },
       });
     }
   };
