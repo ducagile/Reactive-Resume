@@ -5,7 +5,6 @@ import {
   Button,
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -78,9 +77,11 @@ export const ApplyJobDialog = () => {
   const onSubmit = async (values: FormValues) => {
     try {
       const { Id: jobApplydId } = await initJobApply({
-        cv_ids: values.resumeIds.map((id) => id.value).toString(),
+        cv_ids: values.resumeIds.map(({ value }) => value).toString(),
         introduce: values.coverLetter,
         user_id: payload.item?.userId as string,
+        user_name: payload.item?.userName as string,
+        resumes: values.resumeIds.map(({ value, label }) => ({ id: value, title: label })),
       });
 
       await linkJobApply({

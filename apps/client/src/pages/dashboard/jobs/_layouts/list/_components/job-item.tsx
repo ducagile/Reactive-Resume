@@ -12,7 +12,7 @@ import { BaseListItem } from "./item";
 type JobItemProps = {
   job: IJob;
   jobTechStacks: ITechStack[];
-}
+};
 
 export const JobItem = ({ job, jobTechStacks }: JobItemProps) => {
   const { open } = useDialog<IJob>("job");
@@ -27,7 +27,7 @@ export const JobItem = ({ job, jobTechStacks }: JobItemProps) => {
   const onClickApply = () => {
     openApply("create", {
       id: "apply-job",
-      item: { job, coverLetter: "", userId: user ? user.id : "", resumes: [] },
+      item: { job, userId: user ? user.id : "", userName: user ? user.name : "" },
     });
   };
 
