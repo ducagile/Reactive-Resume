@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 import { X } from "@phosphor-icons/react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { cn } from "@reactive-resume/utils";
@@ -20,7 +21,7 @@ export const DialogOverlay = forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      "fixed inset-0 z-50 bg-background/80 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+      "bg-[rgba(0, 0, 0.5)] fixed inset-0 z-50 backdrop-blur-[2px] !duration-200 ease-in data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
       className,
     )}
     {...props}
@@ -38,17 +39,21 @@ export const DialogContent = forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   // React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
   DialogContentProps
->(({ className, children, sidePosition = false, classNameOverlay = "", ...props }, ref) => (
+>(({ children, sidePosition = false, classNameOverlay = "", ...props }, ref) => (
   <DialogPortal>
     <DialogOverlay className={classNameOverlay} />
     <DialogPrimitive.Content
       ref={ref}
+      // forceMount
+      // data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-top-1 data-[state=closed]:zoom-out-95
       className={cn(
-        "fixed gap-4 border bg-background p-6 duration-200 focus:outline-none focus:ring-1 focus:ring-secondary focus:ring-offset-1 sm:rounded-sm",
-        className,
+        "fixed gap-4 border bg-background !duration-200 focus:outline-none focus:ring-1 focus:ring-secondary focus:ring-offset-1  sm:rounded-sm",
+        // className,
         sidePosition
-          ? ""
-          : "left-1/2 top-1/2 z-50 grid -translate-x-1/2 -translate-y-1/2 md:w-full",
+          ? "w-[calc(100vw - 20px)] !top-0 right-0 z-50 h-screen p-6 text-lg !duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right xl:w-[1024px]"
+          : "inset-0 z-50 m-auto flex !h-fit max-h-[88vh] w-fit overflow-hidden !rounded-3xl p-8 ease-in data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[1.03] data-[state=open]:slide-in-from-top-1 md:w-full",
+        // data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-105 data-[state=open]:slide-in-from-bottom-1/2 data-[state=open]:slide-in-from-right-1/2
+        // data-[state=closed]:zoom-out-105 data-[state=closed]:fade-out-0
       )}
       {...props}
     >

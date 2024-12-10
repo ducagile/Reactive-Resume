@@ -266,9 +266,7 @@ const PdfImport = ({
             mappingCode: memoizedMappingCode,
           } as IEvent);
         } else {
-          console.log('abc')
           const currentMappingValue = mappingValue(pdfData, memoizedMappingCode);
-          console.log(currentMappingValue);
           setPrevMappingValue(currentMappingValue);
           setMappedResult(currentMappingValue);
         }
@@ -308,16 +306,6 @@ const PdfImport = ({
   //     return false;
   //   }
   // }, [pdfJson]);
-
-  console.log(keysLeft, mappingCode, isValidToImport)
-
-  console.log(validationResult,
-    setValidationResult,
-    initialData,
-    title,
-    onReset,
-    onClose)
-  console.log(keysLeft, mappingCode)
 
   const onValidate = () => {
     try {
@@ -434,14 +422,19 @@ const PdfImport = ({
               <p className="font-bold text-[inherit]"></p>
               <p className="text-right font-bold text-[inherit]">{t`Map`}</p>
             </div>
-            {schemaMappingData.map((schema) => (
-              <MappingRow
-                key={schema.name}
-                keyLeftArray={keysLeft.current}
-                keyRight={schema}
-                mappingCode={mappingCode}
-                setMappingCode={setMappingCode}
-              />
+            {Object.entries(schemaMappingData).map(([keyName, valueName]) => (
+              <>
+                <p className="py-4 text-center font-medium">{keyName}</p>
+                {valueName.map((schema) => (
+                  <MappingRow
+                    key={schema.name}
+                    keyLeftArray={keysLeft.current}
+                    keyRight={schema}
+                    mappingCode={mappingCode}
+                    setMappingCode={setMappingCode}
+                  />
+                ))}
+              </>
             ))}
           </div>
         </div>
@@ -720,6 +713,11 @@ export const ImportDialog = () => {
         style={{
           maxWidth: pdfState === "none" ? "56rem" : "96vw",
           height: pdfState === "none" ? "unset" : "88vh",
+          // transform: isOpen
+          //   ? "translateY(var(--slide-enter)) scale(var(--scale-enter))"
+          //   : "translateY(var(--slide-exit)) scale(var(--scale-exit))",
+          opacity: isOpen ? 1 : 0,
+          width: "fit-content",
         }}
       >
         {pdfState === "none" ? (
