@@ -79,21 +79,24 @@ export const useJobs = () => {
 export type IJobApply = {
   job: IJob | null;
   userId: string;
-  coverLetter: string;
-  resumes: File[];
+  userName: string;
 };
 
 export const DEFAULT_JOB_APPLY: IJobApply = {
   job: null,
   userId: "",
-  coverLetter: "",
-  resumes: [],
+  userName: "",
 };
 
 export type InitJobDto = {
   introduce: string;
   cv_ids: string;
+  resumes: {
+    id: string;
+    title: string;
+  }[];
   user_id: string;
+  user_name: string;
 };
 
 export type InitJobResponse = {
