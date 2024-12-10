@@ -106,7 +106,11 @@ export const ApplyJobDialog = () => {
 
   return (
     <Dialog open={isOpen} onOpenChange={close}>
-      <DialogContent className="sm:max-w-[725px] z-[60]">
+      <DialogContent
+        // className="z-[60] relative sm:max-w-[725px]"
+        style={{ maxWidth: "56rem", display: "flex", flexDirection: "column", gap: "2rem" }}
+        classNameOverlay="!duration-500"
+      >
         <DialogHeader>
           <DialogTitle>
             <div className="flex items-center space-x-2.5">

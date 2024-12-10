@@ -4,10 +4,12 @@ export const getCookieOptions = (
   grantType: "access" | "refresh",
   isAdminRequest?: boolean,
 ): CookieOptions => {
+    const isProduction = process.env.NODE_ENV === "production";
+
   const baseOptions: CookieOptions = {
-    httpOnly: true,
-    sameSite: "none",
-    secure: (process.env.PUBLIC_URL ?? "").includes("https://"),
+    httpOnly: !!isProduction,
+    sameSite: isProduction ? "none" : "lax",
+    secure: (process.env.PUBLIC_URL ?? "").includes("https://") || isProduction,
     // path: isAdminRequest ? "/api/admin" : "/api",
   };
 
