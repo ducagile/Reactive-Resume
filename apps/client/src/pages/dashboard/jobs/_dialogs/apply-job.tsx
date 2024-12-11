@@ -105,14 +105,14 @@ export const ApplyJobDialog = () => {
 
   return (
     <Dialog open={isOpen} onOpenChange={close}>
-      <DialogContent className="sm:max-w-[725px] z-[60]">
+      <DialogContent style={{ maxWidth: "725px!important" }}>
         <DialogHeader>
           <DialogTitle>
             <div className="flex items-center space-x-2.5">
               <h2 className="text-xl font-bold">{payload.item?.job?.title}</h2>
             </div>
           </DialogTitle>
-          <DialogDescription>{payload.item?.job?.job_code}</DialogDescription>
+          <DialogDescription className="pb-4 pt-2">{payload.item?.job?.job_code}</DialogDescription>
         </DialogHeader>
 
         <Form {...form}>
