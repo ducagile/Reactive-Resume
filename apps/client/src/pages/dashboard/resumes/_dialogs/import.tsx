@@ -707,6 +707,7 @@ export const ImportDialog = () => {
       // open={true}
       open={convertLoading ? true : isOpen}
       // eslint-disable-next-line @typescript-eslint/no-empty-function
+
       onOpenChange={convertLoading ? () => { } : close}
     >
       <DialogContent
@@ -718,6 +719,7 @@ export const ImportDialog = () => {
           //   : "translateY(var(--slide-exit)) scale(var(--scale-exit))",
           opacity: isOpen ? 1 : 0,
           width: "fit-content",
+          display: "flex",
         }}
       >
         {pdfState === "none" ? (
@@ -776,6 +778,7 @@ export const ImportDialog = () => {
                     <FormControl>
                       <Input
                         key={`${accept}-${filetype}`}
+                        className="!bg-transparent"
                         type="file"
                         disabled={
                           validationResult?.isValid && filetype === ImportType["pdf-resume-file"]

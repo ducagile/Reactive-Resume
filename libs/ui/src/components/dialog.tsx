@@ -47,11 +47,11 @@ export const DialogContent = forwardRef<
       // forceMount
       // data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-top-1 data-[state=closed]:zoom-out-95
       className={cn(
-        "fixed gap-4 border bg-background !duration-200 focus:outline-none focus:ring-1 focus:ring-secondary focus:ring-offset-1  sm:rounded-sm",
+        "bg-darkModalBg fixed gap-4 border !duration-200 focus:outline-none focus:ring-1 focus:ring-secondary focus:ring-offset-1  sm:rounded-sm",
         // className,
         sidePosition
           ? "w-[calc(100vw - 20px)] !top-0 right-0 z-50 h-screen p-6 text-lg !duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right xl:w-[1024px]"
-          : "inset-0 z-50 m-auto flex !h-fit max-h-[88vh] w-fit overflow-hidden !rounded-3xl p-8 ease-in data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[1.03] data-[state=open]:slide-in-from-top-1 md:w-full",
+          : "inset-0 z-50 m-auto !h-fit max-h-[88vh] w-fit max-w-4xl overflow-hidden !rounded-3xl p-8 ease-in data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[1.03] data-[state=open]:slide-in-from-top-1 md:w-full",
         // data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-105 data-[state=open]:slide-in-from-bottom-1/2 data-[state=open]:slide-in-from-right-1/2
         // data-[state=closed]:zoom-out-105 data-[state=closed]:fade-out-0
       )}
