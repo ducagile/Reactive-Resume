@@ -599,7 +599,7 @@ export const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSe
               ) : (
                 <>
                   {EmptyItem()}
-                  <CommandGroup heading="select-all">{SelectAllItem()}</CommandGroup>
+                  <CommandGroup heading="Your CV">{SelectAllItem()}</CommandGroup>
                   {CreatableItem()}
                   {!selectFirstItem && <CommandItem value="-" className="hidden" />}
                   {Object.entries(selectables).map(([key, dropdowns]) => (

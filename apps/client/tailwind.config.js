@@ -10,11 +10,13 @@ module.exports = {
     ...createGlobPatternsForDependencies(__dirname),
   ],
   theme: {
-    colors: {
-      "tag-private": "#FFE6AF",
-      "tag-public": "#AFCDFF",
-      black: "#000000",
-      darkModalBg: "#18181B",
+    extend: {
+      colors: {
+        "tag-private": "#FFE6AF",
+        "tag-public": "#AFCDFF",
+        black: "#000000",
+        darkModalBg: "#18181B",
+      },
     },
   },
 };
