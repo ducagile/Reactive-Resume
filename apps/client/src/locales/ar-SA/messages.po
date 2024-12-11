@@ -147,12 +147,16 @@ msgstr "يمكن لأي شخص لديه هذا الرابط مشاهدة وتن�
 msgid "API Key"
 msgstr "مفتاح واجهة برمجة التطبيقات (API)"
 
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:93
+msgid "Application submitted successfully!"
+msgstr ""
+
 #: apps/client/src/pages/dashboard/jobs/_layouts/grid/_components/job-card.tsx:55
 #: apps/client/src/pages/dashboard/jobs/_layouts/list/_components/item.tsx:34
 msgid "Apply"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:59
+#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:75
 msgid "Apply Now"
 msgstr ""
 
@@ -243,7 +247,7 @@ msgid "By the community, for the community."
 msgstr "من قبل المجتمع، من أجل المجتمع."
 
 #: apps/client/src/pages/builder/sidebars/left/sections/shared/section-dialog.tsx:131
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:165
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:170
 #: apps/client/src/pages/dashboard/resumes/_dialogs/lock.tsx:49
 #: apps/client/src/pages/dashboard/resumes/_dialogs/resume.tsx:154
 #: apps/client/src/pages/dashboard/settings/_dialogs/two-factor.tsx:137
@@ -326,7 +330,7 @@ msgstr "انسخ الرابط للسيرة الذاتية"
 msgid "Copy to Clipboard"
 msgstr "نسخ إلى الحافظة"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:149
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:154
 msgid "Cover Letter"
 msgstr ""
 
@@ -415,7 +419,7 @@ msgstr "حذف الحساب"
 #: apps/client/src/pages/builder/sidebars/left/dialogs/projects.tsx:66
 #: apps/client/src/pages/builder/sidebars/left/dialogs/references.tsx:53
 #: apps/client/src/pages/builder/sidebars/left/dialogs/skills.tsx:63
-#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:65
+#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:81
 msgid "Description"
 msgstr "الوصف"
 
@@ -999,7 +1003,7 @@ msgstr "nguyenvana@example.com"
 msgid "No results found"
 msgstr "لم نعثر على نتائج"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:134
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:139
 msgid "No resumes found"
 msgstr ""
 
@@ -1022,7 +1026,7 @@ msgstr "كلمة السر لمرة واحدة OTP"
 
 #: apps/client/src/components/ai-actions.tsx:56
 #: apps/client/src/libs/axios.ts:29
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:95
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:100
 #: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:348
 #: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:645
 #: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:667
@@ -1140,7 +1144,7 @@ msgstr "الموضع"
 msgid "Position"
 msgstr "الموضع"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:56
+#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:69
 #: apps/client/src/pages/dashboard/jobs/_layouts/grid/_components/job-card.tsx:36
 #: apps/client/src/pages/dashboard/jobs/_layouts/list/_components/job-item.tsx:40
 msgid "Posted {postedTime}"
@@ -1295,11 +1299,11 @@ msgstr "الأمان"
 msgid "Select"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:130
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:135
 msgid "Select resumes"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:120
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:125
 msgid "Select Resumes"
 msgstr ""
 
@@ -1445,7 +1449,7 @@ msgstr "تخزين رموز النسخ الاحتياطي الخاص بك بشك
 msgid "Stored"
 msgstr "مخزن"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:171
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:176
 msgid "Submit"
 msgstr ""
 
@@ -1520,7 +1524,7 @@ msgstr "إعادة التفاعل تزدهر بفضل مجتمعها النشط.
 msgid "Talent Resume"
 msgstr "أداة إنشاء سيرة ذاتية مجانية ومفتوحة المصدر"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:74
+#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:90
 msgid "Tech Stack"
 msgstr ""
 
@@ -1767,7 +1771,7 @@ msgstr ""
 msgid "Work Status"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:153
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:158
 msgid "Write your cover letter here..."
 msgstr ""
 

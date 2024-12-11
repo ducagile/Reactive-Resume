@@ -364,7 +364,7 @@ export class AdminService {
 
   async findOneByUsernameSlug(username: string, slug: string, userId?: string) {
     const resume = await this.prisma.resume.findFirstOrThrow({
-      where: { user: { username }, slug, visibility: "public" },
+      where: { user: { username }, slug },
     });
 
     // Update statistics: increment the number of views by 1

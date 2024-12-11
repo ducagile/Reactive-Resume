@@ -5,7 +5,6 @@ import {
   Button,
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -78,9 +77,11 @@ export const ApplyJobDialog = () => {
   const onSubmit = async (values: FormValues) => {
     try {
       const { Id: jobApplydId } = await initJobApply({
-        cv_ids: values.resumeIds.map((id) => id.value).toString(),
+        cv_ids: values.resumeIds.map(({ value }) => value).toString(),
         introduce: values.coverLetter,
         user_id: payload.item?.userId as string,
+        user_name: payload.item?.userName as string,
+        resumes: values.resumeIds.map(({ value, label }) => ({ id: value, title: label })),
       });
 
       await linkJobApply({
@@ -105,14 +106,18 @@ export const ApplyJobDialog = () => {
 
   return (
     <Dialog open={isOpen} onOpenChange={close}>
-      <DialogContent style={{ maxWidth: "725px!important" }}>
+      <DialogContent
+        // className="z-[60] relative sm:max-w-[725px]"
+        style={{ maxWidth: "56rem", display: "flex", flexDirection: "column", gap: "2rem" }}
+        classNameOverlay="!duration-500"
+      >
         <DialogHeader>
           <DialogTitle>
             <div className="flex items-center space-x-2.5">
               <h2 className="text-xl font-bold">{payload.item?.job?.title}</h2>
             </div>
           </DialogTitle>
-          <DialogDescription className="pb-4 pt-2">{payload.item?.job?.job_code}</DialogDescription>
+          {/* <DialogDescription>{payload.item?.job?.job_code}</DialogDescription> */}
         </DialogHeader>
 
         <Form {...form}>
@@ -126,6 +131,7 @@ export const ApplyJobDialog = () => {
                   <FormControl>
                     <MultipleSelector
                       {...field}
+                      allowSelectAll
                       defaultOptions={
                         userResumes?.map((resume) => ({
                           label: resume.title,
