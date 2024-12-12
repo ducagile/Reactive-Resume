@@ -11,12 +11,12 @@ export type ITechStack = {
 
 export const fetchTechStacks = async (): Promise<ITechStack[]> => {
   const response = await fetch(
-    `https://app.nocodb.com/api/v2/tables/${process.env.NX_PUBLIC_TECH_STACK_TABLE}/records?viewId=${process.env.NX_PUBLIC_TECH_STACK_VIEW_1}&limit=25&shuffle=0&offset=0`,
+    `https://app.nocodb.com/api/v2/tables/${process.env.VITE_PUBLIC_TECH_STACK_TABLE}/records?viewId=${process.env.VITE_PUBLIC_TECH_STACK_VIEW_1}&limit=25&shuffle=0&offset=0`,
     {
       // mode: "no-cors",
       headers: {
         Accept: "application/json",
-        "xc-token": process.env.NX_PUBLIC_NOCODB_TOKEN ?? "",
+        "xc-token": process.env.VITE_PUBLIC_NOCODB_TOKEN ?? "",
         "Access-Control-Allow-Origin": "*",
       },
     },

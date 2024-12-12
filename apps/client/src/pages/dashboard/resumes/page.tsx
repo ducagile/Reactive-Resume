@@ -14,6 +14,8 @@ export const ResumesPage = () => {
   const [layout, setLayout] = useState<Layout>("grid");
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   console.log(process.env);
+  console.log(import.meta.env);
+  console.log(JSON.stringify(import.meta.env));
   console.log(process.env.VITE_PUBLIC_JOB_TABLE);
   // console.log(JSON.stringify(process.env));
   return (
