@@ -63,6 +63,19 @@ export class AdminController {
   }
 
   /**
+   * get a user
+   */
+  @Get("/user/:id")
+  @Role([Roles.ADMIN])
+  @UseGuards(TwoFactorGuard, RolesGuard)
+  @ApiOperation({
+    summary: "get a user by id",
+  })
+  async findOneUser(@Param("id") id: string) {
+    return this.adminService.getUserDetail(id);
+  }
+
+  /**
    * download user
    */
   @Get("/users/download")

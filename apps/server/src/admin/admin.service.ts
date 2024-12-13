@@ -107,6 +107,31 @@ export class AdminService {
     }
   }
 
+  async getUserDetail(userId: string) {
+    return this.prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        phone: true,
+        picture: true,
+        username: true,
+        createdAt: true,
+        updatedAt: true,
+        resumes: {
+          select: {
+            id: true,
+            title: true,
+            slug: true,
+            createdAt: true,
+            updatedAt: true,
+          },
+        },
+      },
+    });
+  }
+
   /**
    * download users
    */
