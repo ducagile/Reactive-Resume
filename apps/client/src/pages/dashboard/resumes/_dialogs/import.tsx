@@ -717,7 +717,7 @@ export const ImportDialog = () => {
           // transform: isOpen
           //   ? "translateY(var(--slide-enter)) scale(var(--scale-enter))"
           //   : "translateY(var(--slide-exit)) scale(var(--scale-exit))",
-          opacity: isOpen ? 1 : 0,
+          // opacity: isOpen ? 1 : 0,
           width: "fit-content",
           display: "flex",
         }}
