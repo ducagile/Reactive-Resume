@@ -39,6 +39,8 @@ jobs:
 
             echo "Stage 3: Pull code from branch main"
             git pull origin main
+            git reset --hard origin/main
+            git clean -fdx
 
             echo "Stage 4: Build app from Dockfile"
             docker build -t app-resume .
