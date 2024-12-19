@@ -34,22 +34,24 @@ jobs:
             echo "Stage 1: Go to git folder"
             cd Reactive-Resume
 
-            echo "Stage 2: Checkout to branch main"
-            git checkout main
+            echo "Stage 2: Stop and remove old container"
+            docker stop app-resume || true
+            docker rm app-resume || true
 
-            echo "Stage 3: Pull code from branch main"
+            echo "Stage 3: Remove old images"
+            docker image prune -af
+
+            echo "Stage 4: Pull latest code from GitHub"
+            git checkout .
             git pull origin main
-            git reset --hard origin/main
-            git clean -fdx
 
-            echo "Stage 4: Build app from Dockfile"
+            echo "Stage 5: Build app from Dockerfile"
             docker build -t app-resume .
-
-            echo "Stage 5: Stop and remove old container"
-            docker stop app-resume || true && docker rm app-resume || true
 
             echo "Stage 6: Run app"
             docker run -d --env-file ./.env -p 3000:3000 --network reactive-resume_default --restart unless-stopped --name app-resume app-resume
+
+            echo "Done!"
 
             echo "Stage 7: Remove old images"
             docker image prune -af
