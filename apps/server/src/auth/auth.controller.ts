@@ -114,7 +114,7 @@ export class AuthController {
     @Res({ passthrough: true }) response: Response,
   ) {
     const user = await this.authService.register(registerDto);
-    const domain = request.headers.host as string;
+    const domain = request.headers.origin as string;
     return this.handleAuthenticationResponse(user, response, domain);
   }
 
@@ -126,7 +126,7 @@ export class AuthController {
     @Res({ passthrough: true }) response: Response,
     @Query("isAdminRequest") isAdminRequest?: boolean,
   ) {
-    const domain = request.headers.host as string;
+    const domain = request.headers.origin as string;
     return this.handleAuthenticationResponse(user, response, domain, false, false, isAdminRequest);
   }
 
@@ -151,7 +151,7 @@ export class AuthController {
     @Req() request: Request,
     @Res({ passthrough: true }) response: Response,
   ) {
-    const domain = request.headers.host as string;
+    const domain = request.headers.origin as string;
     return this.handleAuthenticationResponse(user, response, domain, false, true);
   }
 
@@ -170,7 +170,7 @@ export class AuthController {
     @Req() request: Request,
     @Res({ passthrough: true }) response: Response,
   ) {
-    const domain = request.headers.host as string;
+    const domain = request.headers.origin as string;
     return this.handleAuthenticationResponse(user, response, domain, false, true);
   }
 
@@ -182,7 +182,7 @@ export class AuthController {
     @Res({ passthrough: true }) response: Response,
     @Query("isAdminRequest") isAdminRequest?: boolean,
   ) {
-    const domain = request.headers.host as string;
+    const domain = request.headers.origin as string;
     return this.handleAuthenticationResponse(user, response, domain, true, false, isAdminRequest);
   }
 
@@ -290,7 +290,7 @@ export class AuthController {
     @Res({ passthrough: true }) response: Response,
   ) {
     const user = await this.authService.useBackup2FACode(email, code);
-    const domain = request.headers.host as string;
+    const domain = request.headers.origin as string;
     return this.handleAuthenticationResponse(user, response, domain, true);
   }
 
