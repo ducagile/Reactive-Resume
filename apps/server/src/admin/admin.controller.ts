@@ -79,7 +79,7 @@ export class AdminController {
    * download user
    */
   @Get("/users/download")
-  @Role([Roles.ADMIN])
+  @Role([Roles.ADMIN]) 
   @UseGuards(TwoFactorGuard, RolesGuard)
   @ApiOperation({
     summary: "download list users",
