@@ -53,8 +53,3 @@ jobs:
             docker image prune -af
 
             echo "Done!"
-
-            echo "Stage 7: Remove old images"
-            docker image prune -af
-
-            echo "Done!"
