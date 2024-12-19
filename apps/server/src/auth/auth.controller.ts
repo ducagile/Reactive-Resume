@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/non-nullable-type-assertion-style */
 import {
   BadRequestException,
   Body,
@@ -8,6 +9,7 @@ import {
   Patch,
   Post,
   Query,
+  Req,
   Res,
   UseGuards,
 } from "@nestjs/common";
@@ -27,7 +29,7 @@ import {
   UserWithSecrets,
 } from "@reactive-resume/dto";
 import { ErrorMessage } from "@reactive-resume/utils";
-import type { Response } from "express";
+import type { Request, Response } from "express";
 
 import { User } from "../user/decorators/user.decorator";
 import { AuthService } from "./auth.service";
@@ -68,6 +70,7 @@ export class AuthController {
   private async handleAuthenticationResponse(
     user: UserWithSecrets,
     response: Response,
+    domain: string,
     isTwoFactorAuth = false,
     redirect = false,
     isAdminRequest?: boolean,
@@ -85,8 +88,14 @@ export class AuthController {
 
     // console.log("isAdminRequest", isAdminRequest, getCookieOptions("access", isAdminRequest));
 
-    response.cookie("Authentication", accessToken, getCookieOptions("access", isAdminRequest));
-    response.cookie("Refresh", refreshToken, getCookieOptions("refresh", isAdminRequest));
+    response.cookie("Authentication", accessToken, {
+      ...getCookieOptions("access", isAdminRequest),
+      // domain,
+    });
+    response.cookie("Refresh", refreshToken, {
+      ...getCookieOptions("refresh", isAdminRequest),
+      // domain,
+    });
 
     if (user.twoFactorEnabled && !isTwoFactorAuth) status = "2fa_required";
 
@@ -99,20 +108,26 @@ export class AuthController {
   }
 
   @Post("register")
-  async register(@Body() registerDto: RegisterDto, @Res({ passthrough: true }) response: Response) {
+  async register(
+    @Body() registerDto: RegisterDto,
+    @Req() request: Request,
+    @Res({ passthrough: true }) response: Response,
+  ) {
     const user = await this.authService.register(registerDto);
-
-    return this.handleAuthenticationResponse(user, response);
+    const domain = request.headers.host as string;
+    return this.handleAuthenticationResponse(user, response, domain);
   }
 
   @Post("login")
   @UseGuards(LocalGuard)
   async login(
     @User() user: UserWithSecrets,
+    @Req() request: Request,
     @Res({ passthrough: true }) response: Response,
     @Query("isAdminRequest") isAdminRequest?: boolean,
   ) {
-    return this.handleAuthenticationResponse(user, response, false, false, isAdminRequest);
+    const domain = request.headers.host as string;
+    return this.handleAuthenticationResponse(user, response, domain, false, false, isAdminRequest);
   }
 
   @Get("providers")
@@ -133,9 +148,11 @@ export class AuthController {
   @UseGuards(GitHubGuard)
   async githubCallback(
     @User() user: UserWithSecrets,
+    @Req() request: Request,
     @Res({ passthrough: true }) response: Response,
   ) {
-    return this.handleAuthenticationResponse(user, response, false, true);
+    const domain = request.headers.host as string;
+    return this.handleAuthenticationResponse(user, response, domain, false, true);
   }
 
   @ApiTags("OAuth", "Google")
@@ -150,19 +167,23 @@ export class AuthController {
   @UseGuards(GoogleGuard)
   async googleCallback(
     @User() user: UserWithSecrets,
+    @Req() request: Request,
     @Res({ passthrough: true }) response: Response,
   ) {
-    return this.handleAuthenticationResponse(user, response, false, true);
+    const domain = request.headers.host as string;
+    return this.handleAuthenticationResponse(user, response, domain, false, true);
   }
 
   @Post("refresh")
   @UseGuards(RefreshGuard)
   async refresh(
     @User() user: UserWithSecrets,
+    @Req() request: Request,
     @Res({ passthrough: true }) response: Response,
     @Query("isAdminRequest") isAdminRequest?: boolean,
   ) {
-    return this.handleAuthenticationResponse(user, response, true, false, isAdminRequest);
+    const domain = request.headers.host as string;
+    return this.handleAuthenticationResponse(user, response, domain, true, false, isAdminRequest);
   }
 
   @Patch("password")
@@ -265,11 +286,12 @@ export class AuthController {
     @User("id") id: string,
     @User("email") email: string,
     @Body() { code }: TwoFactorBackupDto,
+    @Req() request: Request,
     @Res({ passthrough: true }) response: Response,
   ) {
     const user = await this.authService.useBackup2FACode(email, code);
-
-    return this.handleAuthenticationResponse(user, response, true);
+    const domain = request.headers.host as string;
+    return this.handleAuthenticationResponse(user, response, domain, true);
   }
 
   // Password Recovery Flows
