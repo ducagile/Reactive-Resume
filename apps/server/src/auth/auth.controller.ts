@@ -90,11 +90,11 @@ export class AuthController {
 
     response.cookie("Authentication", accessToken, {
       ...getCookieOptions("access", isAdminRequest),
-      // domain,
+      domain,
     });
     response.cookie("Refresh", refreshToken, {
       ...getCookieOptions("refresh", isAdminRequest),
-      // domain,
+      domain,
     });
 
     if (user.twoFactorEnabled && !isTwoFactorAuth) status = "2fa_required";
