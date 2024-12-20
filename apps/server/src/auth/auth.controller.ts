@@ -206,13 +206,13 @@ export class AuthController {
   ) {
     await this.authService.setRefreshToken(user.email, null);
 
-    response.clearCookie("Authentication", {
+    response.clearCookie(isAdminRequest ? "Admin-Authentication" : "Authentication", {
       //   path: isAdminRequest ? "/api/admin" : "/api",
       httpOnly: true,
       secure: this.configService.get("PUBLIC_URL").includes("https://"),
       sameSite: "none",
     });
-    response.clearCookie("Refresh", {
+    response.clearCookie(isAdminRequest ? "Admin-Refresh" : "Refresh", {
       //   path: isAdminRequest ? "/api/admin" : "/api",
       httpOnly: true,
       secure: this.configService.get("PUBLIC_URL").includes("https://"),
