@@ -2,6 +2,7 @@ import {
   Controller,
   Get,
   Param,
+  Post,
   Query,
   Res,
   UseGuards,
@@ -9,12 +10,16 @@ import {
   ValidationPipe,
 } from "@nestjs/common";
 import { ApiCookieAuth, ApiOperation, ApiTags } from "@nestjs/swagger";
+import { UserDto, UserWithSecrets } from "@reactive-resume/dto";
 import { Response } from "express";
 
+import { AuthService } from "../auth/auth.service";
 import { Role } from "../auth/decorators/roles.decorator";
 import { Roles } from "../auth/enums/roles.enum";
 import { AdminAuthGuard } from "../auth/guards/admin-auth.guard";
+import { AdminRefreshGuard } from "../auth/guards/admin-refresh.guard";
 import { RolesGuard } from "../auth/guards/roles.guard";
+import { User } from "../user/decorators/user.decorator";
 // import { ResumeService } from "../resume/resume.service";
 import { AdminService } from "./admin.service";
 import { PaginationQueryDto, paginationQueryResumeDto } from "./dtos/pagination.dto";
@@ -41,7 +46,7 @@ export class AdminController {
      * inject admin service
      */
     private readonly adminService: AdminService,
-
+    private readonly authService: AuthService,
     /**
      * inject resumes service
      */
@@ -129,5 +134,17 @@ export class AdminController {
     @Param("slug") slug: string,
   ) {
     return this.adminService.findOneByUsernameSlug(username, slug);
+  }
+
+  @Get("me")
+  @UseGuards(AdminAuthGuard)
+  fetch(@User() user: UserDto) {
+    return user;
+  }
+
+  @Post("refresh")
+  @UseGuards(AdminRefreshGuard)
+  async refresh(@User() user: UserWithSecrets, @Res({ passthrough: true }) response: Response) {
+    return this.authService.handleAuthenticationResponse(user, response, true, false, true);
   }
 }

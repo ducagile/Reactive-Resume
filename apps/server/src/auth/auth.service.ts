@@ -3,6 +3,7 @@ import { randomBytes } from "node:crypto";
 import {
   BadRequestException,
   ForbiddenException,
+  HttpStatus,
   Injectable,
   InternalServerErrorException,
   Logger,
@@ -10,15 +11,24 @@ import {
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
-import { AuthProvidersDto, LoginDto, RegisterDto, UserWithSecrets } from "@reactive-resume/dto";
+import {
+  AuthProvidersDto,
+  authResponseSchema,
+  LoginDto,
+  RegisterDto,
+  UserWithSecrets,
+} from "@reactive-resume/dto";
 import { ErrorMessage } from "@reactive-resume/utils";
 import * as bcryptjs from "bcryptjs";
+import { Response } from "express";
 import { authenticator } from "otplib";
 
 import { Config } from "../config/schema";
 import { MailService } from "../mail/mail.service";
 import { UserService } from "../user/user.service";
-import { Payload } from "./utils/payload";
+import { Roles } from "./enums/roles.enum";
+import { getCookieOptions } from "./utils/cookie";
+import { Payload, payloadSchema } from "./utils/payload";
 
 @Injectable()
 export class AuthService {
@@ -43,6 +53,78 @@ export class AuthService {
     if (!isValid) {
       throw new BadRequestException(ErrorMessage.InvalidCredentials);
     }
+  }
+
+  async exchangeToken(
+    id: string,
+    email: string,
+    isTwoFactorAuth = false,
+    role: ("user" | "admin")[],
+  ) {
+    try {
+      const payload = payloadSchema.parse({ id, isTwoFactorAuth, role });
+
+      const accessToken = this.generateToken("access", payload);
+      const refreshToken = this.generateToken("refresh", payload);
+
+      // Set Refresh Token in Database
+      await this.setRefreshToken(email, refreshToken);
+
+      return { accessToken, refreshToken };
+    } catch (error) {
+      console.log("goes here");
+      throw new InternalServerErrorException(error, ErrorMessage.SomethingWentWrong);
+    }
+  }
+
+  async handleAuthenticationResponse(
+    user: UserWithSecrets,
+    response: Response,
+    isTwoFactorAuth = false,
+    redirect = false,
+    isAdminRequest?: boolean,
+  ) {
+    const isAdmin = user.roles.includes(Roles.ADMIN);
+    if (isAdminRequest && !isAdmin) {
+      response
+        .status(HttpStatus.UNAUTHORIZED)
+        .send(
+          "This area is for administrators only. If you believe this is a mistake, please contact support.",
+        );
+      return;
+    }
+
+    let status = "authenticated";
+
+    const baseUrl = this.configService.get("PUBLIC_URL");
+    const redirectUrl = new URL(`${baseUrl}/auth/callback`);
+
+    const { accessToken, refreshToken } = await this.exchangeToken(
+      user.id,
+      user.email,
+      isTwoFactorAuth,
+      user.roles,
+    );
+
+    response.cookie(
+      isAdminRequest ? "Admin-Authentication" : "Authentication",
+      accessToken,
+      getCookieOptions("access", isAdminRequest),
+    );
+    response.cookie(
+      isAdminRequest ? "Admin-Refresh" : "Refresh",
+      refreshToken,
+      getCookieOptions("refresh", isAdminRequest),
+    );
+
+    if (user.twoFactorEnabled && !isTwoFactorAuth) status = "2fa_required";
+
+    const responseData = authResponseSchema.parse({ status, user });
+
+    redirectUrl.searchParams.set("status", status);
+
+    if (redirect) response.redirect(redirectUrl.toString());
+    else response.status(200).send(responseData);
   }
 
   generateToken(grantType: "access" | "refresh" | "reset" | "verification", payload?: Payload) {

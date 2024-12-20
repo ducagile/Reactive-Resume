@@ -4,8 +4,6 @@ import {
   Controller,
   Get,
   HttpCode,
-  HttpStatus,
-  InternalServerErrorException,
   Patch,
   Post,
   Query,
@@ -15,7 +13,6 @@ import {
 import { ConfigService } from "@nestjs/config";
 import { ApiTags } from "@nestjs/swagger";
 import {
-  authResponseSchema,
   backupCodesSchema,
   ForgotPasswordDto,
   messageSchema,
@@ -32,7 +29,6 @@ import type { Response } from "express";
 
 import { User } from "../user/decorators/user.decorator";
 import { AuthService } from "./auth.service";
-import { Roles } from "./enums/roles.enum";
 import { GitHubGuard } from "./guards/github.guard";
 import { GoogleGuard } from "./guards/google.guard";
 import { JwtGuard } from "./guards/jwt.guard";
@@ -40,7 +36,6 @@ import { LocalGuard } from "./guards/local.guard";
 import { RefreshGuard } from "./guards/refresh.guard";
 import { TwoFactorGuard } from "./guards/two-factor.guard";
 import { getCookieOptions } from "./utils/cookie";
-import { payloadSchema } from "./utils/payload";
 
 @ApiTags("Authentication")
 @Controller("auth")
@@ -50,83 +45,11 @@ export class AuthController {
     private readonly configService: ConfigService,
   ) {}
 
-  private async exchangeToken(
-    id: string,
-    email: string,
-    isTwoFactorAuth = false,
-    role: ("user" | "admin")[],
-  ) {
-    try {
-      const payload = payloadSchema.parse({ id, isTwoFactorAuth, role });
-
-      const accessToken = this.authService.generateToken("access", payload);
-      const refreshToken = this.authService.generateToken("refresh", payload);
-
-      // Set Refresh Token in Database
-      await this.authService.setRefreshToken(email, refreshToken);
-
-      return { accessToken, refreshToken };
-    } catch (error) {
-      console.log("goes here");
-      throw new InternalServerErrorException(error, ErrorMessage.SomethingWentWrong);
-    }
-  }
-
-  private async handleAuthenticationResponse(
-    user: UserWithSecrets,
-    response: Response,
-    isTwoFactorAuth = false,
-    redirect = false,
-    isAdminRequest?: boolean,
-  ) {
-    const isAdmin = user.roles.includes(Roles.ADMIN);
-    if (isAdminRequest && !isAdmin) {
-      response
-        .status(HttpStatus.UNAUTHORIZED)
-        .send(
-          "This area is for administrators only. If you believe this is a mistake, please contact support.",
-        );
-      return;
-    }
-
-    let status = "authenticated";
-
-    const baseUrl = this.configService.get("PUBLIC_URL");
-    const redirectUrl = new URL(`${baseUrl}/auth/callback`);
-
-    const { accessToken, refreshToken } = await this.exchangeToken(
-      user.id,
-      user.email,
-      isTwoFactorAuth,
-      user.roles,
-    );
-
-    response.cookie(
-      isAdminRequest ? "Admin-Authentication" : "Authentication",
-      accessToken,
-      getCookieOptions("access", isAdminRequest),
-    );
-    response.cookie(
-      isAdminRequest ? "Admin-Refresh" : "Refresh",
-      refreshToken,
-      getCookieOptions("refresh", isAdminRequest),
-    );
-
-    if (user.twoFactorEnabled && !isTwoFactorAuth) status = "2fa_required";
-
-    const responseData = authResponseSchema.parse({ status, user });
-
-    redirectUrl.searchParams.set("status", status);
-
-    if (redirect) response.redirect(redirectUrl.toString());
-    else response.status(200).send(responseData);
-  }
-
   @Post("register")
   async register(@Body() registerDto: RegisterDto, @Res({ passthrough: true }) response: Response) {
     const user = await this.authService.register(registerDto);
 
-    return this.handleAuthenticationResponse(user, response);
+    return this.authService.handleAuthenticationResponse(user, response);
   }
 
   @Post("login")
@@ -136,7 +59,13 @@ export class AuthController {
     @Res({ passthrough: true }) response: Response,
     @Query("isAdminRequest") isAdminRequest?: boolean,
   ) {
-    return this.handleAuthenticationResponse(user, response, false, false, isAdminRequest);
+    return this.authService.handleAuthenticationResponse(
+      user,
+      response,
+      false,
+      false,
+      isAdminRequest,
+    );
   }
 
   @Get("providers")
@@ -159,7 +88,7 @@ export class AuthController {
     @User() user: UserWithSecrets,
     @Res({ passthrough: true }) response: Response,
   ) {
-    return this.handleAuthenticationResponse(user, response, false, true);
+    return this.authService.handleAuthenticationResponse(user, response, false, true);
   }
 
   @ApiTags("OAuth", "Google")
@@ -176,7 +105,7 @@ export class AuthController {
     @User() user: UserWithSecrets,
     @Res({ passthrough: true }) response: Response,
   ) {
-    return this.handleAuthenticationResponse(user, response, false, true);
+    return this.authService.handleAuthenticationResponse(user, response, false, true);
   }
 
   @Post("refresh")
@@ -186,7 +115,13 @@ export class AuthController {
     @Res({ passthrough: true }) response: Response,
     @Query("isAdminRequest") isAdminRequest?: boolean,
   ) {
-    return this.handleAuthenticationResponse(user, response, true, false, isAdminRequest);
+    return this.authService.handleAuthenticationResponse(
+      user,
+      response,
+      true,
+      false,
+      isAdminRequest,
+    );
   }
 
   @Patch("password")
@@ -244,7 +179,12 @@ export class AuthController {
   ) {
     const { backupCodes } = await this.authService.enable2FA(email, code);
 
-    const { accessToken, refreshToken } = await this.exchangeToken(id, email, true, roles);
+    const { accessToken, refreshToken } = await this.authService.exchangeToken(
+      id,
+      email,
+      true,
+      roles,
+    );
 
     response.cookie("Authentication", accessToken, getCookieOptions("access"));
     response.cookie("Refresh", refreshToken, getCookieOptions("refresh"));
@@ -274,7 +214,7 @@ export class AuthController {
   ) {
     await this.authService.verify2FACode(user.email, code);
 
-    const { accessToken, refreshToken } = await this.exchangeToken(
+    const { accessToken, refreshToken } = await this.authService.exchangeToken(
       user.id,
       user.email,
       true,
@@ -299,7 +239,7 @@ export class AuthController {
   ) {
     const user = await this.authService.useBackup2FACode(email, code);
 
-    return this.handleAuthenticationResponse(user, response, true);
+    return this.authService.handleAuthenticationResponse(user, response, true);
   }
 
   // Password Recovery Flows
