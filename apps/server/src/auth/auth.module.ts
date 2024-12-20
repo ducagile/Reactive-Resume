@@ -9,6 +9,8 @@ import { UserModule } from "../user/user.module";
 import { UserService } from "../user/user.service";
 import { AuthController } from "./auth.controller";
 import { AuthService } from "./auth.service";
+import { RolesGuard } from "./guards/roles.guard";
+import { AdminAuthStrategy } from "./strategy/admin-auth.strategy";
 import { DummyStrategy } from "./strategy/dummy.strategy";
 import { GitHubStrategy } from "./strategy/github.strategy";
 import { GoogleStrategy } from "./strategy/google.strategy";
@@ -16,7 +18,6 @@ import { JwtStrategy } from "./strategy/jwt.strategy";
 import { LocalStrategy } from "./strategy/local.strategy";
 import { RefreshStrategy } from "./strategy/refresh.strategy";
 import { TwoFactorStrategy } from "./strategy/two-factor.strategy";
-import { RolesGuard } from "./guards/roles.guard";
 
 @Module({})
 export class AuthModule {
@@ -31,7 +32,7 @@ export class AuthModule {
         JwtStrategy,
         RefreshStrategy,
         TwoFactorStrategy,
-
+        AdminAuthStrategy,
         // OAuth2 Strategies
         {
           provide: GitHubStrategy,

@@ -4,6 +4,7 @@ import {
   Controller,
   Get,
   HttpCode,
+  HttpStatus,
   InternalServerErrorException,
   Patch,
   Post,
@@ -31,6 +32,7 @@ import type { Response } from "express";
 
 import { User } from "../user/decorators/user.decorator";
 import { AuthService } from "./auth.service";
+import { Roles } from "./enums/roles.enum";
 import { GitHubGuard } from "./guards/github.guard";
 import { GoogleGuard } from "./guards/google.guard";
 import { JwtGuard } from "./guards/jwt.guard";
@@ -48,9 +50,14 @@ export class AuthController {
     private readonly configService: ConfigService,
   ) {}
 
-  private async exchangeToken(id: string, email: string, isTwoFactorAuth = false) {
+  private async exchangeToken(
+    id: string,
+    email: string,
+    isTwoFactorAuth = false,
+    role: ("user" | "admin")[],
+  ) {
     try {
-      const payload = payloadSchema.parse({ id, isTwoFactorAuth });
+      const payload = payloadSchema.parse({ id, isTwoFactorAuth, role });
 
       const accessToken = this.authService.generateToken("access", payload);
       const refreshToken = this.authService.generateToken("refresh", payload);
@@ -72,6 +79,16 @@ export class AuthController {
     redirect = false,
     isAdminRequest?: boolean,
   ) {
+    const isAdmin = user.roles.includes(Roles.ADMIN);
+    if (isAdminRequest && !isAdmin) {
+      response
+        .status(HttpStatus.UNAUTHORIZED)
+        .send(
+          "This area is for administrators only. If you believe this is a mistake, please contact support.",
+        );
+      return;
+    }
+
     let status = "authenticated";
 
     const baseUrl = this.configService.get("PUBLIC_URL");
@@ -81,12 +98,19 @@ export class AuthController {
       user.id,
       user.email,
       isTwoFactorAuth,
+      user.roles,
     );
 
-    // console.log("isAdminRequest", isAdminRequest, getCookieOptions("access", isAdminRequest));
-
-    response.cookie("Authentication", accessToken, getCookieOptions("access", isAdminRequest));
-    response.cookie("Refresh", refreshToken, getCookieOptions("refresh", isAdminRequest));
+    response.cookie(
+      isAdminRequest ? "Admin-Authentication" : "Authentication",
+      accessToken,
+      getCookieOptions("access", isAdminRequest),
+    );
+    response.cookie(
+      isAdminRequest ? "Admin-Refresh" : "Refresh",
+      refreshToken,
+      getCookieOptions("refresh", isAdminRequest),
+    );
 
     if (user.twoFactorEnabled && !isTwoFactorAuth) status = "2fa_required";
 
@@ -182,13 +206,13 @@ export class AuthController {
   ) {
     await this.authService.setRefreshToken(user.email, null);
 
-    response.clearCookie("Authentication", {
+    response.clearCookie(isAdminRequest ? "Admin-Authentication" : "Authentication", {
       //   path: isAdminRequest ? "/api/admin" : "/api",
       httpOnly: true,
       secure: this.configService.get("PUBLIC_URL").includes("https://"),
       sameSite: "none",
     });
-    response.clearCookie("Refresh", {
+    response.clearCookie(isAdminRequest ? "Admin-Refresh" : "Refresh", {
       //   path: isAdminRequest ? "/api/admin" : "/api",
       httpOnly: true,
       secure: this.configService.get("PUBLIC_URL").includes("https://"),
@@ -214,12 +238,13 @@ export class AuthController {
   async enable2FA(
     @User("id") id: string,
     @User("email") email: string,
+    @User("roles") roles: ("user" | "admin")[],
     @Body() { code }: TwoFactorDto,
     @Res({ passthrough: true }) response: Response,
   ) {
     const { backupCodes } = await this.authService.enable2FA(email, code);
 
-    const { accessToken, refreshToken } = await this.exchangeToken(id, email, true);
+    const { accessToken, refreshToken } = await this.exchangeToken(id, email, true, roles);
 
     response.cookie("Authentication", accessToken, getCookieOptions("access"));
     response.cookie("Refresh", refreshToken, getCookieOptions("refresh"));
@@ -249,7 +274,12 @@ export class AuthController {
   ) {
     await this.authService.verify2FACode(user.email, code);
 
-    const { accessToken, refreshToken } = await this.exchangeToken(user.id, user.email, true);
+    const { accessToken, refreshToken } = await this.exchangeToken(
+      user.id,
+      user.email,
+      true,
+      user.roles,
+    );
 
     response.cookie("Authentication", accessToken, getCookieOptions("access"));
     response.cookie("Refresh", refreshToken, getCookieOptions("refresh"));
