@@ -1,11 +1,10 @@
 import {
-  BadRequestException,
   HttpException,
   HttpStatus,
   Injectable,
   InternalServerErrorException,
 } from "@nestjs/common";
-import { Prisma, PrismaClient } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { ErrorMessage } from "@reactive-resume/utils";
 import { PrismaService } from "nestjs-prisma";
 

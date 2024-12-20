@@ -13,8 +13,8 @@ import { Response } from "express";
 
 import { Role } from "../auth/decorators/roles.decorator";
 import { Roles } from "../auth/enums/roles.enum";
+import { AdminAuthGuard } from "../auth/guards/admin-auth.guard";
 import { RolesGuard } from "../auth/guards/roles.guard";
-import { TwoFactorGuard } from "../auth/guards/two-factor.guard";
 // import { ResumeService } from "../resume/resume.service";
 import { AdminService } from "./admin.service";
 import { PaginationQueryDto, paginationQueryResumeDto } from "./dtos/pagination.dto";
@@ -53,7 +53,7 @@ export class AdminController {
    */
   @Get("/users")
   @Role([Roles.ADMIN])
-  @UseGuards(TwoFactorGuard, RolesGuard)
+  @UseGuards(AdminAuthGuard, RolesGuard)
   @ApiOperation({
     summary: "get all users",
     description: "Get all users (name email number of cv) param(page pageSize search)",
@@ -67,7 +67,7 @@ export class AdminController {
    */
   @Get("/user/:id")
   @Role([Roles.ADMIN])
-  @UseGuards(TwoFactorGuard, RolesGuard)
+  @UseGuards(AdminAuthGuard, RolesGuard)
   @ApiOperation({
     summary: "get a user by id",
   })
@@ -79,8 +79,8 @@ export class AdminController {
    * download user
    */
   @Get("/users/download")
-  @Role([Roles.ADMIN]) 
-  @UseGuards(TwoFactorGuard, RolesGuard)
+  @Role([Roles.ADMIN])
+  @UseGuards(AdminAuthGuard, RolesGuard)
   @ApiOperation({
     summary: "download list users",
   })
@@ -99,7 +99,7 @@ export class AdminController {
    */
   @Get("/resumes")
   @Role([Roles.ADMIN])
-  @UseGuards(TwoFactorGuard, RolesGuard)
+  @UseGuards(AdminAuthGuard, RolesGuard)
   @ApiOperation({
     summary: "get list resumes",
   })
@@ -112,7 +112,7 @@ export class AdminController {
    */
   @Get(`/resume/:identify`)
   @Role([Roles.ADMIN])
-  @UseGuards(TwoFactorGuard, RolesGuard)
+  @UseGuards(AdminAuthGuard, RolesGuard)
   @ApiOperation({
     summary: "get a resume by id or slug",
   })
