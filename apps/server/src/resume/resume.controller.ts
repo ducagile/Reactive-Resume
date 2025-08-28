@@ -74,9 +74,9 @@ export class ResumeController {
   @UseGuards(TwoFactorGuard)
   async import(@User() user: UserEntity, @Body() data: unknown) {
     try {
-      console.log(data);
       const result = importResumeSchema.parse(data);
-      return await this.resumeService.import(user.id, result);
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+      return await this.resumeService.import(user.id, (result as any).data ?? result);
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError && error.code === "P2002") {
         throw new BadRequestException(ErrorMessage.ResumeSlugAlreadyExists);

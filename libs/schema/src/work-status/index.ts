@@ -15,7 +15,7 @@ export const JobTypeMap = {
 // Schema
 export const workStatusSchema = z.object({
   openToWork: z.boolean().default(false),
-  pricing: z.number().optional(),
+  pricing: z.number().nullish(),
   jobType: z.nativeEnum(JobType).default(JobType.REMOTE),
   jobLocation: z.string().default(""),
 });
