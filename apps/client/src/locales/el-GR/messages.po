@@ -85,7 +85,7 @@ msgid "A4"
 msgstr "Α4"
 
 #. Helper text to let the user know what filetypes are accepted. {accept} can be .pdf or .json.
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:781
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:809
 msgid "Accepts only {accept} files"
 msgstr "Δέχεται μόνο αρχεία {accept}"
 
@@ -124,9 +124,8 @@ msgstr "ΤΝ"
 msgid "Already have an account?"
 msgstr "Έχεις ήδη λογαριασμό;"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:320
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:543
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:593
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:326
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:579
 msgid "An error occurred while validating the file."
 msgstr "Προέκυψε σφάλμα κατά την αποστολή του αρχείου."
 
@@ -147,7 +146,7 @@ msgstr "Οποιοσδήποτε με αυτόν τον σύνδεσμο μπο�
 msgid "API Key"
 msgstr "Kλειδί API"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:93
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:94
 msgid "Application submitted successfully!"
 msgstr ""
 
@@ -156,7 +155,7 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:75
+#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:77
 msgid "Apply Now"
 msgstr ""
 
@@ -247,7 +246,7 @@ msgid "By the community, for the community."
 msgstr "Από την κοινότητα, για την κοινότητα."
 
 #: apps/client/src/pages/builder/sidebars/left/sections/shared/section-dialog.tsx:131
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:170
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:176
 #: apps/client/src/pages/dashboard/resumes/_dialogs/lock.tsx:49
 #: apps/client/src/pages/dashboard/resumes/_dialogs/resume.tsx:154
 #: apps/client/src/pages/dashboard/settings/_dialogs/two-factor.tsx:137
@@ -330,7 +329,7 @@ msgstr "Αντιγραφή συνδέσμου στο βιογραφικό σημ
 msgid "Copy to Clipboard"
 msgstr "Αντιγραφή στο Πρόχειρο"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:154
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:160
 msgid "Cover Letter"
 msgstr ""
 
@@ -419,7 +418,7 @@ msgstr "Διαγραφή Λογαριασμού"
 #: apps/client/src/pages/builder/sidebars/left/dialogs/projects.tsx:66
 #: apps/client/src/pages/builder/sidebars/left/dialogs/references.tsx:53
 #: apps/client/src/pages/builder/sidebars/left/dialogs/skills.tsx:63
-#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:81
+#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:83
 msgid "Description"
 msgstr "Περιγραφή"
 
@@ -439,8 +438,8 @@ msgstr "Απενεργοποίηση"
 msgid "Disable 2FA"
 msgstr "Απενεργοποίηση 2FA"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:456
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:834
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:469
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:853
 #: apps/client/src/pages/dashboard/settings/_sections/account.tsx:236
 #: apps/client/src/pages/dashboard/settings/_sections/profile.tsx:119
 #: apps/client/src/pages/dashboard/settings/_sections/security.tsx:124
@@ -541,8 +540,8 @@ msgstr "Πληκτρολογήστε τον κωδικό πρόσβασης μι
 msgid "Enter your email address and we will send you a link to reset your password if the account exists."
 msgstr "Εισάγετε τη διεύθυνση ηλεκτρονικού ταχυδρομείου σας και θα σας στείλουμε έναν σύνδεσμο για να επαναφέρετε τον κωδικό πρόσβασής σας, εάν ο λογαριασμός υπάρχει."
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:379
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:794
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:385
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:822
 msgid "Errors"
 msgstr "Σφάλματα"
 
@@ -563,15 +562,15 @@ msgstr "Εξερευνήστε τα πρότυπα που είναι διαθέ�
 msgid "Export"
 msgstr "Εξαγωγή"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:416
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:424
 msgid "Field"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:763
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:790
 msgid "File"
 msgstr "Αρχείο"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:730
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:757
 msgid "Filetype"
 msgstr "Τύπος αρχείου"
 
@@ -666,7 +665,7 @@ msgstr "Google"
 msgid "Grayscale"
 msgstr "Κλίμακα του Γκρι"
 
-#: apps/client/src/pages/dashboard/resumes/page.tsx:45
+#: apps/client/src/pages/dashboard/resumes/page.tsx:48
 msgid "Grid"
 msgstr "Πλέγμα"
 
@@ -731,12 +730,12 @@ msgstr "Εάν απενεργοποιήσετε τον έλεγχο ταυτότ
 msgid "If you're multilingual, we'd love your help in bringing the app to more languages and communities. Don't worry if you don't see your language on the list - just give me a shout-out on GitHub, and I'll make sure to include it. Ready to get started? Jump into translation over at Crowdin by clicking the link below."
 msgstr "Αν είστε πολυγλωσσικός, θα θέλαμε τη βοήθειά σας για να φέρετε την εφαρμογή σε περισσότερες γλώσσες και κοινότητες. Μην ανησυχείτε αν δεν βλέπετε τη γλώσσα σας στη λίστα - απλά δώστε μου μια κραυγή στο GitHub, and I'll make sure to include it. Έτοιμο για να ξεκινήσετε? Μετάβαση στη μετάφραση στο Crowdin κάνοντας κλικ στον παρακάτω σύνδεσμο."
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:463
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:847
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:476
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:866
 msgid "Import"
 msgstr "Εισαγωγή"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:718
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:744
 #: apps/client/src/pages/dashboard/resumes/_layouts/grid/_components/import-card.tsx:28
 #: apps/client/src/pages/dashboard/resumes/_layouts/list/_components/import-item.tsx:17
 msgid "Import an existing resume"
@@ -870,7 +869,7 @@ msgstr "Ύψος Γραμμής"
 msgid "LinkedIn, JSON Resume, etc."
 msgstr "LinkedIn, JSON Βιογραφικό, κλπ."
 
-#: apps/client/src/pages/dashboard/resumes/page.tsx:49
+#: apps/client/src/pages/dashboard/resumes/page.tsx:52
 msgid "List"
 msgstr "Λίστα"
 
@@ -880,7 +879,7 @@ msgid "List Jobs"
 msgstr ""
 
 #: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:847
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:863
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:866
 msgid "Loading..."
 msgstr ""
 
@@ -923,11 +922,11 @@ msgstr "Κύρια"
 msgid "Manage multiple resumes"
 msgstr "Διαχείριση πολλαπλών βιογραφικών σημειωμάτων"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:418
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:426
 msgid "Map"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:413
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:421
 msgid "Mapping"
 msgstr ""
 
@@ -952,11 +951,6 @@ msgstr "Περιθώρια"
 #: apps/client/src/pages/home/sections/features/index.tsx:48
 msgid "MIT License"
 msgstr "MIT License"
-
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:809
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:828
-msgid "Modify"
-msgstr ""
 
 #: apps/client/src/pages/auth/register/page.tsx:98
 #: apps/client/src/pages/builder/sidebars/left/dialogs/custom-section.tsx:58
@@ -1003,7 +997,7 @@ msgstr "nguyenvana@example.com"
 msgid "No results found"
 msgstr "Δεν βρέθηκαν αποτελέσματα"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:139
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:145
 msgid "No resumes found"
 msgstr ""
 
@@ -1026,10 +1020,10 @@ msgstr "Κωδικός πρόσβασης μίας χρήσης"
 
 #: apps/client/src/components/ai-actions.tsx:56
 #: apps/client/src/libs/axios.ts:29
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:100
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:348
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:645
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:667
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:101
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:354
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:631
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:686
 #: apps/client/src/services/resume/print.tsx:26
 msgid "Oops, the server returned an error."
 msgstr "Ουπς, ο διακομιστής επέστρεψε σφάλμα."
@@ -1119,7 +1113,7 @@ msgstr "Φωτογραφία"
 msgid "Please note that this step is completely optional."
 msgstr "Σημειώστε ότι αυτό το βήμα είναι εντελώς προαιρετικό."
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:734
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:761
 msgid "Please select a file type"
 msgstr "Παρακαλούμε επιλέξτε πρώτα τύπο αρχείου"
 
@@ -1144,7 +1138,7 @@ msgstr "Θέση"
 msgid "Position"
 msgstr "Θέση"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:69
+#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:71
 #: apps/client/src/pages/dashboard/jobs/_layouts/grid/_components/job-card.tsx:36
 #: apps/client/src/pages/dashboard/jobs/_layouts/list/_components/job-item.tsx:40
 msgid "Posted {postedTime}"
@@ -1229,13 +1223,13 @@ msgstr "Επαναφορά κωδικού πρόσβασης"
 msgid "Reset Zoom"
 msgstr "Επαναφορά μεγένθυνσης"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:364
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:370
 msgid "Resume Mapping"
 msgstr ""
 
 #: apps/client/src/pages/dashboard/_components/sidebar.tsx:91
-#: apps/client/src/pages/dashboard/resumes/page.tsx:22
-#: apps/client/src/pages/dashboard/resumes/page.tsx:39
+#: apps/client/src/pages/dashboard/resumes/page.tsx:25
+#: apps/client/src/pages/dashboard/resumes/page.tsx:42
 msgid "Resumes"
 msgstr "Βιογραφικά σημειώματα"
 
@@ -1251,6 +1245,10 @@ msgstr "Πλούσιο σε χαρακτηριστικά, όχι σε τιμές
 msgid "Rounded"
 msgstr "Στρογγυλεμένο"
 
+#: apps/client/src/pages/dashboard/resumes/_dialogs/description.tsx:70
+msgid "Sample Schema"
+msgstr ""
+
 #: apps/client/src/pages/builder/sidebars/left/sections/shared/section-dialog.tsx:168
 #: apps/client/src/pages/dashboard/resumes/_dialogs/resume.tsx:243
 #: apps/client/src/pages/dashboard/settings/_sections/account.tsx:233
@@ -1261,6 +1259,10 @@ msgstr "Αποθήκευση Αλλαγών;"
 #: apps/client/src/pages/dashboard/settings/_dialogs/two-factor.tsx:168
 msgid "Scan the QR code below with your authenticator app to setup 2FA on your account."
 msgstr "Σαρώστε τον παρακάτω κωδικό QR με την εφαρμογή ελέγχου ταυτότητας για να ρυθμίσετε τον 2FA στο λογαριασμό σας."
+
+#: apps/client/src/pages/dashboard/resumes/_dialogs/description.tsx:77
+msgid "Schema:"
+msgstr ""
 
 #. Score or honors for the degree, for example, CGPA or magna cum laude
 #: apps/client/src/pages/builder/sidebars/left/dialogs/education.tsx:92
@@ -1299,11 +1301,11 @@ msgstr "Ασφάλεια"
 msgid "Select"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:135
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:141
 msgid "Select resumes"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:125
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:130
 msgid "Select Resumes"
 msgstr ""
 
@@ -1449,7 +1451,7 @@ msgstr "Αποθηκεύστε τους κωδικούς αντιγράφων α
 msgid "Stored"
 msgstr "Αποθηκευμένες"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:176
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:182
 msgid "Submit"
 msgstr ""
 
@@ -1491,7 +1493,7 @@ msgstr "Σύστημα"
 #: apps/client/src/pages/auth/verify-otp/page.tsx:52
 #: apps/client/src/pages/builder/page.tsx:48
 #: apps/client/src/pages/dashboard/jobs/page.tsx:20
-#: apps/client/src/pages/dashboard/resumes/page.tsx:22
+#: apps/client/src/pages/dashboard/resumes/page.tsx:25
 #: apps/client/src/pages/dashboard/settings/page.tsx:14
 #: apps/client/src/pages/home/components/footer.tsx:21
 #: apps/client/src/pages/home/meta/privacy-policy/page.tsx:10
@@ -1524,11 +1526,11 @@ msgstr "Το Talent Hub ευδοκιμεί χάρη στη ζωντανή του
 msgid "Talent Resume"
 msgstr "Ένας δωρεάν και ανοικτού κώδικα κατασκευαστής βιογραφικών σημειωμάτων"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:90
+#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:92
 msgid "Tech Stack"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:432
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:445
 msgid "Techhub Output"
 msgstr ""
 
@@ -1616,7 +1618,7 @@ msgstr "Εναλλαγή αριθμών σελίδας"
 msgid "Track views and downloads"
 msgstr "Παρακολούθηση προβολών και λήψεων"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:863
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:847
 msgid "Transform"
 msgstr ""
 
@@ -1679,7 +1681,7 @@ msgstr "Ενημέρωση ενός υπάρχοντος στοιχείου"
 msgid "Update an existing resume"
 msgstr "Ενημέρωση ενός υπάρχοντος στοιχείου"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:722
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:748
 msgid "Upload a file from one of the accepted sources to parse existing data and import it into Talent Hub for easier editing."
 msgstr "Ανεβάστε ένα αρχείο από μία από τις αποδεκτές πηγές για να αναλύσετε τα υπάρχοντα δεδομένα και να τα εισαγάγετε στο Talent Hub για ευκολότερη επεξεργασία."
 
@@ -1710,13 +1712,13 @@ msgstr "Όνομα Χρήστη"
 msgid "Users Signed Up"
 msgstr "Χρήστες που έχουν εγγραφεί"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:448
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:828
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:461
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:837
 msgid "Validate"
 msgstr "Επικύρωση"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:468
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:852
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:481
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:871
 msgid "Validated"
 msgstr "Επιβεβαιωμένο"
 
@@ -1771,7 +1773,7 @@ msgstr ""
 msgid "Work Status"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:158
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:164
 msgid "Write your cover letter here..."
 msgstr ""
 
@@ -1815,7 +1817,7 @@ msgstr "Ο λογαριασμός σας και όλα τα δεδομένα σ�
 msgid "Your API key is securely stored in the browser's local storage and is only utilized when making requests to OpenAI via their official SDK. Rest assured that your key is not transmitted to any external server except when interacting with OpenAI's services."
 msgstr "Το κλειδί API σας αποθηκεύεται με ασφάλεια στον τοπικό αποθηκευτικό χώρο του προγράμματος περιήγησης και χρησιμοποιείται μόνο όταν κάνει αιτήσεις στο OpenAI μέσω του επίσημου SDK. Να είστε βέβαιοι ότι το κλειδί σας δεν μεταδίδεται σε κανέναν εξωτερικό διακομιστή εκτός όταν αλληλεπιδρά με τις υπηρεσίες του OpenAI."
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:390
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:398
 msgid "Your CV Data"
 msgstr ""
 

@@ -85,7 +85,7 @@ msgid "A4"
 msgstr "A4"
 
 #. Helper text to let the user know what filetypes are accepted. {accept} can be .pdf or .json.
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:781
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:809
 msgid "Accepts only {accept} files"
 msgstr "Acepta solo archivos {accept}"
 
@@ -124,9 +124,8 @@ msgstr "IA"
 msgid "Already have an account?"
 msgstr "¿Ya tienes una cuenta?"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:320
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:543
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:593
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:326
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:579
 msgid "An error occurred while validating the file."
 msgstr "Se ha producido un error al cargar el archivo."
 
@@ -147,7 +146,7 @@ msgstr "Cualquier persona que tenga este enlace puede ver y descargar el curríc
 msgid "API Key"
 msgstr "Clave API"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:93
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:94
 msgid "Application submitted successfully!"
 msgstr ""
 
@@ -156,7 +155,7 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:75
+#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:77
 msgid "Apply Now"
 msgstr ""
 
@@ -247,7 +246,7 @@ msgid "By the community, for the community."
 msgstr "Por la comunidad, para la comunidad."
 
 #: apps/client/src/pages/builder/sidebars/left/sections/shared/section-dialog.tsx:131
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:170
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:176
 #: apps/client/src/pages/dashboard/resumes/_dialogs/lock.tsx:49
 #: apps/client/src/pages/dashboard/resumes/_dialogs/resume.tsx:154
 #: apps/client/src/pages/dashboard/settings/_dialogs/two-factor.tsx:137
@@ -330,7 +329,7 @@ msgstr "Copiar enlace al currículum"
 msgid "Copy to Clipboard"
 msgstr "Copiar al portapapeles"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:154
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:160
 msgid "Cover Letter"
 msgstr ""
 
@@ -419,7 +418,7 @@ msgstr "Eliminar cuenta"
 #: apps/client/src/pages/builder/sidebars/left/dialogs/projects.tsx:66
 #: apps/client/src/pages/builder/sidebars/left/dialogs/references.tsx:53
 #: apps/client/src/pages/builder/sidebars/left/dialogs/skills.tsx:63
-#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:81
+#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:83
 msgid "Description"
 msgstr "Descripción"
 
@@ -439,8 +438,8 @@ msgstr "Deshabilitar"
 msgid "Disable 2FA"
 msgstr "Deshabilitar 2FA"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:456
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:834
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:469
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:853
 #: apps/client/src/pages/dashboard/settings/_sections/account.tsx:236
 #: apps/client/src/pages/dashboard/settings/_sections/profile.tsx:119
 #: apps/client/src/pages/dashboard/settings/_sections/security.tsx:124
@@ -541,8 +540,8 @@ msgstr "Ingresa la contraseña de un solo uso proporcionada por tu aplicación d
 msgid "Enter your email address and we will send you a link to reset your password if the account exists."
 msgstr "Ingresa tu dirección de correo electrónico y te enviaremos un enlace para restablecer tu contraseña si la cuenta existe."
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:379
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:794
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:385
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:822
 msgid "Errors"
 msgstr "Errores"
 
@@ -563,15 +562,15 @@ msgstr "Explora las plantillas disponibles en Talent Hub y ve los currículums e
 msgid "Export"
 msgstr "Exportar"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:416
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:424
 msgid "Field"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:763
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:790
 msgid "File"
 msgstr "Archivo"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:730
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:757
 msgid "Filetype"
 msgstr "Tipo de archivo"
 
@@ -666,7 +665,7 @@ msgstr "Google"
 msgid "Grayscale"
 msgstr "Escala de grises"
 
-#: apps/client/src/pages/dashboard/resumes/page.tsx:45
+#: apps/client/src/pages/dashboard/resumes/page.tsx:48
 msgid "Grid"
 msgstr "Cuadrícula"
 
@@ -731,12 +730,12 @@ msgstr "Si desactivas la autenticación de doble factor, ya no se te pedirá que
 msgid "If you're multilingual, we'd love your help in bringing the app to more languages and communities. Don't worry if you don't see your language on the list - just give me a shout-out on GitHub, and I'll make sure to include it. Ready to get started? Jump into translation over at Crowdin by clicking the link below."
 msgstr "Si eres multilingüe, nos encantaría contar con tu ayuda para llevar la aplicación a más idiomas y comunidades. No te preocupes si no ves tu idioma en la lista: solo tienes que avisarme en GitHub y me aseguraré de incluirlo. ¿Listo para empezar? Lánzate a la traducción en Crowdin haciendo clic en el siguiente enlace."
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:463
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:847
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:476
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:866
 msgid "Import"
 msgstr "Importar"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:718
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:744
 #: apps/client/src/pages/dashboard/resumes/_layouts/grid/_components/import-card.tsx:28
 #: apps/client/src/pages/dashboard/resumes/_layouts/list/_components/import-item.tsx:17
 msgid "Import an existing resume"
@@ -870,7 +869,7 @@ msgstr "Altura de la línea"
 msgid "LinkedIn, JSON Resume, etc."
 msgstr "LinkedIn, currículum JSON, etc."
 
-#: apps/client/src/pages/dashboard/resumes/page.tsx:49
+#: apps/client/src/pages/dashboard/resumes/page.tsx:52
 msgid "List"
 msgstr "Lista"
 
@@ -880,7 +879,7 @@ msgid "List Jobs"
 msgstr ""
 
 #: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:847
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:863
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:866
 msgid "Loading..."
 msgstr ""
 
@@ -923,11 +922,11 @@ msgstr "Principal"
 msgid "Manage multiple resumes"
 msgstr "Administrar múltiples currículums"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:418
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:426
 msgid "Map"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:413
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:421
 msgid "Mapping"
 msgstr ""
 
@@ -952,11 +951,6 @@ msgstr "Margen"
 #: apps/client/src/pages/home/sections/features/index.tsx:48
 msgid "MIT License"
 msgstr "Licencia MIT"
-
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:809
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:828
-msgid "Modify"
-msgstr ""
 
 #: apps/client/src/pages/auth/register/page.tsx:98
 #: apps/client/src/pages/builder/sidebars/left/dialogs/custom-section.tsx:58
@@ -1003,7 +997,7 @@ msgstr "juan.nadie@ejemplo.es"
 msgid "No results found"
 msgstr "No se han encontrado resultados"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:139
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:145
 msgid "No resumes found"
 msgstr ""
 
@@ -1026,10 +1020,10 @@ msgstr "Contraseña de un solo uso (OTP)"
 
 #: apps/client/src/components/ai-actions.tsx:56
 #: apps/client/src/libs/axios.ts:29
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:100
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:348
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:645
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:667
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:101
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:354
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:631
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:686
 #: apps/client/src/services/resume/print.tsx:26
 msgid "Oops, the server returned an error."
 msgstr "Vaya, el servidor devolvió un error."
@@ -1119,7 +1113,7 @@ msgstr "Imagen"
 msgid "Please note that this step is completely optional."
 msgstr "Ten en cuenta que este paso es completamente opcional."
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:734
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:761
 msgid "Please select a file type"
 msgstr "Por favor, selecciona un tipo de archivo"
 
@@ -1144,7 +1138,7 @@ msgstr "Posición"
 msgid "Position"
 msgstr "Posición"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:69
+#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:71
 #: apps/client/src/pages/dashboard/jobs/_layouts/grid/_components/job-card.tsx:36
 #: apps/client/src/pages/dashboard/jobs/_layouts/list/_components/job-item.tsx:40
 msgid "Posted {postedTime}"
@@ -1229,13 +1223,13 @@ msgstr "Restablecer tu contraseña"
 msgid "Reset Zoom"
 msgstr "Restablecer zoom"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:364
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:370
 msgid "Resume Mapping"
 msgstr ""
 
 #: apps/client/src/pages/dashboard/_components/sidebar.tsx:91
-#: apps/client/src/pages/dashboard/resumes/page.tsx:22
-#: apps/client/src/pages/dashboard/resumes/page.tsx:39
+#: apps/client/src/pages/dashboard/resumes/page.tsx:25
+#: apps/client/src/pages/dashboard/resumes/page.tsx:42
 msgid "Resumes"
 msgstr "Currículums"
 
@@ -1251,6 +1245,10 @@ msgstr "Rico en funciones, no en precios."
 msgid "Rounded"
 msgstr "Redondeado"
 
+#: apps/client/src/pages/dashboard/resumes/_dialogs/description.tsx:70
+msgid "Sample Schema"
+msgstr ""
+
 #: apps/client/src/pages/builder/sidebars/left/sections/shared/section-dialog.tsx:168
 #: apps/client/src/pages/dashboard/resumes/_dialogs/resume.tsx:243
 #: apps/client/src/pages/dashboard/settings/_sections/account.tsx:233
@@ -1261,6 +1259,10 @@ msgstr "Guardar cambios"
 #: apps/client/src/pages/dashboard/settings/_dialogs/two-factor.tsx:168
 msgid "Scan the QR code below with your authenticator app to setup 2FA on your account."
 msgstr "Escanea el siguiente código QR con tu aplicación de autenticación para configurar 2FA en tu cuenta."
+
+#: apps/client/src/pages/dashboard/resumes/_dialogs/description.tsx:77
+msgid "Schema:"
+msgstr ""
 
 #. Score or honors for the degree, for example, CGPA or magna cum laude
 #: apps/client/src/pages/builder/sidebars/left/dialogs/education.tsx:92
@@ -1299,11 +1301,11 @@ msgstr "Seguridad"
 msgid "Select"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:135
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:141
 msgid "Select resumes"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:125
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:130
 msgid "Select Resumes"
 msgstr ""
 
@@ -1449,7 +1451,7 @@ msgstr "Almacena tus códigos de respaldo de forma segura"
 msgid "Stored"
 msgstr "Almacenado"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:176
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:182
 msgid "Submit"
 msgstr ""
 
@@ -1491,7 +1493,7 @@ msgstr "Sistema"
 #: apps/client/src/pages/auth/verify-otp/page.tsx:52
 #: apps/client/src/pages/builder/page.tsx:48
 #: apps/client/src/pages/dashboard/jobs/page.tsx:20
-#: apps/client/src/pages/dashboard/resumes/page.tsx:22
+#: apps/client/src/pages/dashboard/resumes/page.tsx:25
 #: apps/client/src/pages/dashboard/settings/page.tsx:14
 #: apps/client/src/pages/home/components/footer.tsx:21
 #: apps/client/src/pages/home/meta/privacy-policy/page.tsx:10
@@ -1524,11 +1526,11 @@ msgstr "Talent Hub prospera gracias a su vibrante comunidad. Este proyecto debe 
 msgid "Talent Resume"
 msgstr "Un creador de currículums gratuito y de código abierto"
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:90
+#: apps/client/src/pages/dashboard/jobs/_dialogs/job.tsx:92
 msgid "Tech Stack"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:432
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:445
 msgid "Techhub Output"
 msgstr ""
 
@@ -1616,7 +1618,7 @@ msgstr "Alternar números de página"
 msgid "Track views and downloads"
 msgstr "Seguimiento de visitas y descargas"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:863
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:847
 msgid "Transform"
 msgstr ""
 
@@ -1679,7 +1681,7 @@ msgstr "Actualizar un elemento existente"
 msgid "Update an existing resume"
 msgstr "Actualizar un currículum existente"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:722
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:748
 msgid "Upload a file from one of the accepted sources to parse existing data and import it into Talent Hub for easier editing."
 msgstr "Cargue un archivo de una de las fuentes aceptadas para analizar los datos existentes e importarlos a la Reanudación Reactiva para facilitar su edición."
 
@@ -1710,13 +1712,13 @@ msgstr "Usuario"
 msgid "Users Signed Up"
 msgstr "Usuarios registrados"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:448
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:828
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:461
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:837
 msgid "Validate"
 msgstr "Validar"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:468
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:852
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:481
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:871
 msgid "Validated"
 msgstr "Validado"
 
@@ -1771,7 +1773,7 @@ msgstr ""
 msgid "Work Status"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:158
+#: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:164
 msgid "Write your cover letter here..."
 msgstr ""
 
@@ -1815,7 +1817,7 @@ msgstr "Tu cuenta y todos tus datos han sido eliminados con éxito. ¡Adiós!"
 msgid "Your API key is securely stored in the browser's local storage and is only utilized when making requests to OpenAI via their official SDK. Rest assured that your key is not transmitted to any external server except when interacting with OpenAI's services."
 msgstr "Su clave de API se almacena de manera segura en el almacenamiento local del navegador y solo se utiliza al realizar peticiones a OpenAI a través de su SDK oficial. Tenga la seguridad de que su clave no se transmite a ningún servidor externo a excepción de los servicios de OpenAI."
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:390
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:398
 msgid "Your CV Data"
 msgstr ""
 
