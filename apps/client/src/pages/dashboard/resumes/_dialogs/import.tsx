@@ -58,6 +58,7 @@ import { useDialog } from "@/client/stores/dialog";
 import { extractKeysArray, getValues, mappingValue, splitPathArray } from "@/client/util/mapping";
 
 import { defaultMappingCode, schemaMappingData } from "./data";
+import DescriptionImport from "./description";
 import { IEvent } from "./worker";
 
 function extractText(file: File) {
@@ -68,7 +69,7 @@ function extractText(file: File) {
   }
 }
 
-enum ImportType {
+export enum ImportType {
   "reactive-resume-json" = "reactive-resume-json",
   "reactive-resume-v3-json" = "reactive-resume-v3-json",
   "json-resume-json" = "json-resume-json",
@@ -242,7 +243,9 @@ const PdfImport = ({
       pdfDataRef.current = pdfData;
       keysLeft.current = extractKeysArray(pdfData);
       // eslint-disable-next-line no-empty
-    } catch { }
+    } catch {
+      // empty
+    }
   }, [pdfJson]);
 
   const mappedValue = useMemo(() => {
@@ -494,6 +497,13 @@ export const ImportDialog = () => {
   const textRef = useRef<string | null>(null);
   const initialDataRef = useRef<AnyObject>({});
   const titleRef = useRef<null | string>(null);
+
+  const includeDescriptionArrayTypes = [
+    ImportType["reactive-resume-json"],
+    ImportType["reactive-resume-v3-json"],
+    ImportType["json-resume-json"],
+  ];
+
   // const okRef = useRef<boolean>(false);
 
   const [validationResult, setValidationResult] = useState<ValidationResult | null>(null);
@@ -708,7 +718,9 @@ export const ImportDialog = () => {
       open={convertLoading ? true : isOpen}
       // eslint-disable-next-line @typescript-eslint/no-empty-function
 
-      onOpenChange={convertLoading ? () => { } : close}
+      onOpenChange={convertLoading ? () => {
+        /* empty */
+      } : close}
     >
       <DialogContent
         style={{
@@ -734,6 +746,7 @@ export const ImportDialog = () => {
                 </DialogTitle>
                 <DialogDescription>
                   {t`Upload a file from one of the accepted sources to parse existing data and import it into Talent Hub for easier editing.`}
+                  {includeDescriptionArrayTypes.includes(filetype) && <DescriptionImport filetype={filetype as any} />}
                 </DialogDescription>
               </DialogHeader>
               <FormField
