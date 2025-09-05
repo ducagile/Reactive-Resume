@@ -7,7 +7,7 @@
 /* eslint-disable lingui/no-unlocalized-strings */
 import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/macro";
-import { Check, DownloadSimple, FlowArrow } from "@phosphor-icons/react";
+import { BookBookmark, Check, DownloadSimple, FlowArrow } from "@phosphor-icons/react";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import {
   JsonResume,
@@ -49,6 +49,7 @@ import { AnimatePresence } from "framer-motion";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import pdfToText from "react-pdftotext";
+import { Link } from "react-router-dom";
 import { z, ZodError } from "zod";
 
 import { useToast } from "@/client/hooks/use-toast";
@@ -58,7 +59,6 @@ import { useDialog } from "@/client/stores/dialog";
 import { extractKeysArray, getValues, mappingValue, splitPathArray } from "@/client/util/mapping";
 
 import { defaultMappingCode, schemaMappingData } from "./data";
-import DescriptionImport from "./description";
 import { IEvent } from "./worker";
 
 function extractText(file: File) {
@@ -75,6 +75,19 @@ export enum ImportType {
   "json-resume-json" = "json-resume-json",
   "linkedin-data-export-zip" = "linkedin-data-export-zip",
   "pdf-resume-file" = "pdf-resume-file",
+}
+
+const guideLink =
+  "https://docs.google.com/document/d/1TSqQXbyH_coYc12AN5kuc9unxwfu00gMxNW7_ga3_eM/edit?usp=sharing";
+const guideLinkV3 =
+  "https://docs.google.com/document/d/1FyKPvVOexGadHdi_cbZAvSqfP5Iv17tDnvG-f0h8wyk/edit?usp=sharing";
+const guideLinkJsonResume =
+  "https://docs.google.com/document/d/1Qe1OVxK5lUiFu8s4kfvpABhOoDikJ9kO3FiQWdEl_Ck/edit?usp=sharing";
+
+const guideLinkMapping = {
+  [ImportType["reactive-resume-json"]]: guideLink,
+  [ImportType["reactive-resume-v3-json"]]: guideLinkV3,
+  [ImportType["json-resume-json"]]: guideLinkJsonResume,
 }
 
 const formSchema = z.object({
@@ -741,12 +754,23 @@ export const ImportDialog = () => {
                 <DialogTitle>
                   <div className="flex items-center space-x-2.5">
                     <DownloadSimple />
-                    <h2 onClick={() => { console.log(pdfState) }}>{t`Import an existing resume`}</h2>
+                    <h2>{t`Import an existing resume`}</h2>
                   </div>
                 </DialogTitle>
                 <DialogDescription>
                   {t`Upload a file from one of the accepted sources to parse existing data and import it into Talent Hub for easier editing.`}
-                  {includeDescriptionArrayTypes.includes(filetype) && <DescriptionImport filetype={filetype as any} />}
+                  {/* {includeDescriptionArrayTypes.includes(filetype) && <DescriptionImport filetype={filetype as any} />} */}
+                  {includeDescriptionArrayTypes.includes(filetype) && (
+                    <Link
+                      className="group flex w-fit cursor-pointer items-center gap-1 py-2"
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      to={(guideLinkMapping as any)[filetype]}
+                      target="_blank"
+                    >
+                      <BookBookmark size={16} className="text-gray-300" />
+                      <p className="text-sm text-gray-500 group-hover:underline">{t`Guide`}</p>
+                    </Link>
+                  )}
                 </DialogDescription>
               </DialogHeader>
               <FormField
