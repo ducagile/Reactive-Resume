@@ -671,7 +671,7 @@ msgstr "Lưới"
 
 #: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:771
 msgid "Guide"
-msgstr ""
+msgstr "Hướng dẫn sử dụng"
 
 #: apps/client/src/pages/builder/sidebars/left/sections/basics.tsx:43
 msgid "Headline"
