@@ -85,7 +85,7 @@ msgid "A4"
 msgstr "A4"
 
 #. Helper text to let the user know what filetypes are accepted. {accept} can be .pdf or .json.
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:809
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:833
 msgid "Accepts only {accept} files"
 msgstr "Priimami tik {accept} failai"
 
@@ -124,8 +124,8 @@ msgstr "AI"
 msgid "Already have an account?"
 msgstr "Jau turite paskyrą?"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:326
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:579
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:339
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:592
 msgid "An error occurred while validating the file."
 msgstr "Patvirtinant failą įvyko klaida."
 
@@ -438,8 +438,8 @@ msgstr "Išjungti"
 msgid "Disable 2FA"
 msgstr "Išjungti 2FA"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:469
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:853
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:482
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:877
 #: apps/client/src/pages/dashboard/settings/_sections/account.tsx:236
 #: apps/client/src/pages/dashboard/settings/_sections/profile.tsx:119
 #: apps/client/src/pages/dashboard/settings/_sections/security.tsx:124
@@ -540,8 +540,8 @@ msgstr "Toliau įveskite vienkartinį slaptažodį, kurį pateikė autentifikato
 msgid "Enter your email address and we will send you a link to reset your password if the account exists."
 msgstr "Įveskite savo el. pašto adresą ir mes atsiųsime jums nuorodą, kad iš naujo nustatytumėte slaptažodį, jei paskyra egzistuoja."
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:385
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:822
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:398
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:846
 msgid "Errors"
 msgstr "Klaidos"
 
@@ -562,15 +562,15 @@ msgstr "Išnagrinėkite \"Talent Hub\" esančius šablonus ir peržiūrėkite pa
 msgid "Export"
 msgstr "Eksportuoti"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:424
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:437
 msgid "Field"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:790
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:814
 msgid "File"
 msgstr "Failas"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:757
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:781
 msgid "Filetype"
 msgstr "Failo tipas"
 
@@ -669,6 +669,10 @@ msgstr "Pilka skalė"
 msgid "Grid"
 msgstr "Tinklelis"
 
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:771
+msgid "Guide"
+msgstr ""
+
 #: apps/client/src/pages/builder/sidebars/left/sections/basics.tsx:43
 msgid "Headline"
 msgstr "Antraštė"
@@ -730,12 +734,12 @@ msgstr "Jei išjungsite dviejų veiksnių autentifikavimą, prisijungiant nebere
 msgid "If you're multilingual, we'd love your help in bringing the app to more languages and communities. Don't worry if you don't see your language on the list - just give me a shout-out on GitHub, and I'll make sure to include it. Ready to get started? Jump into translation over at Crowdin by clicking the link below."
 msgstr "Jei kalbate keliomis kalbomis, norėtume, kad padėtumėte programėlę įdiegti daugiau kalbų ir bendruomenių. Nesijaudinkite, jei sąraše nematote savo kalbos - tiesiog praneškite man apie tai \"GitHub\", ir aš pasirūpinsiu, kad ji būtų įtraukta. Ar esate pasiruošę pradėti? Pereikite prie vertimo \"Crowdin\" svetainėje spustelėję toliau pateiktą nuorodą."
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:476
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:866
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:489
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:890
 msgid "Import"
 msgstr "Importas"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:744
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:757
 #: apps/client/src/pages/dashboard/resumes/_layouts/grid/_components/import-card.tsx:28
 #: apps/client/src/pages/dashboard/resumes/_layouts/list/_components/import-item.tsx:17
 msgid "Import an existing resume"
@@ -878,8 +882,8 @@ msgstr "Sąrašas"
 msgid "List Jobs"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:847
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:866
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:871
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:890
 msgid "Loading..."
 msgstr ""
 
@@ -922,11 +926,11 @@ msgstr "Pagrindinis"
 msgid "Manage multiple resumes"
 msgstr "Tvarkykite kelis gyvenimo aprašymus"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:426
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:439
 msgid "Map"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:421
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:434
 msgid "Mapping"
 msgstr ""
 
@@ -1021,9 +1025,9 @@ msgstr "Vienkartinis slaptažodis"
 #: apps/client/src/components/ai-actions.tsx:56
 #: apps/client/src/libs/axios.ts:29
 #: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:101
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:354
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:631
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:686
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:367
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:644
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:699
 #: apps/client/src/services/resume/print.tsx:26
 msgid "Oops, the server returned an error."
 msgstr "Oi, serveris grąžino klaidą."
@@ -1113,7 +1117,7 @@ msgstr "Paveikslėlis"
 msgid "Please note that this step is completely optional."
 msgstr "Atkreipkite dėmesį, kad šis veiksmas yra visiškai neprivalomas."
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:761
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:785
 msgid "Please select a file type"
 msgstr "Pasirinkite failo tipą"
 
@@ -1223,7 +1227,7 @@ msgstr "Iš naujo nustatyti slaptažodį"
 msgid "Reset Zoom"
 msgstr "Iš naujo nustatyti priartinimą"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:370
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:383
 msgid "Resume Mapping"
 msgstr ""
 
@@ -1530,7 +1534,7 @@ msgstr "Nemokamas atvirojo kodo gyvenimo aprašymų kūrėjas"
 msgid "Tech Stack"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:445
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:458
 msgid "Techhub Output"
 msgstr ""
 
@@ -1618,7 +1622,7 @@ msgstr "Perjungti puslapių numerius"
 msgid "Track views and downloads"
 msgstr "Stebėkite peržiūras ir atsisiuntimus"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:847
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:871
 msgid "Transform"
 msgstr ""
 
@@ -1681,7 +1685,7 @@ msgstr "Atnaujinti esamą elementą"
 msgid "Update an existing resume"
 msgstr "Atnaujinti esamą gyvenimo aprašymą"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:748
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:761
 msgid "Upload a file from one of the accepted sources to parse existing data and import it into Talent Hub for easier editing."
 msgstr "Įkelkite failą iš vieno iš priimtų šaltinių, kad išanalizuoti esamus duomenis ir importuoti jį į \"Talent Hub\", kad būtų lengviau redaguoti."
 
@@ -1712,13 +1716,13 @@ msgstr "Vartotojo vardas"
 msgid "Users Signed Up"
 msgstr "Prisiregistravę vartotojai"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:461
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:837
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:474
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:861
 msgid "Validate"
 msgstr "Patvirtinti"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:481
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:871
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:494
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:895
 msgid "Validated"
 msgstr "Patvirtinta"
 
@@ -1817,7 +1821,7 @@ msgstr "Jūsų paskyra ir visi duomenys buvo sėkmingai ištrinti. Viso gero!"
 msgid "Your API key is securely stored in the browser's local storage and is only utilized when making requests to OpenAI via their official SDK. Rest assured that your key is not transmitted to any external server except when interacting with OpenAI's services."
 msgstr "Jūsų API raktas saugiai saugomas naršyklės vietinėje saugykloje ir naudojamas tik teikiant užklausas \"OpenAI\" per oficialų SDK. Galite būti tikri, kad jūsų raktas nėra perduodamas jokiam išoriniam serveriui, išskyrus atvejus, kai sąveikaujama su \"OpenAI\" paslaugomis."
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:398
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:411
 msgid "Your CV Data"
 msgstr ""
 

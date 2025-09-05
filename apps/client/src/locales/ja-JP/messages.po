@@ -85,7 +85,7 @@ msgid "A4"
 msgstr "A4"
 
 #. Helper text to let the user know what filetypes are accepted. {accept} can be .pdf or .json.
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:809
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:833
 msgid "Accepts only {accept} files"
 msgstr "{accept} ファイルのみ"
 
@@ -124,8 +124,8 @@ msgstr "AI"
 msgid "Already have an account?"
 msgstr "既にアカウントをお持ちですか？"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:326
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:579
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:339
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:592
 msgid "An error occurred while validating the file."
 msgstr "ファイルの読み込み中にエラーが発生しました。"
 
@@ -438,8 +438,8 @@ msgstr "無効"
 msgid "Disable 2FA"
 msgstr "2段階認証を無効にする"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:469
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:853
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:482
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:877
 #: apps/client/src/pages/dashboard/settings/_sections/account.tsx:236
 #: apps/client/src/pages/dashboard/settings/_sections/profile.tsx:119
 #: apps/client/src/pages/dashboard/settings/_sections/security.tsx:124
@@ -540,8 +540,8 @@ msgstr "認証アプリが提供するワンタイムパスワードを以下に
 msgid "Enter your email address and we will send you a link to reset your password if the account exists."
 msgstr "メールアドレスを入力してください。アカウントが存在する場合、パスワードをリセットするためのリンクを送信します。"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:385
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:822
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:398
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:846
 msgid "Errors"
 msgstr "エラー"
 
@@ -562,15 +562,15 @@ msgstr "Talent Hub で利用可能なテンプレートを探索し、作成し�
 msgid "Export"
 msgstr "輸出"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:424
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:437
 msgid "Field"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:790
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:814
 msgid "File"
 msgstr "ファイル"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:757
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:781
 msgid "Filetype"
 msgstr "ファイル タイプ"
 
@@ -669,6 +669,10 @@ msgstr "Grayscale"
 msgid "Grid"
 msgstr "グリッド"
 
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:771
+msgid "Guide"
+msgstr ""
+
 #: apps/client/src/pages/builder/sidebars/left/sections/basics.tsx:43
 msgid "Headline"
 msgstr "見出し"
@@ -730,12 +734,12 @@ msgstr "2段階認証を無効にすると、ログイン時に認証コード�
 msgid "If you're multilingual, we'd love your help in bringing the app to more languages and communities. Don't worry if you don't see your language on the list - just give me a shout-out on GitHub, and I'll make sure to include it. Ready to get started? Jump into translation over at Crowdin by clicking the link below."
 msgstr "多言語対応の方は、より多くの言語やコミュニティにアプリを導入するのに役立ちます。 リストにあなたの言語が表示されない場合は心配しないでください - GitHubで私に声をかけてください 必ず含めるようにします。 始める準備はできましたか？以下のリンクをクリックして、Crowdin で翻訳をご覧ください。"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:476
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:866
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:489
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:890
 msgid "Import"
 msgstr "インポート"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:744
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:757
 #: apps/client/src/pages/dashboard/resumes/_layouts/grid/_components/import-card.tsx:28
 #: apps/client/src/pages/dashboard/resumes/_layouts/list/_components/import-item.tsx:17
 msgid "Import an existing resume"
@@ -878,8 +882,8 @@ msgstr "リスト"
 msgid "List Jobs"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:847
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:866
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:871
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:890
 msgid "Loading..."
 msgstr ""
 
@@ -922,11 +926,11 @@ msgstr "メイン"
 msgid "Manage multiple resumes"
 msgstr "複数の履歴書を管理"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:426
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:439
 msgid "Map"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:421
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:434
 msgid "Mapping"
 msgstr ""
 
@@ -1021,9 +1025,9 @@ msgstr "ワンタイムパスワード"
 #: apps/client/src/components/ai-actions.tsx:56
 #: apps/client/src/libs/axios.ts:29
 #: apps/client/src/pages/dashboard/jobs/_dialogs/apply-job.tsx:101
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:354
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:631
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:686
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:367
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:644
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:699
 #: apps/client/src/services/resume/print.tsx:26
 msgid "Oops, the server returned an error."
 msgstr "サーバーがエラーを返しました。"
@@ -1113,7 +1117,7 @@ msgstr "写真"
 msgid "Please note that this step is completely optional."
 msgstr "このステップは完全に任意であることに注意してください。"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:761
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:785
 msgid "Please select a file type"
 msgstr "ファイルの種類を選択してください"
 
@@ -1223,7 +1227,7 @@ msgstr "パスワードをリセットする"
 msgid "Reset Zoom"
 msgstr "Reset Zoom"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:370
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:383
 msgid "Resume Mapping"
 msgstr ""
 
@@ -1530,7 +1534,7 @@ msgstr "無料でオープンソースの履歴書ビルダー"
 msgid "Tech Stack"
 msgstr ""
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:445
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:458
 msgid "Techhub Output"
 msgstr ""
 
@@ -1618,7 +1622,7 @@ msgstr "ページ番号の切り替え"
 msgid "Track views and downloads"
 msgstr "ビューとダウンロードを追跡する"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:847
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:871
 msgid "Transform"
 msgstr ""
 
@@ -1681,7 +1685,7 @@ msgstr "既存のアイテムを更新"
 msgid "Update an existing resume"
 msgstr "既存の履歴書を更新"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:748
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:761
 msgid "Upload a file from one of the accepted sources to parse existing data and import it into Talent Hub for easier editing."
 msgstr "承認されたソースのいずれかからファイルをアップロードして、既存のデータをパースし、Talent Hub にインポートして編集を容易にします。"
 
@@ -1712,13 +1716,13 @@ msgstr "ユーザー名"
 msgid "Users Signed Up"
 msgstr "サインアップしたユーザー"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:461
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:837
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:474
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:861
 msgid "Validate"
 msgstr "Validate"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:481
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:871
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:494
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:895
 msgid "Validated"
 msgstr "検証済み"
 
@@ -1817,7 +1821,7 @@ msgstr "アカウントとすべてのデータが正常に削除されました
 msgid "Your API key is securely stored in the browser's local storage and is only utilized when making requests to OpenAI via their official SDK. Rest assured that your key is not transmitted to any external server except when interacting with OpenAI's services."
 msgstr "API キーはブラウザーのローカルストレージに安全に保存され、公式の SDK 経由で OpenAI へのリクエストを行う場合にのみ使用されます。 OpenAIのサービスと相互作用する場合を除き、キーが外部サーバーに送信されることはありませんのでご安心ください。"
 
-#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:398
+#: apps/client/src/pages/dashboard/resumes/_dialogs/import.tsx:411
 msgid "Your CV Data"
 msgstr ""
 
