@@ -142,7 +142,7 @@ export const SectionDialog = <T extends SectionItem>({
 
   return (
     <Dialog open={isOpen} onOpenChange={close}>
-      <DialogContent className="z-50">
+      <DialogContent>
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
             <DialogHeader>
@@ -163,7 +163,7 @@ export const SectionDialog = <T extends SectionItem>({
             {children}
 
             <DialogFooter>
-              <Button type="submit" onClick={() => {console.log(form.getValues())}}>
+              <Button type="submit">
                 {isCreate && t`Create`}
                 {isUpdate && t`Save Changes`}
                 {isDuplicate && t`Duplicate`}
