@@ -4,7 +4,7 @@ export const getCookieOptions = (
   grantType: "access" | "refresh",
   isAdminRequest?: boolean,
 ): CookieOptions => {
-    const isProduction = process.env.NODE_ENV === "production";
+  const isProduction = process.env.NODE_ENV === "production";
 
   const baseOptions: CookieOptions = {
     httpOnly: !!isProduction,

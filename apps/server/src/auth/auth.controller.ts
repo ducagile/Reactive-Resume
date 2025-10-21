@@ -143,15 +143,11 @@ export class AuthController {
 
     response.clearCookie(isAdminRequest ? "Admin-Authentication" : "Authentication", {
       //   path: isAdminRequest ? "/api/admin" : "/api",
-      httpOnly: true,
       secure: this.configService.get("PUBLIC_URL").includes("https://"),
-      sameSite: "none",
     });
     response.clearCookie(isAdminRequest ? "Admin-Refresh" : "Refresh", {
       //   path: isAdminRequest ? "/api/admin" : "/api",
-      httpOnly: true,
       secure: this.configService.get("PUBLIC_URL").includes("https://"),
-      sameSite: "none",
     });
 
     const data = messageSchema.parse({ message: "You have been logged out, tschüss!" });
