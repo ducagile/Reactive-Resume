@@ -110,9 +110,10 @@ export const getValues = (keyStr: string, data: AnyObject) => {
 
 export const setValues = (
   keyStr: string,
-  value: string | string[] | AnyObject | AnyObject[],
+  value1: string | string[] | AnyObject | AnyObject[],
   data: AnyObject,
 ) => {
+  const value = (value1 as unknown) ?? "";
   console.warn("II", keyStr, value, data);
   if (typeof value === "string" && (!value || value === "string")) return;
   const keyArr = keyStr.split(".");
@@ -465,7 +466,6 @@ export const mappingValue = (
         setValues(value[0], arrayItem, resultData);
       }
     }
-    console.warn(resultData)
     return resultData;
   } catch {
     return defaultResumeData;

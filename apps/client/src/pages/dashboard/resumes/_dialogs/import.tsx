@@ -595,36 +595,38 @@ export const ImportDialog = () => {
     }
   };
 
-  const onImport = async () => {
+  const onImport = async (value?: ValidationResult) => {
     const { type } = formSchema.parse(form.getValues());
 
-    if (!validationResult?.isValid || validationResult.type !== type) return;
+    const validationResultVal = value ?? validationResult;
+
+    if (!validationResultVal?.isValid || validationResultVal.type !== type) return;
 
     try {
       if (type === ImportType["reactive-resume-json"]) {
         const parser = new ReactiveResumeParser();
-        const data = parser.convert(validationResult.result as ResumeData);
+        const data = parser.convert(validationResultVal.result as ResumeData);
 
         await importResume({ data });
       }
 
       if (type === ImportType["reactive-resume-v3-json"]) {
         const parser = new ReactiveResumeV3Parser();
-        const data = parser.convert(validationResult.result as ReactiveResumeV3);
+        const data = parser.convert(validationResultVal.result as ReactiveResumeV3);
 
         await importResume({ data });
       }
 
       if (type === ImportType["json-resume-json"]) {
         const parser = new JsonResumeParser();
-        const data = parser.convert(validationResult.result as JsonResume);
+        const data = parser.convert(validationResultVal.result as JsonResume);
 
         await importResume({ data });
       }
 
       if (type === ImportType["linkedin-data-export-zip"]) {
         const parser = new LinkedInParser();
-        const data = parser.convert(validationResult.result as LinkedIn);
+        const data = parser.convert(validationResultVal.result as LinkedIn);
 
         await importResume({ data });
       }
@@ -632,7 +634,7 @@ export const ImportDialog = () => {
       if (type === ImportType["pdf-resume-file"]) {
         const title = titleRef.current ?? generateRandomName();
         await importResume({
-          data: validationResult.result as ResumeData,
+          data: validationResultVal.result as ResumeData,
           title: title,
           slug: kebabCase(title),
         });
@@ -683,10 +685,15 @@ export const ImportDialog = () => {
       const formData = new FormData();
       formData.append("file", file);
       const response = await importPdfResume(formData);
+      await onImport({
+        isValid: true,
+        type: ImportType["pdf-resume-file"],
+        result: mappingValue(response, defaultMappingCode),
+      });
       // const text = await extractText(file);
-      titleRef.current = file.name.split(".pdf")[0];
-      initialDataRef.current = response;
-      setPdfState("data");
+      // titleRef.current = file.name.split(".pdf")[0];
+      // initialDataRef.current = response;
+      // setPdfState("data");
       setConvertLoading(false);
     } catch (error: unknown) {
       setConvertLoading(false);
@@ -885,7 +892,7 @@ export const ImportDialog = () => {
                         <Button
                           type="button"
                           disabled={loading || convertLoading}
-                          onClick={onImport}
+                          onClick={() => onImport()}
                         >
                           {loading || convertLoading ? t`Loading...` : t`Import`}
                         </Button>
