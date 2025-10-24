@@ -2,7 +2,6 @@ import { t } from "@lingui/macro";
 import { deepSearchAndParseDates, ErrorMessage } from "@reactive-resume/utils";
 import _axios from "axios";
 import createAuthRefreshInterceptor from "axios-auth-refresh";
-import { redirect } from "react-router-dom";
 
 import { refreshToken } from "@/client/services/auth";
 
@@ -31,7 +30,10 @@ axios.interceptors.response.use(
       });
     }
 
-    return Promise.reject(new Error(message));
+    // return Promise.reject(new Error(message));
+    error.customMessage = message;
+    // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
+    return Promise.reject(error);
   },
 );
 
@@ -40,12 +42,16 @@ axios.interceptors.response.use(
 const axiosForRefresh = _axios.create({ baseURL: "/api", withCredentials: true });
 
 // Interceptor to handle expired access token errors
-const handleAuthError = () => refreshToken(axiosForRefresh);
+const handleAuthError = () => {
+  return refreshToken(axiosForRefresh);
+};
 
 // Interceptor to handle expired refresh token errors
 const handleRefreshError = async () => {
-  await queryClient.invalidateQueries({ queryKey: USER_KEY });
-  redirect("/auth/login");
+  queryClient.setQueryData(USER_KEY, null);
+  window.location.href = "/auth/login";
+  // eslint-disable-next-line unicorn/no-useless-promise-resolve-reject
+  return Promise.resolve();
 };
 
 // Intercept responses to check for 401 and 403 errors, refresh token and retry the request
