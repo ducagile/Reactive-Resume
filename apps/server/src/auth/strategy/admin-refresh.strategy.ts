@@ -10,7 +10,7 @@ import { AuthService } from "../auth.service";
 import { Payload } from "../utils/payload";
 
 @Injectable()
-export class AdminRefreshStrategy extends PassportStrategy(Strategy, "refresh") {
+export class AdminRefreshStrategy extends PassportStrategy(Strategy, "admin-refresh") {
   constructor(
     private readonly configService: ConfigService<Config>,
     private readonly authService: AuthService,
