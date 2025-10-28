@@ -23,6 +23,12 @@ enum Role {
   admin
 }
 
+enum Status {
+  pending
+  completed
+  failed
+}
+
 model User {
   id               String   @id @default(cuid())
   name             String
@@ -68,6 +74,7 @@ model Resume {
   user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
+  status     Status      @default(pending)
 
   @@unique([userId, id])
   @@unique([userId, slug])

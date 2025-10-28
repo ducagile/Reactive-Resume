@@ -23,6 +23,16 @@ services:
       timeout: 5s
       retries: 5
 
+  # Redis (for queue)
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
+    ports:
+      - ${REDIS_PORT:-6379}:6379
+    volumes:
+      - redis_data:/data
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS_PASSWORD:-redis}"]
+
   # Storage (for image uploads)
   minio:
     image: minio/minio
@@ -55,3 +65,4 @@ services:
 volumes:
   minio_data:
   postgres_data:
+  redis_data:

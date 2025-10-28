@@ -44,7 +44,6 @@ import {
   SelectValue,
 } from "@reactive-resume/ui";
 import { generateRandomName, kebabCase } from "@reactive-resume/utils";
-import { useDebounce } from "ahooks";
 import { AnimatePresence } from "framer-motion";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -54,12 +53,11 @@ import { z, ZodError } from "zod";
 
 import { useToast } from "@/client/hooks/use-toast";
 import { useImportResume } from "@/client/services/resume/import";
-import { importPdfResume } from "@/client/services/resume/import-pdf";
+import { useImportPdfResume } from "@/client/services/resume/import-pdf";
 import { useDialog } from "@/client/stores/dialog";
-import { extractKeysArray, getValues, mappingValue, splitPathArray } from "@/client/util/mapping";
 
-import { defaultMappingCode, schemaMappingData } from "./data";
-import { IEvent } from "./worker";
+// import { extractKeysArray, getValues, splitPathArray } from "@/client/util/mapping";
+import { schemaMappingData } from "./data";
 
 function extractText(file: File) {
   try {
@@ -91,7 +89,7 @@ const guideLinkMapping = {
 }
 
 const formSchema = z.object({
-  file: z.instanceof(File),
+  file: z.union([z.instanceof(File), z.instanceof(FileList)]),
   type: z.nativeEnum(ImportType),
 });
 
@@ -169,25 +167,25 @@ const MappingRow = ({
   );
 };
 
-const transCodeMapping = (pdfJson: AnyObject | null) => {
-  if (!pdfJson) return {};
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-  const data = pdfJson ?? {};
-  let obj = {};
-  for (const key of Object.keys(defaultMappingCode) as (keyof typeof defaultMappingCode)[]) {
-    const { arrayPath } = splitPathArray(defaultMappingCode[key], data);
-    const values = getValues(arrayPath, data);
-    // console.log(">>>", arrayPath, defaultMappingCode[key], values)
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any, unicorn/explicit-length-check
-    if (!((values as any[]).length === 0)) {
-      obj = {
-        ...obj,
-        [key]: defaultMappingCode[key],
-      };
-    }
-  }
-  return obj;
-};
+// const transCodeMapping = (pdfJson: AnyObject | null) => {
+//   if (!pdfJson) return {};
+//   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+//   const data = pdfJson ?? {};
+//   let obj = {};
+//   for (const key of Object.keys(defaultMappingCode) as (keyof typeof defaultMappingCode)[]) {
+//     const { arrayPath } = splitPathArray(defaultMappingCode[key], data);
+//     const values = getValues(arrayPath, data);
+//     // console.log(">>>", arrayPath, defaultMappingCode[key], values)
+//     // eslint-disable-next-line @typescript-eslint/no-explicit-any, unicorn/explicit-length-check
+//     if (!((values as any[]).length === 0)) {
+//       obj = {
+//         ...obj,
+//         [key]: defaultMappingCode[key],
+//       };
+//     }
+//   }
+//   return obj;
+// };
 
 const PdfImport = ({
   validationResult,
@@ -207,10 +205,10 @@ const PdfImport = ({
   const { toast } = useToast();
   const { importResume, loading } = useImportResume();
   const [pdfJson, setPdfJson] = useState<string | AnyObject>(initialData);
-  const [mappingCode, setMappingCode] = useState<Record<string, string>>(
-    transCodeMapping(initialData),
-  );
-  const keysLeft = useRef<(string | string[])[]>(extractKeysArray(initialData));
+  // const [mappingCode, setMappingCode] = useState<Record<string, string>>(
+  //   transCodeMapping(initialData),
+  // );
+  // const keysLeft = useRef<(string | string[])[]>(extractKeysArray(initialData));
   const pdfDataRef = useRef<AnyObject>(initialData);
   const [mappedResult, setMappedResult] = useState({});
 
@@ -242,57 +240,57 @@ const PdfImport = ({
   // console.warn(pdfJson)
   const [prevMappingValue, setPrevMappingValue] = useState({});
 
-  const memoizedMappingCode = useDebounce(mappingCode, { wait: 300 });
-  const memoizedPdfJson = useDebounce(pdfJson, { wait: 300 });
+  // const memoizedMappingCode = useDebounce(mappingCode, { wait: 300 });
+  // const memoizedPdfJson = useDebounce(pdfJson, { wait: 300 });
 
-  useEffect(() => {
-    setValidationResult(null);
-  }, [mappingCode]);
+  // useEffect(() => {
+  //   setValidationResult(null);
+  // }, [mappingCode]);
 
-  useEffect(() => {
-    setValidationResult(null);
-    try {
-      const pdfData = typeof pdfJson === "string" ? JSON.parse(pdfJson) : pdfJson;
-      pdfDataRef.current = pdfData;
-      keysLeft.current = extractKeysArray(pdfData);
-      // eslint-disable-next-line no-empty
-    } catch {
-      // empty
-    }
-  }, [pdfJson]);
+  // useEffect(() => {
+  //   setValidationResult(null);
+  //   try {
+  //     const pdfData = typeof pdfJson === "string" ? JSON.parse(pdfJson) : pdfJson;
+  //     pdfDataRef.current = pdfData;
+  //     keysLeft.current = extractKeysArray(pdfData);
+  //     // eslint-disable-next-line no-empty
+  //   } catch {
+  //     // empty
+  //   }
+  // }, [pdfJson]);
 
-  const mappedValue = useMemo(() => {
-    const isValidCode = Object.values(memoizedMappingCode).every((code) =>
-      keysLeft.current.flat(Infinity).includes(code),
-    );
-    try {
-      const pdfData =
-        typeof memoizedPdfJson === "string" ? JSON.parse(memoizedPdfJson) : memoizedPdfJson;
-      // if (isValidCode) {
-      //   const currentMappingValue = mappingValue(pdfData, memoizedMappingCode);
-      //   setPrevMappingValue(currentMappingValue);
-      //   return currentMappingValue;
-      // } else {
-      //   return prevMappingValue;
-      // }
-      if (isValidCode) {
-        if (workerRef.current) {
-          workerRef.current.postMessage({
-            pdfJson: pdfData,
-            mappingCode: memoizedMappingCode,
-          } as IEvent);
-        } else {
-          const currentMappingValue = mappingValue(pdfData, memoizedMappingCode);
-          setPrevMappingValue(currentMappingValue);
-          setMappedResult(currentMappingValue);
-        }
-      } else {
-        setMappedResult(prevMappingValue);
-      }
-    } catch {
-      setMappedResult(prevMappingValue);
-    }
-  }, [memoizedMappingCode, memoizedPdfJson]);
+  // const mappedValue = useMemo(() => {
+  //   const isValidCode = Object.values(memoizedMappingCode).every((code) =>
+  //     keysLeft.current.flat(Infinity).includes(code),
+  //   );
+  //   try {
+  //     const pdfData =
+  //       typeof memoizedPdfJson === "string" ? JSON.parse(memoizedPdfJson) : memoizedPdfJson;
+  //     // if (isValidCode) {
+  //     //   const currentMappingValue = mappingValue(pdfData, memoizedMappingCode);
+  //     //   setPrevMappingValue(currentMappingValue);
+  //     //   return currentMappingValue;
+  //     // } else {
+  //     //   return prevMappingValue;
+  //     // }
+  //     if (isValidCode) {
+  //       if (workerRef.current) {
+  //         workerRef.current.postMessage({
+  //           pdfJson: pdfData,
+  //           mappingCode: memoizedMappingCode,
+  //         } as IEvent);
+  //       } else {
+  //         const currentMappingValue = mappingValue(pdfData, memoizedMappingCode);
+  //         setPrevMappingValue(currentMappingValue);
+  //         setMappedResult(currentMappingValue);
+  //       }
+  //     } else {
+  //       setMappedResult(prevMappingValue);
+  //     }
+  //   } catch {
+  //     setMappedResult(prevMappingValue);
+  //   }
+  // }, [memoizedMappingCode, memoizedPdfJson]);
 
   const isValidJson = useMemo(() => {
     try {
@@ -305,11 +303,11 @@ const PdfImport = ({
 
   // console.warn("IRE")
 
-  const isValidToImport = useMemo(() => {
-    return Object.values(mappingCode).every((code) =>
-      keysLeft.current.flat(Infinity).includes(code),
-    );
-  }, [mappingCode]);
+  // const isValidToImport = useMemo(() => {
+  //   return Object.values(mappingCode).every((code) =>
+  //     keysLeft.current.flat(Infinity).includes(code),
+  //   );
+  // }, [mappingCode]);
 
   // const checkTextarea = useMemo(() => {
   //   try {
@@ -376,11 +374,7 @@ const PdfImport = ({
         <DialogTitle>
           <div className="flex items-center space-x-2.5">
             <FlowArrow />
-            <h2
-              onClick={() => {
-                setMappingCode({});
-              }}
-            >{t`Resume Mapping`}</h2>
+            <h2>{t`Resume Mapping`}</h2>
           </div>
         </DialogTitle>
       </DialogHeader>
@@ -441,7 +435,7 @@ const PdfImport = ({
             {Object.entries(schemaMappingData).map(([keyName, valueName]) => (
               <>
                 <p className="py-4 text-center font-medium">{keyName}</p>
-                {valueName.map((schema) => (
+                {/* {valueName.map((schema) => (
                   <MappingRow
                     key={schema.name}
                     keyLeftArray={keysLeft.current}
@@ -449,7 +443,7 @@ const PdfImport = ({
                     mappingCode={mappingCode}
                     setMappingCode={setMappingCode}
                   />
-                ))}
+                ))} */}
               </>
             ))}
           </div>
@@ -468,7 +462,7 @@ const PdfImport = ({
           {!validationResult && (
             <Button
               type="button"
-              disabled={!isValidJson || !isValidToImport || loading}
+              disabled={!isValidJson || loading}
               onClick={onValidate}
             >
               {t`Validate`}
@@ -507,6 +501,7 @@ export const ImportDialog = () => {
   const { toast } = useToast();
   const { isOpen, close } = useDialog("import");
   const { importResume, loading } = useImportResume();
+  const { importResume: importPdfResume } = useImportPdfResume();
   const textRef = useRef<string | null>(null);
   const initialDataRef = useRef<AnyObject>({});
   const titleRef = useRef<null | string>(null);
@@ -551,7 +546,7 @@ export const ImportDialog = () => {
 
       if (type === ImportType["reactive-resume-json"]) {
         const parser = new ReactiveResumeParser();
-        const data = await parser.readFile(file);
+        const data = await parser.readFile(file as File);
         const result = parser.validate(data);
 
         setValidationResult({ isValid: true, type, result });
@@ -559,7 +554,7 @@ export const ImportDialog = () => {
 
       if (type === ImportType["reactive-resume-v3-json"]) {
         const parser = new ReactiveResumeV3Parser();
-        const data = await parser.readFile(file);
+        const data = await parser.readFile(file as File);
         const result = parser.validate(data);
 
         setValidationResult({ isValid: true, type, result });
@@ -567,7 +562,7 @@ export const ImportDialog = () => {
 
       if (type === ImportType["json-resume-json"]) {
         const parser = new JsonResumeParser();
-        const data = await parser.readFile(file);
+        const data = await parser.readFile(file as File);
         const result = parser.validate(data);
 
         setValidationResult({ isValid: true, type, result });
@@ -575,7 +570,7 @@ export const ImportDialog = () => {
 
       if (type === ImportType["linkedin-data-export-zip"]) {
         const parser = new LinkedInParser();
-        const data = await parser.readFile(file);
+        const data = await parser.readFile(file as File);
         const result = await parser.validate(data);
 
         setValidationResult({ isValid: true, type, result });
@@ -683,24 +678,20 @@ export const ImportDialog = () => {
       setConvertLoading(true);
       const { file } = formSchema.parse(form.getValues());
       const formData = new FormData();
-      formData.append("file", file);
-      const response = await importPdfResume(formData);
-      await onImport({
-        isValid: true,
-        type: ImportType["pdf-resume-file"],
-        result: mappingValue(response, defaultMappingCode),
-      });
-      // const text = await extractText(file);
-      // titleRef.current = file.name.split(".pdf")[0];
-      // initialDataRef.current = response;
-      // setPdfState("data");
+      if (file instanceof FileList) {
+        for (let i = 0; i < file.length; i++) {
+          const f = file.item(i);
+          if (f) {
+            formData.append("files", f);
+          }
+        }
+      } else {
+        formData.append("files", file);
+      }
+      await importPdfResume(formData);
+      close();
       setConvertLoading(false);
     } catch (error: unknown) {
-      setConvertLoading(false);
-      setValidationResult({
-        isValid: false,
-        errors: (error as Error).message,
-      });
       toast({
         variant: "error",
         title: t`Oops, the server returned an error.`,
@@ -824,13 +815,18 @@ export const ImportDialog = () => {
                         key={`${accept}-${filetype}`}
                         className="!bg-transparent"
                         type="file"
+                        multiple={filetype === ImportType["pdf-resume-file"]}
                         disabled={
                           validationResult?.isValid && filetype === ImportType["pdf-resume-file"]
                         }
                         accept={accept}
                         onChange={(event) => {
                           if (!event.target.files?.length) return;
-                          field.onChange(event.target.files[0]);
+                          if (filetype === ImportType["pdf-resume-file"]) {
+                            field.onChange(event.target.files);
+                          } else {
+                            field.onChange(event.target.files[0]);
+                          }
                         }}
                       />
                     </FormControl>

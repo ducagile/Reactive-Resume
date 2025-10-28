@@ -1,13 +1,15 @@
 import { t } from "@lingui/macro";
 import {
+  CircleNotch,
   CopySimple,
   FolderOpen,
   Lock,
   LockOpen,
   PencilSimple,
   TrashSimple,
+  X,
 } from "@phosphor-icons/react";
-import { ResumeDto } from "@reactive-resume/dto";
+import { ResumeDto, ResumeStatus } from "@reactive-resume/dto";
 import {
   ContextMenu,
   ContextMenuContent,
@@ -36,6 +38,9 @@ export const ResumeCard = ({ resume }: Props) => {
   const lastUpdated = dayjs().to(resume.updatedAt);
 
   const onOpen = () => {
+    if (resume.status !== ResumeStatus.COMPLETED) {
+      return;
+    }
     navigate(`/builder/${resume.id}`);
   };
 
@@ -58,7 +63,14 @@ export const ResumeCard = ({ resume }: Props) => {
   return (
     <ContextMenu>
       <ContextMenuTrigger>
-        <BaseCard className="space-y-0" onClick={onOpen}>
+        <BaseCard
+          className={cn(
+            "space-y-0",
+            resume.status === ResumeStatus.PENDING ? "backdrop-contrast-75" : "",
+            resume.status === ResumeStatus.FAILED ? "border-red-600" : "",
+          )}
+          onClick={onOpen}
+        >
           <AnimatePresence>
             {resume.locked && (
               <motion.div
@@ -71,6 +83,17 @@ export const ResumeCard = ({ resume }: Props) => {
               </motion.div>
             )}
           </AnimatePresence>
+
+          {resume.status === ResumeStatus.PENDING && (
+            <CircleNotch
+              size={36}
+              className="absolute inset-0 m-auto animate-spin !duration-1500"
+            />
+          )}
+
+          {resume.status === ResumeStatus.FAILED && (
+            <X size={36} className="absolute inset-0 m-auto text-red-700" />
+          )}
 
           <div
             // eslint-disable-next-line tailwindcss/no-custom-classname
@@ -94,36 +117,42 @@ export const ResumeCard = ({ resume }: Props) => {
         </BaseCard>
       </ContextMenuTrigger>
 
-      <ContextMenuContent>
-        <ContextMenuItem onClick={onOpen}>
-          <FolderOpen size={14} className="mr-2" />
-          {t`Open`}
-        </ContextMenuItem>
-        <ContextMenuItem onClick={onUpdate}>
-          <PencilSimple size={14} className="mr-2" />
-          {t`Rename`}
-        </ContextMenuItem>
-        <ContextMenuItem onClick={onDuplicate}>
-          <CopySimple size={14} className="mr-2" />
-          {t`Duplicate`}
-        </ContextMenuItem>
-        {resume.locked ? (
-          <ContextMenuItem onClick={onLockChange}>
-            <LockOpen size={14} className="mr-2" />
-            {t`Unlock`}
+      {resume.status !== ResumeStatus.PENDING && (
+        <ContextMenuContent>
+          {resume.status === ResumeStatus.COMPLETED && (
+            <>
+              <ContextMenuItem onClick={onOpen}>
+                <FolderOpen size={14} className="mr-2" />
+                {t`Open`}
+              </ContextMenuItem>
+              <ContextMenuItem onClick={onUpdate}>
+                <PencilSimple size={14} className="mr-2" />
+                {t`Rename`}
+              </ContextMenuItem>
+              <ContextMenuItem onClick={onDuplicate}>
+                <CopySimple size={14} className="mr-2" />
+                {t`Duplicate`}
+              </ContextMenuItem>
+              {resume.locked ? (
+                <ContextMenuItem onClick={onLockChange}>
+                  <LockOpen size={14} className="mr-2" />
+                  {t`Unlock`}
+                </ContextMenuItem>
+              ) : (
+                <ContextMenuItem onClick={onLockChange}>
+                  <Lock size={14} className="mr-2" />
+                  {t`Lock`}
+                </ContextMenuItem>
+              )}
+            </>
+          )}
+          <ContextMenuSeparator />
+          <ContextMenuItem className="text-error" onClick={onDelete}>
+            <TrashSimple size={14} className="mr-2" />
+            {t`Delete`}
           </ContextMenuItem>
-        ) : (
-          <ContextMenuItem onClick={onLockChange}>
-            <Lock size={14} className="mr-2" />
-            {t`Lock`}
-          </ContextMenuItem>
-        )}
-        <ContextMenuSeparator />
-        <ContextMenuItem className="text-error" onClick={onDelete}>
-          <TrashSimple size={14} className="mr-2" />
-          {t`Delete`}
-        </ContextMenuItem>
-      </ContextMenuContent>
+        </ContextMenuContent>
+      )}
     </ContextMenu>
   );
 };

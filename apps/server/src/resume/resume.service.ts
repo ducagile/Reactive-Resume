@@ -1,16 +1,17 @@
-import * as fs from "node:fs";
-
+import { InjectQueue } from "@nestjs/bullmq";
 import {
   BadRequestException,
   Injectable,
   InternalServerErrorException,
   Logger,
 } from "@nestjs/common";
+import { createId } from "@paralleldrive/cuid2";
 import { Prisma } from "@prisma/client";
 import { CreateResumeDto, ImportResumeDto, ResumeDto, UpdateResumeDto } from "@reactive-resume/dto";
-import { defaultResumeData, ResumeData } from "@reactive-resume/schema";
+import { defaultResumeData, ResumeData, resumeDataSchema } from "@reactive-resume/schema";
 import type { DeepPartial } from "@reactive-resume/utils";
 import { ErrorMessage, generateRandomName, kebabCase } from "@reactive-resume/utils";
+import { Queue } from "bullmq";
 import deepmerge from "deepmerge";
 import { jsonrepair } from "jsonrepair";
 import { PrismaService } from "nestjs-prisma";
@@ -19,16 +20,23 @@ import { PrinterService } from "@/server/printer/printer.service";
 
 import { GenaiService } from "../genai/genai.service";
 import { StorageService } from "../storage/storage.service";
+import { AnyObject, ResumeStatus } from "./types";
+import { defaultMappingCode, mappingValue } from "./utils/mapping";
 import { toInnerHtml } from "./utils/to-html-inner";
 
 @Injectable()
 export class ResumeService {
   constructor(
+    @InjectQueue("resume") private resumeQueue: Queue,
     private readonly prisma: PrismaService,
     private readonly printerService: PrinterService,
     private readonly storageService: StorageService,
     private readonly genaiService: GenaiService,
   ) {}
+
+  resumeToData = (resume: AnyObject): ResumeData => {
+    return mappingValue(resume, defaultMappingCode);
+  };
 
   async create(userId: string, createResumeDto: CreateResumeDto) {
     const { name, email, picture } = await this.prisma.user.findUniqueOrThrow({
@@ -47,6 +55,7 @@ export class ResumeService {
         title: createResumeDto.title,
         visibility: createResumeDto.visibility,
         slug: createResumeDto.slug ?? kebabCase(createResumeDto.title),
+        status: ResumeStatus.COMPLETED,
       },
     });
   }
@@ -61,6 +70,17 @@ export class ResumeService {
         data: data as Prisma.InputJsonValue,
         title: importResumeDto.title ?? title,
         slug: importResumeDto.slug ?? kebabCase(title),
+        status: ResumeStatus.COMPLETED,
+      },
+    });
+  }
+
+  updateResume(id: string, data: ResumeData) {
+    return this.prisma.resume.update({
+      where: { id },
+      data: {
+        data: data as unknown as Prisma.JsonObject,
+        status: ResumeStatus.COMPLETED,
       },
     });
   }
@@ -167,24 +187,59 @@ export class ResumeService {
     return this.printerService.printPreview(resume);
   }
 
-  async handleUpload(str: string) {
-    const json = await this.genaiService.convertResumeToJson(str);
-    const repaired = jsonrepair(json);
-    const data1 = JSON.parse(repaired);
-    console.log(repaired);
-    return repaired;
+  async handleUpload(resumeId: string, filePath: string) {
+    try {
+      const json = await this.genaiService.convertResumeToJson(filePath);
+      const repaired = jsonrepair(json);
+      const data = this.resumeToData(JSON.parse(repaired));
+      const resumeData = resumeDataSchema.parse(data);
+      const resume = await this.updateResume(resumeId, resumeData);
+      return resume;
+    } catch {
+      await this.prisma.resume.update({
+        where: { id: resumeId },
+        data: {
+          status: ResumeStatus.FAILED,
+        },
+      });
+      throw new BadRequestException();
+    }
   }
 
-  async upload(str: string) {
-    const data = await this.handleUpload(str);
-    fs.unlink(str, (err) => {
-      if (err) console.error(`Failed to delete file ${str}:`, err);
+  async upload(filePaths: string[], userId: string) {
+    const pathMappings = filePaths.map((filePath) => ({
+      filePath,
+      id: createId(),
+    }));
+    await Promise.all(
+      pathMappings.map(async ({ filePath, id }, index) => {
+        await this.resumeQueue.add(
+          "convertPdf",
+          {
+            filePath,
+            resumeId: id,
+          },
+          {
+            delay: index * 2000,
+            attempts: 3,
+          },
+        );
+      }),
+    );
+    return this.prisma.resume.createManyAndReturn({
+      data: pathMappings.map(({ id }) => {
+        const title = generateRandomName();
+        const slug = kebabCase(title);
+        return {
+          id,
+          userId,
+          title,
+          slug,
+          visibility: "private",
+          status: ResumeStatus.PENDING,
+          data: {},
+        };
+      }),
     });
-    return data;
   }
-
-  // async upload1(fileName: string) {
-  //   const data = await this.genaiService.convertResumeToJson(fileName);
-  //   return JSON.parse(data);
-  // }
 }
