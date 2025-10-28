@@ -12,11 +12,11 @@ import {
   Param,
   Patch,
   Post,
-  UploadedFile,
+  UploadedFiles,
   UseGuards,
   UseInterceptors,
 } from "@nestjs/common";
-import { FileInterceptor } from "@nestjs/platform-express";
+import { FilesInterceptor } from "@nestjs/platform-express";
 import { ApiTags } from "@nestjs/swagger";
 import { User as UserEntity } from "@prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
@@ -164,13 +164,11 @@ export class ResumeController {
   }
 
   @UseInterceptors(
-    FileInterceptor("file", {
+    FilesInterceptor("files", 10, {
       storage: diskStorage({
         destination: "./uploads",
         filename: (req, file, callback) => {
-          console.log("daw");
-          // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-          const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+          const uniqueSuffix = String(Date.now()) + "-" + String(Math.round(Math.random() * 1e9));
           const ext = path.extname(file.originalname);
           const filename = `${file.fieldname}-${uniqueSuffix}${ext}`;
           callback(null, filename);
@@ -178,27 +176,17 @@ export class ResumeController {
       }),
       limits: { fileSize: 1000 * 1000 * 5 },
       fileFilter: (req, file, cb) => {
-        if (file.mimetype === "application/pdf") {
-          cb(null, true);
-        } else {
-          cb(new BadRequestException("Invalid file type, only images are allowed!"), false);
-        }
+        if (file.mimetype === "application/pdf") cb(null, true);
+        else cb(new BadRequestException("Only PDF files are allowed!"), false);
       },
     }),
   )
   @Post("upload")
-  // @UseGuards(TwoFactorGuard)
-  async upload1(@UploadedFile() file: Express.Multer.File) {
-    console.log(file);
-    // console.log(path.join(process.cwd(), "uploads", file.filename).split("/").join("/"));
-    const filePath = path.join(process.cwd(), "uploads", file.filename).split("/").join("/");
-    return this.resumeService.upload(filePath);
-    // return this.resumeService.upload(data);
+  @UseGuards(TwoFactorGuard)
+  async upload(@UploadedFiles() files: Express.Multer.File[], @User() user: UserEntity) {
+    const filePaths = files.map((file) =>
+      path.join(process.cwd(), "uploads", file.filename).split("\\").join("/"),
+    );
+    return this.resumeService.upload(filePaths, user.id);
   }
-
-  // @Post("upload")
-  // // @UseGuards(TwoFactorGuard)
-  // async upload(@Body() { data }: { data: string }) {
-  //   return this.resumeService.upload(data);
-  // }
 }

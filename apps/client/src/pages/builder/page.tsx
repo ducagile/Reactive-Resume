@@ -13,9 +13,6 @@ export const BuilderPage = () => {
   const frameRef = useBuilderStore((state) => state.frame.ref);
   const setFrameRef = useBuilderStore((state) => state.frame.setRef);
 
-  console.log('>>>>1', frameRef);
-  // console.log('>>>>2', frameRef);
-
   const resume = useResumeStore((state) => state.resume);
   const title = useResumeStore((state) => state.resume.title);
 
@@ -38,8 +35,6 @@ export const BuilderPage = () => {
 
   // Send resume data to iframe on change of resume data
   useEffect(updateResumeInFrame, [resume.data]);
-
-  console.log(resume)
 
   return (
     <>

@@ -18,8 +18,64 @@ export const isObject = (value: unknown) => {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 };
 
+export const defaultMappingCode = {
+  "basics.name": "basics.name",
+  "basics.headline": "basics.label",
+  "basics.email": "basics.email",
+  "basics.phone": "basics.phone",
+  "basics.url.href": "basics.url",
+  "sections.summary.content": "basics.summary",
+  "basics.location": "basics.location.address",
+  "sections.profiles.items.network": "basics.profiles.network",
+  "sections.profiles.items.username": "basics.profiles.username",
+  "sections.profiles.items.url.href": "basics.profiles.url",
+  "sections.experience.items.company": "work.name",
+  "sections.experience.items.position": "work.position",
+  "sections.experience.items.url.href": "work.url",
+  "sections.experience.items.date": "work.date",
+  "sections.experience.items.summary": "work.sectionsHtmlRemainingContent",
+  "sections.volunteer.items.organization": "volunteer.organization",
+  "sections.volunteer.items.position": "volunteer.position",
+  "sections.volunteer.items.url.href": "volunteer.url",
+  "sections.volunteer.items.date": "volunteer.date",
+  "sections.volunteer.items.summary": "volunteer.sectionsHtmlRemainingContent",
+  "sections.education.items.institution": "education.institution",
+  "sections.education.items.url.href": "education.url",
+  "sections.education.items.area": "education.area",
+  "sections.education.items.studyType": "education.studyType",
+  "sections.education.items.date": "education.date",
+  "sections.education.items.score": "education.score",
+  "sections.awards.items.title": "awards.title",
+  "sections.awards.items.date": "awards.date",
+  "sections.awards.items.awarder": "awards.awarder",
+  "sections.awards.items.summary": "awards.summary",
+  "sections.certifications.items.name": "certificates.name",
+  "sections.certifications.items.date": "certificates.date",
+  "sections.certifications.items.issuer": "certificates.issuer",
+  "sections.certifications.items.url.href": "certificates.url",
+  "sections.publications.items.name": "publications.name",
+  "sections.publications.items.publisher": "publications.publisher",
+  "sections.publications.items.date": "publications.releaseDate",
+  "sections.publications.items.url.href": "publications.url",
+  "sections.publications.items.summary": "publications.summary",
+  "sections.skills.items.name": "skills.name",
+  "sections.skills.items.description": "skills.level",
+  "sections.skills.items.keywords": "skills.keywords",
+  "sections.languages.items.name": "languages.language",
+  "sections.languages.items.description": "languages.fluency",
+  "sections.interests.items.name": "interests.name",
+  "sections.interests.items.keywords": "interests.keywords",
+  "sections.references.items.name": "references.name",
+  "sections.references.items.description": "references.reference",
+  "sections.projects.items.name": "projects.name",
+  "sections.projects.items.date": "projects.date",
+  // "sections.projects.items.description": "projects.text",
+  "sections.projects.items.url.href": "projects.url",
+  "sections.projects.items.summary": "projects.sectionsHtmlRemainingContent",
+};
+
 export const keysMapping = (keyStr: string) => {
-  console.log(">>>???", keyStr);
+  // console.log(">>>???", keyStr);
   const keyArr = keyStr.split(".");
   let keyMap = {
     basics: defaultBasicMapping,
@@ -33,7 +89,7 @@ export const keysMapping = (keyStr: string) => {
       keyMap = Array.isArray(keyMap) ? keyMap[0][key] : keyMap[key as keyof typeof keyMap];
     }
   }
-  console.log("???", keyMap);
+  // console.log("???", keyMap);
   return typeof keyMap === "object" || Array.isArray(keyMap)
     ? Array.isArray(keyMap)
       ? isObject(keyMap[0])
@@ -114,7 +170,7 @@ export const setValues = (
   data: AnyObject,
 ) => {
   const value = (value1 as unknown) ?? "";
-  console.warn("II", keyStr, value, data);
+  // console.warn("II", keyStr, value, data);
   if (typeof value === "string" && (!value || value === "string")) return;
   const keyArr = keyStr.split(".");
   let keyMap = data;
@@ -361,62 +417,6 @@ export const mappingValue = (
   },
 ) => {
   try {
-    // console.warn(JSON.stringify(mappingCode), JSON.stringify(data));
-    //   const defaultResumeMapping = {
-    //     basics: defaultBasicMapping,
-    //     sections: defaultSectionsMapping,
-    //   };
-    //   const dataRtn = cloneDeep(defaultResumeData);
-    //   const objCode = transformingCode(mappingCode, data);
-    //   for (const [originalKey, value] of Object.entries(objCode)) {
-    //     // console.log(value)
-    //     if (typeof value === "string") {
-    //       const { arrayPath, remainingPath } = splitPathArray(value);
-    //       if (!remainingPath) {
-    //         const valueInPath = getValues(originalKey, data) as unknown as string;
-    //         setValues(value, valueInPath, dataRtn);
-    //         continue;
-    //       }
-    //       const schemaItem = getValues(arrayPath, defaultResumeMapping) as unknown as string;
-    //       const valueInPath = getValues(originalKey, data) as unknown as string;
-    //       // console.log(schemaItem, valueInPath)
-    //       setValues(remainingPath, valueInPath, schemaItem as unknown as AnyObject);
-    //       setValues(arrayPath, schemaItem, dataRtn);
-    //     } else if (Array.isArray(value)) {
-    //       // console.log(originalKey, value)
-    //       const schemaItem = getValues(value[0], defaultResumeMapping);
-    //       const arrayValue = getValues(originalKey, data) as unknown[];
-    //       const arrayItem = [];
-    //       for (const itemValue of arrayValue) {
-    //         let defaultItem = cloneDeep(schemaItem);
-    //         for (const [rjsPath, thPath] of Object.entries(value[1])) {
-    //           const valueInPath = getValues(rjsPath, itemValue as AnyObject) as unknown as string;
-    // const defaultValue = getValues(
-    //   // eslint-disable-next-line unicorn/prefer-spread
-    //   (value[0] as string).concat(".", thPath as string),
-    //   defaultResumeMapping,
-    // );
-    //           // console.log("???>>", rjsPath, thPath, valueInPath, defaultValue, (value[0] as string).concat(".", thPath as string))
-    //           if (Array.isArray(valueInPath) && !Array.isArray(defaultValue))
-    //             return defaultResumeMapping;
-    //           if (Array.isArray(defaultValue) && !Array.isArray(valueInPath))
-    //             return defaultResumeMapping;
-    //           setValues(thPath as string, valueInPath, defaultItem as AnyObject);
-    //         }
-    //         arrayItem.push(cloneDeep(defaultItem));
-    //       }
-    //       console.warn("i", arrayItem);
-    //       // console.log(">>>", value[0])
-    //       // console.log("WTF1", value[0], arrayItem);
-    //       setValues(value[0], arrayItem as unknown as string[], dataRtn);
-    //       console.warn("III", dataRtn);
-    //     }
-    //   }
-    //   console.log("WTF12", dataRtn);
-    //   return dataRtn;
-    // } catch {
-    //   return defaultResumeData;
-    // }
 
     const defaultResumeMapping = {
       basics: defaultBasicMapping,

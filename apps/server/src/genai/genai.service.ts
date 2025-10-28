@@ -520,7 +520,7 @@ export class GenaiService {
     this.fileManager = new GoogleAIFileManager(process.env.GENAI_API_KEY ?? "");
   }
 
-  async convertResumeToJson(str: string): Promise<any> {
+  async convertResumeToJson(str: string): Promise<string> {
     const prompt = `
       Lọc Ra Các Trường Phù Hợp Tương Ứng Với Dữ Liệu Resume Sau Và Những Trường Được Required Mà Không Có Dữ Liệu Thì Trả Về Chuỗi Rỗng Hoặc Mảng Rỗng (Lưu Ý Là Lấy Tất Cả Các Dữ Liệu Có Thể Trong Resume):
       Return the output in valid JSON format. Ensure the JSON is properly formatted with correct syntax so that JSON.parse can be used.
@@ -528,7 +528,7 @@ export class GenaiService {
 
     // Resume Text: ${str}
     const model = this.genAI.getGenerativeModel({
-      model: "gemini-2.5-pro",
+      model: "gemini-2.5-flash-lite",
       generationConfig: {
         responseMimeType: "application/json",
         responseSchema: schema,
